@@ -293,10 +293,7 @@ h3{font-size:1.25rem}
   box-shadow:0 0 0 3px color-mix(in srgb,var(--acc,var(--sage-deep)) 18%,transparent);
 }
 .card .mini li:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(51,68,62,.13);border-color:var(--acc,var(--sage-deep))}
-.cards-grid.g2 .cat-card:nth-child(1){--acc:var(--apricot-deep);--acc-soft:#FAECDD;--acc-line:rgba(216,154,99,.4)}
-.cards-grid.g2 .cat-card:nth-child(2){--acc:var(--sun-deep);--acc-soft:var(--sun-soft);--acc-line:rgba(198,138,46,.35)}
-.cards-grid.g2 .cat-card:nth-child(3){--acc:var(--plum-deep);--acc-soft:var(--plum-soft);--acc-line:rgba(124,58,237,.28)}
-.cards-grid.g2 .cat-card:nth-child(4){--acc:var(--sage-deep);--acc-soft:var(--sage-soft);--acc-line:rgba(95,122,106,.35)}
+.cards-grid.g2 .cat-card{--acc:var(--apricot-deep);--acc-soft:#FAECDD;--acc-line:rgba(216,154,99,.4)}
 .anchor-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px}
 .anchor-chips a{
   background:var(--white);border:1px solid var(--sage-soft);border-radius:999px;
@@ -690,8 +687,8 @@ h3{font-size:1.25rem}
 .photo-hero::before{
   content:"";position:absolute;inset:0;z-index:-1;
   background:
-    linear-gradient(to top,rgba(24,34,29,.82) 0%,rgba(24,34,29,.5) 45%,rgba(24,34,29,.38) 100%),
-    radial-gradient(90% 120% at 50% 100%,rgba(24,34,29,.35),transparent 60%);
+    linear-gradient(to top,rgba(24,34,29,.52) 0%,rgba(24,34,29,.26) 45%,rgba(24,34,29,.18) 100%),
+    radial-gradient(70% 90% at 50% 55%,rgba(24,34,29,.22),transparent 70%);
 }
 .photo-hero .breadcrumbs{color:rgba(255,255,255,.75)}
 .photo-hero .breadcrumbs a{color:var(--sage)}
