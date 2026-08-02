@@ -334,7 +334,7 @@ h3{font-size:1.25rem}
 }
 .cat-body{padding:22px 26px 26px;display:flex;flex-direction:column;flex-grow:1}
 .cat-body .cat-lead{color:var(--ink-soft);font-size:.95rem;margin-bottom:4px;flex-grow:0}
-.cat-body .card-link{margin-top:auto;padding-top:16px;align-self:flex-end}
+.cat-body .card-link{margin-top:auto;padding-top:16px;align-self:flex-end;color:#9464EA}
 
 /* ---------- steps flow animation ---------- */
 @media(min-width:1025px){
