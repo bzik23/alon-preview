@@ -189,7 +189,7 @@ h3{font-size:1.25rem}
     radial-gradient(700px 460px at 95% 15%,rgba(233,179,132,.22),transparent 55%),
     radial-gradient(640px 420px at 45% 108%,rgba(139,92,246,.16),transparent 60%),
     var(--cream);
-  padding:clamp(28px,3.5vw,48px) 0 clamp(20px,3vw,36px);
+  padding:clamp(44px,7vw,100px) 0 clamp(36px,6vw,86px);
 }
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
 .hero-kicker{
