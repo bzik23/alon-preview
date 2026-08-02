@@ -769,6 +769,7 @@ html.acc-motion *,html.acc-motion *::before,html.acc-motion *::after{
 html.acc-motion .reveal{opacity:1;transform:none}
 
 /* ---------- clinic (הקליניקה: חדר + חצר) ---------- */
+#clinic{scroll-margin-top:110px}
 .clinic-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,64px);align-items:center}
 .clinic-grid.flip .clinic-media{order:2}
 .clinic-media{position:relative}
