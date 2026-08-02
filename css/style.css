@@ -65,6 +65,16 @@ h3{font-size:1.25rem}
   -webkit-mask-image:linear-gradient(to bottom,#000 0 42%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 0 42%,transparent 100%);
 }
+/* mirrored crest - keeps repeated waves down the page from looking copy-pasted */
+.wave-plum.wave-flip::before{transform:scaleX(-1)}
+/* soft plum corner glow - the quieter sibling of the wave */
+.glow-plum{position:relative;isolation:isolate}
+.glow-plum::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;inset:0;
+  background:
+    radial-gradient(560px 340px at 90% 4%,rgba(139,92,246,.24),transparent 64%),
+    radial-gradient(500px 320px at 8% 96%,rgba(139,92,246,.18),transparent 66%);
+}
 .section-head{max-width:720px;margin:0 auto clamp(32px,5vw,56px);text-align:center}
 .section-head h2::after{
   content:"";display:block;width:64px;height:4px;border-radius:3px;margin:14px auto 0;
