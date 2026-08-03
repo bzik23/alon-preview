@@ -425,13 +425,20 @@ h3{font-size:1.25rem}
 /* width:100% is required - every slide is absolutely positioned, so the frame's
    max-content width is 0 and it collapses under the mobile `margin-inline:auto` */
 .split-frame.slider{display:block;position:relative;width:100%;background:linear-gradient(160deg,#DCE8DF 0%,#F2E8DC 55%,#F8E9D8 100%)}
+/* a slider card stays a compact ~400px square - the tall 4/4.7 frame overshoots
+   the text column beside it and stretches the section out.
+   width (not max-width) is required: with an auto margin the shrink-to-fit width
+   of a frame holding only absolute slides is 0. */
+.split-visual:has(.slider){width:min(400px,100%);margin-inline-end:auto}
+.split-visual:has(.slider) .split-frame{aspect-ratio:1/1}
 /* the fade has to stay well under the rotation interval, or slides never settle */
 .sl-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
 .sl-slide.on{opacity:1}
 .sl-slide img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%)}
 /* the home-page portrait keeps its nature backdrop and warm bottom haze */
 .sl-slide.natural{background-image:url(../assets/nature-bg.jpg);background-size:cover;background-position:center}
-.sl-slide.natural img{object-position:top}
+/* anchor to the bottom - it lifts the portrait, trading dead headroom for shoulders */
+.sl-slide.natural img{object-position:bottom}
 .sl-slide.natural::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to top,rgba(250,247,242,.28),transparent 45%);
@@ -654,6 +661,8 @@ h3{font-size:1.25rem}
   background:linear-gradient(160deg,var(--sage-soft),var(--sand));
   display:flex;align-items:center;justify-content:center;font-size:3rem;
 }
+.ws-card .ws-side.has-img{background:none;padding:0;overflow:hidden}
+.ws-card .ws-side.has-img img{width:100%;height:100%;object-fit:cover;display:block}
 .ws-card .ws-body{padding:30px 28px}
 .ws-card .ws-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
 .ws-card .ws-meta span{background:var(--sage-soft);border-radius:999px;padding:5px 14px;font-size:.82rem;font-weight:600;color:var(--sage-deep)}
@@ -1062,8 +1071,10 @@ body.lbx-open{overflow:hidden}
   .hero-card{width:min(320px,86%);aspect-ratio:4/4.4}
   .hf-1{right:0}.hf-2{left:0}
   .split-visual{width:100%;max-width:420px;margin-inline:auto}
+  .split-visual:has(.slider){width:100%;max-width:420px;margin-inline:auto}
   .ws-card{grid-template-columns:1fr}
   .ws-card .ws-side{min-height:110px;font-size:2.4rem}
+  .ws-card .ws-side.has-img{min-height:200px}
 }
 @media(max-width:560px){
   .cards-grid,.cards-grid.g2,.cards-grid.g4,.audience-grid,.steps,.clinic-feats{grid-template-columns:1fr}
