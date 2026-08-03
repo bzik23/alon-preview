@@ -182,7 +182,15 @@ h3{font-size:1.25rem}
 
 /* NLP chamber membership badge */
 .hdr-nlp{display:flex;align-items:center;flex-shrink:0}
-.hdr-nlp img{display:block;width:auto;height:42px;opacity:.95}
+.hdr-nlp img{display:block;width:auto;height:34px;opacity:.95}
+
+/* narrow laptops: tighten the nav so it stays on one line next to the badge */
+@media(min-width:1281px) and (max-width:1450px){
+  .header-inner{gap:12px}
+  .main-nav ul{gap:2px}
+  .main-nav a{padding:9px 7px;font-size:.91rem}
+  .hdr-nlp img{height:30px}
+}
 
 /* header quick actions */
 .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -999,7 +1007,7 @@ body.lbx-open{overflow:hidden}
   .main-nav .has-sub.open ul.sub-menu{display:block}
   .sub-menu a{padding:9px 10px;font-size:1rem}
   .sm-txt b{font-size:1rem}
-  .hdr-nlp img{height:34px}
+  .hdr-nlp img{height:30px}
   body.nav-open{overflow:hidden}
 }
 @media(max-width:600px){
