@@ -573,8 +573,9 @@ h3{font-size:1.25rem}
 .page-hero{
   background:
     radial-gradient(700px 400px at 10% 0%,rgba(168,195,176,.3),transparent 60%),
-    radial-gradient(600px 380px at 95% 30%,rgba(233,179,132,.18),transparent 55%),
-    radial-gradient(560px 360px at 50% 115%,rgba(139,92,246,.14),transparent 60%),
+    radial-gradient(600px 380px at 95% 25%,rgba(233,179,132,.18),transparent 55%),
+    radial-gradient(880px 500px at 46% 116%,rgba(139,92,246,.32),transparent 64%),
+    radial-gradient(640px 400px at 6% 100%,rgba(139,92,246,.15),transparent 62%),
     var(--cream);
   padding:clamp(52px,7vw,84px) 0;text-align:center;
 }
@@ -582,7 +583,15 @@ h3{font-size:1.25rem}
 .page-hero p{color:var(--ink-soft);max-width:680px;margin-inline:auto;font-size:1.1rem}
 .breadcrumbs{font-size:.85rem;color:var(--ink-soft);margin-bottom:18px}
 .breadcrumbs a{color:var(--sage-deep);font-weight:600}
-.page-hero.compact{padding:26px 0 30px}
+/* the compact hero is too short for a bottom-anchored wash - pull the plum into frame */
+.page-hero.compact{
+  padding:26px 0 30px;
+  background:
+    radial-gradient(520px 260px at 6% -20%,rgba(168,195,176,.3),transparent 62%),
+    radial-gradient(560px 300px at 92% 108%,rgba(139,92,246,.30),transparent 62%),
+    radial-gradient(420px 240px at 30% 120%,rgba(139,92,246,.14),transparent 60%),
+    var(--cream);
+}
 .page-hero.compact .breadcrumbs{margin-bottom:8px}
 .page-hero.compact h1{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:8px}
 .page-hero.compact p{font-size:1rem}
