@@ -761,12 +761,14 @@ h3{font-size:1.25rem}
 /* ---------- photo background hero ---------- */
 .page-hero.photo-hero{
   position:relative;overflow:hidden;isolation:isolate;
-  padding:clamp(180px,24vw,300px) 0 clamp(30px,3.8vw,42px);
+  padding:clamp(180px,24vw,300px) 0 clamp(24px,2.6vw,32px);
 }
+/* pull the first content section up so its opening line is visible on load */
+.page-hero.photo-hero:not(.ph-top) + .section{padding-top:clamp(26px,3vw,40px)}
 /* on wide screens grow the hero with the viewport, so the cover-crop keeps the
    subject (head!) in frame instead of squeezing a thin band out of the photo */
 @media(min-width:1441px){
-  .page-hero.photo-hero{padding-top:clamp(300px,calc(300px + (100vw - 1440px)*.34),560px)}
+  .page-hero.photo-hero{padding-top:clamp(280px,calc(280px + (100vw - 1440px)*.28),520px)}
 }
 .photo-hero .ph-bg{
   position:absolute;inset:0;z-index:-2;width:100%;height:100%;
@@ -796,7 +798,7 @@ h3{font-size:1.25rem}
 }
 .photo-hero .anchor-chips a:hover{background:#fff;border-color:#fff;color:var(--sage-deep)}
 @media(max-width:600px){
-  .page-hero.photo-hero{padding:160px 0 34px}
+  .page-hero.photo-hero{padding:160px 0 26px}
   .page-hero.photo-hero.ph-top{padding:130px 0 170px}
   .photo-hero .ph-bg{object-position:var(--pos-m,50% 30%)}
 }
