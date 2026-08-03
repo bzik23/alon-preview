@@ -97,7 +97,6 @@
 
 <section class="page-hero compact">
   <div class="container">
-    <div class="breadcrumbs"><a href="index.html">בית</a> ‹ יצירת קשר</div>
     <h1>בואו נדבר</h1>
     <p>השאירו פרטים או התקשרו - ונקבע שיחת היכרות אישית, ללא התחייבות.</p>
   </div>
@@ -145,15 +144,15 @@
       <label for="f-email">אימייל</label>
       <input id="f-email" type="email" name="email" placeholder="name@email.com">
       <label for="f-topic">במה תרצו להתמקד?</label>
-      <select id="f-topic" name="topic">
-        <option value="">בחרו נושא (לא חובה)</option>
-        <option>אימון אישי להתפתחות</option>
-        <option>טיפול רגשי לילד / נער</option>
-        <option>זוגיות ותקשורת</option>
-        <option>חרדות, לחץ או משבר</option>
-        <option>שינוי הרגלים ודפוסים</option>
-        <option>סדנה או הרצאה לקבוצה</option>
-        <option>אחר / עדיין לא בטוח</option>
+      <select id="f-topic" name="topic" data-nice data-head="מה הכי מדויק עבורכם?">
+        <option value="" data-ico="✨">בחרו נושא (לא חובה)</option>
+        <option data-ico="🌱">אימון אישי להתפתחות</option>
+        <option data-ico="🧸">טיפול רגשי לילד / נער</option>
+        <option data-ico="💞">זוגיות ותקשורת</option>
+        <option data-ico="🕊️">חרדות, לחץ או משבר</option>
+        <option data-ico="🔓">שינוי הרגלים ודפוסים</option>
+        <option data-ico="🎤">סדנה או הרצאה לקבוצה</option>
+        <option data-ico="🧭">אחר / עדיין לא בטוח</option>
       </select>
       <label for="f-msg">כמה מילים (לא חובה)</label>
       <textarea id="f-msg" name="message" placeholder="ספרו לי בקצרה מה מעסיק אתכם..."></textarea>
@@ -167,6 +166,12 @@
   </div>
 </section>
 
+
+<div class="crumbs-bottom">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">בית</a> ‹ יצירת קשר</div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="container footer-grid">

@@ -239,6 +239,12 @@
 
     var panel = document.createElement('div');
     panel.className = 'ns-panel';
+    if (sel.dataset.head) {
+      var head = document.createElement('div');
+      head.className = 'ns-head';
+      head.textContent = sel.dataset.head;
+      panel.appendChild(head);
+    }
     var list = document.createElement('ul');
     list.className = 'ns-list';
     list.id = uid + '-list';
@@ -275,7 +281,9 @@
     function paint() {
       var i = sel.selectedIndex < 0 ? 0 : sel.selectedIndex;
       var o = sel.options[i];
-      btn.querySelector('.ns-ico').textContent = (o && o.dataset.ico) || '✨';
+      var ico = btn.querySelector('.ns-ico');
+      ico.textContent = (o && o.dataset.ico) || '✨';
+      ico.className = 'ns-ico t' + (i % 4);
       var val = btn.querySelector('.ns-val');
       val.textContent = o ? o.textContent.trim() : '';
       val.classList.toggle('ph', !o || o.value === '');
