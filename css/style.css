@@ -429,7 +429,7 @@ h3{font-size:1.25rem}
    the text column beside it and stretches the section out.
    width (not max-width) is required: with an auto margin the shrink-to-fit width
    of a frame holding only absolute slides is 0. */
-.split-visual:has(.slider){width:min(400px,100%);margin-inline-end:auto}
+.split-visual:has(.slider){width:min(460px,100%);margin-inline-end:auto}
 .split-visual:has(.slider) .split-frame{aspect-ratio:1/1}
 /* the fade has to stay well under the rotation interval, or slides never settle */
 .sl-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
@@ -774,12 +774,12 @@ h3{font-size:1.25rem}
     radial-gradient(70% 90% at 50% 60%,rgba(24,34,29,.14),transparent 70%);
 }
 /* ph-top: text sits in the upper third, scene stays visible below (about page) */
-.page-hero.photo-hero.ph-top{padding:clamp(140px,15vw,180px) 0 clamp(200px,26vw,300px)}
+.page-hero.photo-hero.ph-top{padding:clamp(104px,11vw,132px) 0 clamp(140px,18vw,216px)}
 .photo-hero.ph-top p{text-wrap:balance}
 .photo-hero.ph-top::before{
   background:
-    linear-gradient(to bottom,rgba(24,34,29,.46) 0%,rgba(24,34,29,.24) 42%,rgba(24,34,29,.06) 78%,rgba(24,34,29,.14) 100%),
-    radial-gradient(80% 70% at 50% 22%,rgba(24,34,29,.2),transparent 72%);
+    linear-gradient(to bottom,rgba(24,34,29,.48) 0%,rgba(24,34,29,.34) 46%,rgba(24,34,29,.08) 80%,rgba(24,34,29,.14) 100%),
+    radial-gradient(80% 62% at 50% 34%,rgba(24,34,29,.24),transparent 72%);
 }
 .crumbs-bottom{padding:0 0 22px}
 .crumbs-bottom .breadcrumbs{margin-bottom:0}
@@ -928,6 +928,9 @@ html.acc-motion .reveal{opacity:1;transform:none}
 
 /* ---------- certificates (הסמכות ותעודות) ---------- */
 #certificates{scroll-margin-top:110px}
+/* the story block and the certificates block sat ~200px apart - tighten both sides */
+.section.alt:has(.cert-link){padding-bottom:clamp(38px,4.6vw,58px)}
+#certificates{padding-top:clamp(40px,5vw,64px)}
 .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,28px)}
 .cert-card{
   margin:0;display:flex;flex-direction:column;
