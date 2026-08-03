@@ -125,48 +125,88 @@
     });
   }
 
-  // certificate lightbox - full-size scan loads only on click
-  var certBtns = document.querySelectorAll('.cert-shot');
-  if (certBtns.length) {
-    var lbx = document.createElement('div');
+  // shared lightbox - built on first use (certificates, and clinic photos on mobile)
+  var lbx = null, lbxImg, lbxCap, lbxClose, lbxLast = null;
+  function buildLbx() {
+    if (lbx) return;
+    lbx = document.createElement('div');
     lbx.className = 'lbx';
     lbx.setAttribute('role', 'dialog');
     lbx.setAttribute('aria-modal', 'true');
-    lbx.setAttribute('aria-label', 'תעודה בתצוגה מוגדלת');
+    lbx.setAttribute('aria-label', 'תמונה בתצוגה מוגדלת');
     lbx.innerHTML =
       '<button class="lbx-close" type="button" aria-label="סגירת התצוגה">✕</button>' +
       '<figure><img src="" alt=""><figcaption></figcaption></figure>';
     document.body.appendChild(lbx);
-
-    var lbxImg = lbx.querySelector('img');
-    var lbxCap = lbx.querySelector('figcaption');
-    var lbxClose = lbx.querySelector('.lbx-close');
-    var lastFocus = null;
-
-    function openLbx(btn) {
-      var thumb = btn.querySelector('img');
-      lbxImg.src = btn.getAttribute('data-full');
-      lbxImg.alt = thumb ? thumb.alt : '';
-      lbxCap.textContent = btn.getAttribute('data-caption') || '';
-      lastFocus = btn;
-      lbx.classList.add('open');
-      document.body.classList.add('lbx-open');
-      lbxClose.focus();
-    }
-    function closeLbx() {
-      lbx.classList.remove('open');
-      document.body.classList.remove('lbx-open');
-      if (lastFocus) lastFocus.focus();
-    }
-
-    certBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () { openLbx(btn); });
-    });
+    lbxImg = lbx.querySelector('img');
+    lbxCap = lbx.querySelector('figcaption');
+    lbxClose = lbx.querySelector('.lbx-close');
     lbx.addEventListener('click', function (e) {
       if (e.target === lbx || lbxClose.contains(e.target)) closeLbx();
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && lbx.classList.contains('open')) closeLbx();
+    });
+  }
+  function openLbx(src, alt, caption, origin) {
+    buildLbx();
+    lbxImg.src = src;
+    lbxImg.alt = alt || '';
+    lbxCap.textContent = caption || '';
+    lbxLast = origin || null;
+    lbx.classList.add('open');
+    document.body.classList.add('lbx-open');
+    lbxClose.focus();
+  }
+  function closeLbx() {
+    lbx.classList.remove('open');
+    document.body.classList.remove('lbx-open');
+    if (lbxLast) lbxLast.focus();
+  }
+
+  // certificates - the full-size scan loads only on click
+  document.querySelectorAll('.cert-shot').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var thumb = btn.querySelector('img');
+      openLbx(btn.getAttribute('data-full'), thumb ? thumb.alt : '',
+              btn.getAttribute('data-caption'), btn);
+    });
+  });
+
+  // clinic photos - on mobile the pair is tiny, so a tap opens the photo full screen
+  var clinicShots = document.querySelectorAll('.clinic-frame img');
+  if (clinicShots.length && window.matchMedia) {
+    var mqZoom = window.matchMedia('(max-width:860px)');
+    clinicShots.forEach(function (img) {
+      var frame = img.parentElement;
+      var cap = frame.querySelector('figcaption');
+      var hint = document.createElement('span');
+      hint.className = 'fr-zoom';
+      hint.setAttribute('aria-hidden', 'true');
+      hint.textContent = '⤢';
+      function open() {
+        if (!mqZoom.matches) return;
+        openLbx(img.currentSrc || img.src, img.alt, cap ? cap.textContent : '', img);
+      }
+      function sync() {
+        if (mqZoom.matches) {
+          if (!hint.parentElement) frame.appendChild(hint);
+          img.setAttribute('role', 'button');
+          img.setAttribute('tabindex', '0');
+          img.setAttribute('aria-label', 'הגדלת התמונה: ' + (cap ? cap.textContent : img.alt));
+        } else {
+          if (hint.parentElement) frame.removeChild(hint);
+          img.removeAttribute('role');
+          img.removeAttribute('tabindex');
+          img.removeAttribute('aria-label');
+        }
+      }
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+      sync();
+      if (mqZoom.addEventListener) mqZoom.addEventListener('change', sync);
     });
   }
 
@@ -380,6 +420,148 @@
     if (e.key === 'Escape') closeAll();
   });
   document.querySelectorAll('select[data-nice], .contact-form select').forEach(niceSelect);
+
+  // ---------- podcast players ----------
+  // נגן מותאם לכל פרק: preload="none" כדי שקובץ של 20MB לא ירד בטעינת העמוד,
+  // רק פרק אחד מתנגן בכל רגע, ומיקום ההאזנה נשמר ב-localStorage כדי לחזור לאותו מקום.
+  var RATES = [1, 1.25, 1.5, 1.75, 2];
+
+  function fmt(t) {
+    if (!isFinite(t) || t < 0) t = 0;
+    var m = Math.floor(t / 60), s = Math.floor(t % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function initEpisode(ep, all) {
+    var audio = ep.querySelector('[data-audio]');
+    if (!audio) return;
+    var bar = ep.querySelector('[data-bar]');
+    var prog = ep.querySelector('[data-prog]');
+    var buf = ep.querySelector('[data-buf]');
+    var cur = ep.querySelector('[data-cur]');
+    var durEl = ep.querySelector('[data-dur]');
+    var rateBtn = ep.querySelector('[data-rate]');
+    var storeKey = 'alon-pod-' + audio.getAttribute('data-key');
+    var rateIdx = 0, seeking = false, restored = false;
+
+    function duration() {
+      return isFinite(audio.duration) && audio.duration > 0
+        ? audio.duration
+        : parseFloat(bar.getAttribute('aria-valuemax')) || 0;
+    }
+
+    function paint() {
+      var d = duration();
+      var pct = d ? Math.min(100, (audio.currentTime / d) * 100) : 0;
+      prog.style.width = pct + '%';
+      cur.textContent = fmt(audio.currentTime);
+      bar.setAttribute('aria-valuenow', Math.round(audio.currentTime));
+      bar.setAttribute('aria-valuetext', fmt(audio.currentTime) + ' מתוך ' + fmt(d));
+    }
+
+    function paintBuffered() {
+      var d = duration();
+      if (!d || !audio.buffered.length) return;
+      buf.style.width = Math.min(100, (audio.buffered.end(audio.buffered.length - 1) / d) * 100) + '%';
+    }
+
+    // חזרה למקום שבו הפסקנו - רק אם באמת נעצרנו באמצע הפרק
+    function restore() {
+      if (restored) return;
+      restored = true;
+      var saved = parseFloat(localStorage.getItem(storeKey) || '0');
+      var d = duration();
+      if (saved > 30 && d && saved < d - 30) audio.currentTime = saved;
+    }
+
+    ep.querySelectorAll('[data-pp]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (audio.paused) {
+          all.forEach(function (o) { if (o !== audio) o.pause(); });
+          restore();
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      });
+    });
+
+    ep.querySelectorAll('[data-skip]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        restore();
+        audio.currentTime = Math.max(0, Math.min(duration(), audio.currentTime + (+btn.getAttribute('data-skip'))));
+        paint();
+      });
+    });
+
+    if (rateBtn) {
+      rateBtn.addEventListener('click', function () {
+        rateIdx = (rateIdx + 1) % RATES.length;
+        audio.playbackRate = RATES[rateIdx];
+        rateBtn.textContent = RATES[rateIdx] + '×';
+      });
+    }
+
+    // גרירה / לחיצה על ציר הזמן (הציר תמיד LTR, גם באתר RTL)
+    function seekTo(clientX) {
+      var r = bar.getBoundingClientRect();
+      var ratio = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+      restored = true;                       // בחירה ידנית גוברת על המיקום השמור
+      audio.currentTime = ratio * duration();
+      paint();
+    }
+    bar.addEventListener('pointerdown', function (e) {
+      seeking = true;
+      bar.setPointerCapture(e.pointerId);
+      seekTo(e.clientX);
+    });
+    bar.addEventListener('pointermove', function (e) { if (seeking) seekTo(e.clientX); });
+    bar.addEventListener('pointerup', function () { seeking = false; });
+    bar.addEventListener('pointercancel', function () { seeking = false; });
+    bar.addEventListener('keydown', function (e) {
+      var step = e.key === 'PageUp' || e.key === 'PageDown' ? 60 : 10;
+      var dir = (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'PageUp') ? 1
+              : (e.key === 'ArrowLeft' || e.key === 'ArrowDown' || e.key === 'PageDown') ? -1 : 0;
+      if (!dir && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault();
+      restored = true;
+      if (e.key === 'Home') audio.currentTime = 0;
+      else if (e.key === 'End') audio.currentTime = duration();
+      else audio.currentTime = Math.max(0, Math.min(duration(), audio.currentTime + dir * step));
+      paint();
+    });
+
+    audio.addEventListener('loadedmetadata', function () {
+      if (durEl && isFinite(audio.duration)) durEl.textContent = fmt(audio.duration);
+      bar.setAttribute('aria-valuemax', Math.round(duration()));
+      restore();
+      paint();
+    });
+    audio.addEventListener('timeupdate', function () {
+      paint();
+      if (!seeking && audio.currentTime > 5) localStorage.setItem(storeKey, audio.currentTime);
+    });
+    audio.addEventListener('progress', paintBuffered);
+    audio.addEventListener('play', function () { ep.classList.add('playing'); });
+    audio.addEventListener('pause', function () { ep.classList.remove('playing'); });
+    audio.addEventListener('ended', function () {
+      ep.classList.remove('playing');
+      localStorage.removeItem(storeKey);
+      audio.currentTime = 0;
+      restored = true;
+      paint();
+    });
+  }
+
+  var eps = document.querySelectorAll('[data-ep]');
+  if (eps.length) {
+    var players = [];
+    eps.forEach(function (ep) {
+      var a = ep.querySelector('[data-audio]');
+      if (a) players.push(a);
+    });
+    eps.forEach(function (ep) { initEpisode(ep, players); });
+  }
 
   // demo form handler (prototype only)
   var form = document.getElementById('leadForm');
