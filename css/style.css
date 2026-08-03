@@ -425,7 +425,8 @@ h3{font-size:1.25rem}
 /* width:100% is required - every slide is absolutely positioned, so the frame's
    max-content width is 0 and it collapses under the mobile `margin-inline:auto` */
 .split-frame.slider{display:block;position:relative;width:100%;background:linear-gradient(160deg,#DCE8DF 0%,#F2E8DC 55%,#F8E9D8 100%)}
-.sl-slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+/* the fade has to stay well under the rotation interval, or slides never settle */
+.sl-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
 .sl-slide.on{opacity:1}
 .sl-slide img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%)}
 /* the home-page portrait keeps its nature backdrop and warm bottom haze */
