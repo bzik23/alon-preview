@@ -877,6 +877,84 @@ html.acc-motion .reveal{opacity:1;transform:none}
 }
 .section.tint .clinic-note{background:var(--white)}
 
+/* ---------- certificates (הסמכות ותעודות) ---------- */
+#certificates{scroll-margin-top:110px}
+.certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,28px)}
+.cert-card{
+  margin:0;display:flex;flex-direction:column;
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(95,122,106,.12);box-shadow:var(--shadow);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.cert-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+/* the thumbnail is a button - the scan opens full size in a lightbox */
+.cert-shot{
+  position:relative;display:block;width:100%;padding:14px;
+  border:0;font:inherit;color:inherit;cursor:zoom-in;
+  background:linear-gradient(150deg,var(--cream-2) 0%,var(--white) 58%,var(--sun-soft) 100%);
+}
+.cert-shot img{width:100%;height:auto;border-radius:9px;box-shadow:0 6px 18px rgba(51,68,62,.15)}
+.cert-zoom{
+  position:absolute;bottom:24px;inset-inline-end:24px;
+  background:rgba(255,255,255,.94);border-radius:999px;padding:5px 13px;
+  font-size:.8rem;font-weight:700;color:var(--ink);
+  box-shadow:0 4px 14px rgba(51,68,62,.18);
+  opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease;
+}
+.cert-shot:hover .cert-zoom,.cert-shot:focus-visible .cert-zoom{opacity:1;transform:none}
+.cert-card figcaption{padding:6px 20px 22px}
+.cert-card figcaption h3{font-size:1.08rem;margin-bottom:6px}
+.cert-card figcaption p{color:var(--ink-soft);font-size:.91rem;line-height:1.55}
+.certs-note{
+  margin:28px auto 0;width:fit-content;max-width:100%;text-align:center;
+  background:var(--white);border-radius:999px;padding:11px 24px;
+  font-size:.93rem;color:var(--ink-soft);box-shadow:var(--shadow);
+}
+.certs-note b{color:var(--ink);font-weight:700}
+/* quiet in-page link from the story section down to the certificates */
+.cert-link{
+  display:inline-flex;align-items:center;gap:7px;margin-top:18px;
+  font-weight:700;font-size:.95rem;color:var(--sage-deep);
+  border-bottom:2px solid var(--sage);padding-bottom:2px;
+  transition:color .25s ease,border-color .25s ease;
+}
+.cert-link:hover{color:var(--plum-deep);border-color:var(--plum)}
+@media(max-width:900px){
+  .certs-grid{grid-template-columns:1fr 1fr}
+  .certs-grid .cert-card:nth-child(3){grid-column:span 2;max-width:min(100%,430px);margin-inline:auto}
+}
+@media(max-width:620px){
+  .certs-grid{grid-template-columns:1fr}
+  .certs-grid .cert-card:nth-child(3){grid-column:auto;max-width:none}
+  .cert-zoom{opacity:1;transform:none}
+  .certs-note{border-radius:var(--radius-sm)}
+}
+
+/* ---------- lightbox (הגדלת תעודה) ---------- */
+.lbx{
+  position:fixed;inset:0;z-index:120;
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(14px,4vw,44px);
+  background:rgba(28,38,34,.88);
+  opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease;
+}
+.lbx.open{opacity:1;visibility:visible}
+.lbx figure{margin:0;display:flex;flex-direction:column;gap:12px;max-width:min(1180px,100%)}
+.lbx img{
+  width:auto;height:auto;max-width:100%;max-height:calc(100vh - 160px);
+  object-fit:contain;background:var(--white);
+  border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.45);
+}
+.lbx figcaption{color:#fff;text-align:center;font-family:var(--font-head);font-size:1.05rem}
+.lbx-close{
+  position:absolute;top:16px;inset-inline-end:18px;
+  width:46px;height:46px;border:0;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.94);color:var(--ink);
+  font-size:1.35rem;line-height:1;box-shadow:var(--shadow);
+}
+.lbx-close:hover{background:#fff}
+body.lbx-open{overflow:hidden}
+
 /* ---------- disclaimer (הסתייגות: לא תחליף לטיפול פסיכולוגי/פסיכיאטרי) ---------- */
 .disclaimer-sec{padding:clamp(30px,4vw,46px) 0 clamp(22px,3vw,34px)}
 .disclaimer{

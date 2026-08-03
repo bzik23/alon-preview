@@ -125,6 +125,51 @@
     });
   }
 
+  // certificate lightbox - full-size scan loads only on click
+  var certBtns = document.querySelectorAll('.cert-shot');
+  if (certBtns.length) {
+    var lbx = document.createElement('div');
+    lbx.className = 'lbx';
+    lbx.setAttribute('role', 'dialog');
+    lbx.setAttribute('aria-modal', 'true');
+    lbx.setAttribute('aria-label', 'תעודה בתצוגה מוגדלת');
+    lbx.innerHTML =
+      '<button class="lbx-close" type="button" aria-label="סגירת התצוגה">✕</button>' +
+      '<figure><img src="" alt=""><figcaption></figcaption></figure>';
+    document.body.appendChild(lbx);
+
+    var lbxImg = lbx.querySelector('img');
+    var lbxCap = lbx.querySelector('figcaption');
+    var lbxClose = lbx.querySelector('.lbx-close');
+    var lastFocus = null;
+
+    function openLbx(btn) {
+      var thumb = btn.querySelector('img');
+      lbxImg.src = btn.getAttribute('data-full');
+      lbxImg.alt = thumb ? thumb.alt : '';
+      lbxCap.textContent = btn.getAttribute('data-caption') || '';
+      lastFocus = btn;
+      lbx.classList.add('open');
+      document.body.classList.add('lbx-open');
+      lbxClose.focus();
+    }
+    function closeLbx() {
+      lbx.classList.remove('open');
+      document.body.classList.remove('lbx-open');
+      if (lastFocus) lastFocus.focus();
+    }
+
+    certBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { openLbx(btn); });
+    });
+    lbx.addEventListener('click', function (e) {
+      if (e.target === lbx || lbxClose.contains(e.target)) closeLbx();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lbx.classList.contains('open')) closeLbx();
+    });
+  }
+
   // demo form handler (prototype only)
   var form = document.getElementById('leadForm');
   if (form) {
