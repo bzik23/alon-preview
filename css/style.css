@@ -210,6 +210,11 @@ h3{font-size:1.25rem}
 .hdr-wa svg{width:21px;height:21px;fill:#fff}
 .hdr-wa:hover{transform:scale(1.09)}
 
+/* dimmed backdrop behind the mobile drawer - stays under the header (z 100) */
+.nav-scrim{
+  position:fixed;inset:0;z-index:90;background:rgba(28,38,34,.46);
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;
+}
 .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .menu-toggle span{display:block;width:26px;height:3px;background:var(--ink);margin:5px 0;border-radius:2px;transition:.3s}
 
@@ -1102,6 +1107,23 @@ html.acc-motion .nselect.open .ns-opt{animation:none}
   .page-hero.photo-hero{padding:160px 0 26px}
   .page-hero.photo-hero.ph-top{padding:130px 0 170px}
   .photo-hero .ph-bg{object-position:var(--pos-m,50% 30%)}
+  /* ph-clear: on phones the photo is never cropped vertically, so each subject's head
+     sits at a fixed band of the hero height. the text is parked around that band -
+     each page tunes the three gaps inline (--ph-top-m / --ph-gap / --ph-chips). */
+  .page-hero.photo-hero.ph-clear{padding:var(--ph-top-m,30px) 0 26px}
+  .photo-hero.ph-clear h1{margin-bottom:var(--ph-gap,14px)}
+  .photo-hero.ph-clear .anchor-chips{margin-top:var(--ph-chips,24px)}
+  .photo-hero.ph-clear:not(.ph-dim)::before{
+    background:
+      linear-gradient(to bottom,rgba(24,34,29,.5) 0%,rgba(24,34,29,.3) 30%,rgba(24,34,29,.16) 58%,rgba(24,34,29,.34) 100%),
+      radial-gradient(78% 40% at 50% 14%,rgba(24,34,29,.26),transparent 74%);
+  }
+  /* podcast: bright studio shot - keep it dark where the text is, clear over the face */
+  .photo-hero.ph-dim.ph-clear::before{
+    background:
+      linear-gradient(to bottom,rgba(24,34,29,.58) 0%,rgba(24,34,29,.36) 20%,rgba(24,34,29,.12) 44%,rgba(24,34,29,.3) 74%,rgba(24,34,29,.5) 100%),
+      radial-gradient(92% 26% at 50% 4%,rgba(24,34,29,.3),transparent 78%);
+  }
 }
 
 /* ---------- signs grid (when to reach out) ---------- */
@@ -1422,6 +1444,12 @@ body.lbx-open{overflow:hidden}
   .ws-card{grid-template-columns:1fr}
   .ws-card .ws-side{min-height:110px;font-size:2.4rem}
   .ws-card .ws-side.has-img{min-height:200px}
+  /* workshop title + tags lead the card, the photo follows (display:contents unwraps .ws-body) */
+  .ws-card .ws-body{display:contents}
+  .ws-card .ws-body h3{order:-3;padding:24px 24px 0}
+  .ws-card .ws-meta{order:-2;padding:0 24px;margin:12px 0 16px}
+  .ws-card .ws-side{order:-1}
+  .ws-card .ws-body p{padding:20px 24px 26px}
   /* mobile hero: CTAs live in the sticky header/whatsapp fab, so drop the duplicate pair */
   .hero .hero-ctas{display:none}
   .hero-points{justify-content:center;margin-top:4px}
@@ -1453,6 +1481,74 @@ body.lbx-open{overflow:hidden}
   /* "להכיר אותי יותר" sits on the left edge on mobile (RTL: end == left) */
   .split.split-hoist .split-text .btn{justify-self:end}
   .trust-items div:nth-child(4) .t-ico{background:var(--sun-soft)}
+  /* card CTAs ("איך זה עובד" / "למה זה עובד") sit on the left edge, like the category cards */
+  .card > .card-link{align-self:flex-end}
+  /* ---- mobile nav drawer: 75% wide panel with card-style links ---- */
+  .main-nav{
+    left:auto;right:0;width:75%;max-width:370px;
+    background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%);
+    border-radius:26px 0 0 26px;box-shadow:-18px 0 46px rgba(51,68,62,.24);
+    padding:20px 16px 30px;overscroll-behavior:contain;
+  }
+  .main-nav > ul{gap:9px}
+  .main-nav > ul > li{--nav-acc:var(--sage-deep)}
+  .main-nav > ul > li:nth-child(4n+2){--nav-acc:var(--apricot-deep)}
+  .main-nav > ul > li:nth-child(4n+3){--nav-acc:var(--plum)}
+  .main-nav > ul > li:nth-child(4n){--nav-acc:var(--sun-deep)}
+  .main-nav > ul > li > a{
+    position:relative;display:flex;align-items:center;gap:10px;
+    padding:13px 18px 13px 14px;font-size:1.02rem;font-weight:700;border-radius:16px;
+    background:var(--white);border:1px solid rgba(95,122,106,.14);
+    box-shadow:0 4px 12px rgba(51,68,62,.05);
+  }
+  /* accent bar on the start (right) edge of every row */
+  .main-nav > ul > li > a::before{
+    content:"";position:absolute;inset-inline-start:0;top:14%;height:72%;width:4px;
+    background:var(--nav-acc);border-radius:0 4px 4px 0;
+  }
+  .main-nav > ul > li.active > a{background:var(--sage-soft);border-color:rgba(95,122,106,.3)}
+  .main-nav > ul > li.has-sub > a::after{margin-inline-start:auto;font-size:.8em;opacity:.75}
+  .main-nav > ul > li.has-sub.open > a{background:var(--sage-soft);color:var(--sage-deep)}
+  .main-nav > ul > li.has-sub.open > a::after{transform:rotate(180deg)}
+  /* last item ("יצירת קשר") reads as the drawer's CTA */
+  .main-nav > ul > li:last-child > a,.main-nav > ul > li:last-child.active > a{
+    background:var(--sage-deep);color:#fff;justify-content:center;border-color:transparent;
+    box-shadow:0 10px 22px rgba(95,122,106,.34);
+  }
+  .main-nav > ul > li:last-child > a::before{display:none}
+  /* submenu: indented under an accent guide line, one compact row per service */
+  .main-nav ul.sub-menu,.main-nav ul.sub-menu.wide{
+    background:none;padding:4px 12px 2px;margin:8px 2px 4px;
+    border-inline-start:2px solid var(--nav-acc);border-radius:0;
+  }
+  .main-nav .sub-menu a{
+    gap:9px;padding:8px 10px;border-radius:12px;font-size:.97rem;
+    background:rgba(255,255,255,.66);border:1px solid rgba(95,122,106,.1);
+  }
+  .main-nav .sub-menu li{margin-bottom:6px}
+  .main-nav .sm-ico{width:30px;height:30px;font-size:.95rem}
+  .main-nav .sm-txt small{display:none}
+  .main-nav .sm-txt b{font-size:.97rem}
+  .main-nav .sub-menu .sm-all{margin-top:2px;border-top:0;padding-top:0}
+  .main-nav .sub-menu .sm-all a{
+    justify-content:center;background:none;border:1px dashed var(--nav-acc);
+    color:var(--sage-deep);font-weight:700;font-size:.92rem;
+  }
+  /* rows fade in one after the other while the panel slides open */
+  @keyframes navIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+  .main-nav.open > ul > li{animation:navIn .3s ease both}
+  .main-nav.open > ul > li:nth-child(2){animation-delay:.04s}
+  .main-nav.open > ul > li:nth-child(3){animation-delay:.08s}
+  .main-nav.open > ul > li:nth-child(4){animation-delay:.12s}
+  .main-nav.open > ul > li:nth-child(5){animation-delay:.16s}
+  .main-nav.open > ul > li:nth-child(6){animation-delay:.2s}
+  .main-nav.open > ul > li:nth-child(7){animation-delay:.24s}
+  .main-nav.open > ul > li:nth-child(8){animation-delay:.28s}
+  .nav-scrim.on{opacity:1;visibility:visible}
+  /* hamburger morphs into a close icon */
+  .menu-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu-toggle.open span:nth-child(2){opacity:0}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
   /* clinic: both pills ("הקליניקה" + "הקליניקה ברחובות") move above the photo pair */
   .clinic-grid{gap:0}
   .clinic-text{display:contents}

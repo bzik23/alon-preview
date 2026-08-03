@@ -8,13 +8,27 @@
     header.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
 
-  // mobile menu
+  // mobile menu - the drawer covers 75% of the screen, the rest dims and closes on tap
   var toggle = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.main-nav');
   if (toggle && nav) {
+    var scrim = document.createElement('div');
+    scrim.className = 'nav-scrim';
+    document.body.appendChild(scrim);
+    toggle.setAttribute('aria-expanded', 'false');
+    var setNav = function (open) {
+      nav.classList.toggle('open', open);
+      toggle.classList.toggle('open', open);
+      scrim.classList.toggle('on', open);
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
     toggle.addEventListener('click', function () {
-      nav.classList.toggle('open');
-      document.body.classList.toggle('nav-open');
+      setNav(!nav.classList.contains('open'));
+    });
+    scrim.addEventListener('click', function () { setNav(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) setNav(false);
     });
   }
 
