@@ -95,19 +95,37 @@
   </div>
 </header>
 
-<section class="page-hero">
-  <div class="container">
-    <div class="breadcrumbs"><a href="index.html">בית</a> ‹ מי אני</div>
+<section class="page-hero photo-hero ph-top" style="--pos:50% 42%;--pos-m:50% 46%">
+  <img class="ph-bg" src="assets/about-hero.jpg" alt="קבוצת אנשים יושבת במעגל על הדשא בשיחה פתוחה באור שקיעה" fetchpriority="high">
+  <div class="container ph-content">
     <h1>מי אני</h1>
     <p>נעים להכיר, אני אלון שמש - מטפל רגשי ומאמן להתפתחות אישית. זה הסיפור שלי, ובעיקר - מה שאני מאמין בו.</p>
   </div>
 </section>
 
+
 <section class="section alt">
   <div class="container split">
     <div class="split-visual reveal">
-      <div class="split-frame natural">
-        <img src="assets/alon-hero.png" alt="אלון שמש - מטפל רגשי ומאמן להתפתחות אישית">
+      <div class="split-frame slider" data-slider data-interval="4500">
+        <div class="sl-slide natural on">
+          <img src="assets/alon-hero.png" alt="אלון שמש - מטפל רגשי ומאמן להתפתחות אישית" width="583" height="670">
+        </div>
+        <div class="sl-slide">
+          <img src="assets/about-slide-studio.jpg" alt="אלון שמש מקליט פרק פודקאסט באולפן" width="900" height="1057" loading="lazy">
+        </div>
+        <div class="sl-slide">
+          <img src="assets/about-slide-workshop.jpg" alt="אלון שמש מעביר סדנה קבוצתית" width="900" height="1057" loading="lazy">
+        </div>
+        <div class="sl-slide">
+          <img src="assets/about-slide-crater.jpg" alt="אלון שמש בטבע, על שפת המכתש" width="900" height="1057" loading="lazy">
+        </div>
+        <div class="sl-dots" role="tablist" aria-label="החלפת תמונה">
+        <button type="button" role="tab" aria-label="פורטרט" class="on" aria-selected="true"></button>
+        <button type="button" role="tab" aria-label="באולפן ההקלטות" aria-selected="false"></button>
+        <button type="button" role="tab" aria-label="בסדנה קבוצתית" aria-selected="false"></button>
+        <button type="button" role="tab" aria-label="בטבע" aria-selected="false"></button>
+        </div>
       </div>
       <div class="split-badge">אלון שמש<small>מטפל רגשי ומאמן אישי</small></div>
     </div>
@@ -262,6 +280,12 @@
     </div>
   </div>
 </section>
+
+<div class="crumbs-bottom">
+  <div class="container">
+    <div class="breadcrumbs"><a href="index.html">בית</a> ‹ מי אני</div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="container footer-grid">

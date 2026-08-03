@@ -170,6 +170,45 @@
     });
   }
 
+  // photo slider - crossfade on a timer, dots for manual control, pauses on hover
+  document.querySelectorAll('[data-slider]').forEach(function (box) {
+    var slides = box.querySelectorAll('.sl-slide');
+    if (slides.length < 2) return;
+    var dots = box.querySelectorAll('.sl-dots button');
+    var delay = parseInt(box.getAttribute('data-interval'), 10) || 4500;
+    var idx = 0;
+    var timer = null;
+
+    function show(n) {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) { s.classList.toggle('on', k === idx); });
+      dots.forEach(function (d, k) {
+        d.classList.toggle('on', k === idx);
+        d.setAttribute('aria-selected', k === idx ? 'true' : 'false');
+      });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function play() {
+      stop();
+      if (reduceMotion) return;
+      timer = setInterval(function () { show(idx + 1); }, delay);
+    }
+
+    dots.forEach(function (d, k) {
+      d.addEventListener('click', function () { show(k); play(); });
+    });
+    box.addEventListener('mouseenter', stop);
+    box.addEventListener('mouseleave', play);
+    box.addEventListener('focusin', stop);
+    box.addEventListener('focusout', play);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { stop(); } else { play(); }
+    });
+
+    show(0);
+    play();
+  });
+
   // demo form handler (prototype only)
   var form = document.getElementById('leadForm');
   if (form) {

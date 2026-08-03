@@ -421,6 +421,28 @@ h3{font-size:1.25rem}
   background:linear-gradient(to top,rgba(250,247,242,.28),transparent 45%);
 }
 .split-frame.photo{aspect-ratio:4/3}
+/* photo slider inside a split frame - crossfade, same proportion for every slide */
+/* width:100% is required - every slide is absolutely positioned, so the frame's
+   max-content width is 0 and it collapses under the mobile `margin-inline:auto` */
+.split-frame.slider{display:block;position:relative;width:100%;background:linear-gradient(160deg,#DCE8DF 0%,#F2E8DC 55%,#F8E9D8 100%)}
+.sl-slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.sl-slide.on{opacity:1}
+.sl-slide img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%)}
+/* the home-page portrait keeps its nature backdrop and warm bottom haze */
+.sl-slide.natural{background-image:url(../assets/nature-bg.jpg);background-size:cover;background-position:center}
+.sl-slide.natural img{object-position:top}
+.sl-slide.natural::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(250,247,242,.28),transparent 45%);
+}
+.sl-dots{position:absolute;bottom:15px;inset-inline:0;display:flex;justify-content:center;gap:8px;z-index:3}
+.sl-dots button{
+  width:9px;height:9px;padding:0;border:0;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.6);box-shadow:0 1px 5px rgba(24,34,29,.35);transition:.28s;
+}
+.sl-dots button:hover{background:rgba(255,255,255,.88)}
+.sl-dots button.on{background:#fff;width:24px}
+@media(prefers-reduced-motion:reduce){.sl-slide{transition:none}}
 .split-badge{
   position:absolute;bottom:24px;right:-14px;background:var(--white);border-radius:16px;
   box-shadow:var(--shadow-lg);padding:14px 22px;font-weight:700;color:var(--sage-deep);
@@ -741,6 +763,13 @@ h3{font-size:1.25rem}
     linear-gradient(to top,rgba(24,34,29,.34) 0%,rgba(24,34,29,.15) 45%,rgba(24,34,29,.08) 100%),
     radial-gradient(70% 90% at 50% 60%,rgba(24,34,29,.14),transparent 70%);
 }
+/* ph-top: text sits in the upper third, scene stays visible below (about page) */
+.page-hero.photo-hero.ph-top{padding:clamp(140px,15vw,180px) 0 clamp(200px,26vw,300px)}
+.photo-hero.ph-top::before{
+  background:
+    linear-gradient(to bottom,rgba(24,34,29,.46) 0%,rgba(24,34,29,.24) 42%,rgba(24,34,29,.06) 78%,rgba(24,34,29,.14) 100%),
+    radial-gradient(80% 70% at 50% 22%,rgba(24,34,29,.2),transparent 72%);
+}
 .crumbs-bottom{padding:0 0 22px}
 .crumbs-bottom .breadcrumbs{margin-bottom:0}
 .photo-hero h1{color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.35)}
@@ -752,6 +781,7 @@ h3{font-size:1.25rem}
 .photo-hero .anchor-chips a:hover{background:#fff;border-color:#fff;color:var(--sage-deep)}
 @media(max-width:600px){
   .page-hero.photo-hero{padding:160px 0 34px}
+  .page-hero.photo-hero.ph-top{padding:130px 0 170px}
   .photo-hero .ph-bg{object-position:var(--pos-m,50% 30%)}
 }
 
@@ -1029,7 +1059,7 @@ body.lbx-open{overflow:hidden}
   .hero-visual{order:-1}
   .hero-card{width:min(320px,86%);aspect-ratio:4/4.4}
   .hf-1{right:0}.hf-2{left:0}
-  .split-visual{max-width:420px;margin-inline:auto}
+  .split-visual{width:100%;max-width:420px;margin-inline:auto}
   .ws-card{grid-template-columns:1fr}
   .ws-card .ws-side{min-height:110px;font-size:2.4rem}
 }
