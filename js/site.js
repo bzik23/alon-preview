@@ -209,6 +209,170 @@
     play();
   });
 
+  // ---------- fancy dropdown: upgrades a native <select> ----------
+  var NS_CARET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+  var NS_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  var nsSeq = 0;
+
+  function niceSelect(sel) {
+    if (sel.dataset.nsReady) return;
+    sel.dataset.nsReady = '1';
+    nsSeq++;
+    var uid = 'ns' + nsSeq;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'nselect';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+    sel.classList.add('ns-native');
+    sel.setAttribute('tabindex', '-1');
+    sel.setAttribute('aria-hidden', 'true');
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ns-btn';
+    btn.id = uid + '-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="ns-ico"></span><span class="ns-val" id="' + uid + '-val"></span>' +
+                    '<span class="ns-caret">' + NS_CARET + '</span>';
+
+    var panel = document.createElement('div');
+    panel.className = 'ns-panel';
+    var list = document.createElement('ul');
+    list.className = 'ns-list';
+    list.id = uid + '-list';
+    list.setAttribute('role', 'listbox');
+    panel.appendChild(list);
+
+    var opts = Array.prototype.slice.call(sel.options);
+    var items = opts.map(function (o, i) {
+      var li = document.createElement('li');
+      li.className = 'ns-opt' + (o.value === '' ? ' ns-ph' : '');
+      li.id = uid + '-o' + i;
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', 'false');
+      li.innerHTML = '<span class="oi">' + (o.dataset.ico || '•') + '</span>' +
+                     '<span class="ot"></span><span class="ns-check">' + NS_CHECK + '</span>';
+      li.querySelector('.ot').textContent = o.textContent.trim();
+      list.appendChild(li);
+      return li;
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+
+    // label points at the hidden select - route it to the button instead
+    var label = sel.id ? document.querySelector('label[for="' + sel.id + '"]') : null;
+    if (label) {
+      if (!label.id) label.id = uid + '-lbl';
+      btn.setAttribute('aria-labelledby', label.id + ' ' + uid + '-val');
+      label.addEventListener('click', function (e) { e.preventDefault(); btn.focus(); });
+    }
+
+    var open = false, hl = sel.selectedIndex < 0 ? 0 : sel.selectedIndex;
+
+    function paint() {
+      var i = sel.selectedIndex < 0 ? 0 : sel.selectedIndex;
+      var o = sel.options[i];
+      btn.querySelector('.ns-ico').textContent = (o && o.dataset.ico) || '✨';
+      var val = btn.querySelector('.ns-val');
+      val.textContent = o ? o.textContent.trim() : '';
+      val.classList.toggle('ph', !o || o.value === '');
+      items.forEach(function (li, k) {
+        li.classList.toggle('on', k === i);
+        li.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+    }
+
+    function highlight(k) {
+      hl = Math.max(0, Math.min(items.length - 1, k));
+      items.forEach(function (li, n) { li.classList.toggle('hl', n === hl); });
+      list.setAttribute('aria-activedescendant', items[hl].id);
+      var li = items[hl];
+      if (li.offsetTop < list.scrollTop) list.scrollTop = li.offsetTop;
+      else if (li.offsetTop + li.offsetHeight > list.scrollTop + list.clientHeight) {
+        list.scrollTop = li.offsetTop + li.offsetHeight - list.clientHeight;
+      }
+    }
+
+    function openPanel() {
+      if (open) return;
+      closeAll();
+      open = true;
+      var space = window.innerHeight - btn.getBoundingClientRect().bottom;
+      wrap.classList.toggle('up', space < 320 && btn.getBoundingClientRect().top > space);
+      wrap.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      highlight(sel.selectedIndex < 0 ? 0 : sel.selectedIndex);
+    }
+
+    function closePanel(focusBtn) {
+      if (!open) return;
+      open = false;
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      items.forEach(function (li) { li.classList.remove('hl'); });
+      list.removeAttribute('aria-activedescendant');
+      if (focusBtn) btn.focus();
+    }
+    wrap._nsClose = closePanel;
+
+    function pick(k) {
+      sel.selectedIndex = k;
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+      paint();
+      closePanel(true);
+    }
+
+    btn.addEventListener('click', function () { open ? closePanel(false) : openPanel(); });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (!open) { openPanel(); return; }
+        if (e.key === 'Enter' || e.key === ' ') { pick(hl); return; }
+        highlight(hl + (e.key === 'ArrowDown' ? 1 : -1));
+      } else if (e.key === 'Home' && open) { e.preventDefault(); highlight(0); }
+      else if (e.key === 'End' && open) { e.preventDefault(); highlight(items.length - 1); }
+      else if (e.key === 'Escape') { closePanel(true); }
+      else if (e.key === 'Tab') { closePanel(false); }
+      else if (e.key.length === 1) {
+        var q = e.key.toLowerCase(), from = open ? hl + 1 : 0;
+        for (var n = 0; n < items.length; n++) {
+          var k = (from + n) % items.length;
+          if (sel.options[k].textContent.trim().toLowerCase().indexOf(q) === 0) {
+            if (!open) openPanel();
+            highlight(k);
+            break;
+          }
+        }
+      }
+    });
+
+    items.forEach(function (li, k) {
+      li.addEventListener('click', function () { pick(k); });
+      li.addEventListener('mouseenter', function () { highlight(k); });
+    });
+
+    sel.addEventListener('change', paint);
+    if (sel.form) sel.form.addEventListener('reset', function () { setTimeout(paint, 0); });
+    paint();
+  }
+
+  function closeAll(except) {
+    document.querySelectorAll('.nselect.open').forEach(function (w) {
+      if (w !== except && w._nsClose) w._nsClose(false);
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var inside = e.target.closest ? e.target.closest('.nselect') : null;
+    closeAll(inside);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll();
+  });
+  document.querySelectorAll('select[data-nice], .contact-form select').forEach(niceSelect);
+
   // demo form handler (prototype only)
   var form = document.getElementById('leadForm');
   if (form) {
