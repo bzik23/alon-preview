@@ -249,6 +249,74 @@
     play();
   });
 
+  // mobile card slider - a card grid becomes one auto-rotating card on phones
+  var msMq = window.matchMedia('(max-width:640px)');
+  document.querySelectorAll('[data-mslider]').forEach(function (box) {
+    var track = box.querySelector('.ms-track');
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.children);
+    if (cards.length < 2) return;
+    var delay = parseInt(box.getAttribute('data-interval'), 10) || 3000;
+    var rtl = getComputedStyle(document.documentElement).direction === 'rtl';
+    var idx = 0, timer = null, live = false;
+
+    var dots = document.createElement('div');
+    dots.className = 'ms-dots';
+    dots.setAttribute('role', 'tablist');
+    dots.setAttribute('aria-label', box.getAttribute('data-label') || 'מעבר בין כרטיסים');
+    cards.forEach(function (c, k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'כרטיס ' + (k + 1) + ' מתוך ' + cards.length);
+      b.addEventListener('click', function () { show(k); play(); });
+      dots.appendChild(b);
+    });
+    box.appendChild(dots);
+    var btns = dots.querySelectorAll('button');
+
+    function show(n) {
+      idx = (n + cards.length) % cards.length;
+      // RTL flows right-to-left, so advancing moves the track the other way.
+      // each step is one card (100%) plus the gap that separates it from the next.
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      var dir = rtl ? 1 : -1;
+      track.style.transform = 'translateX(calc(' + (dir * idx * 100) + '% + ' + (dir * idx * gap) + 'px))';
+      btns.forEach(function (b, k) {
+        b.classList.toggle('on', k === idx);
+        b.setAttribute('aria-selected', k === idx ? 'true' : 'false');
+      });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function play() {
+      stop();
+      if (!live || reduceMotion) return;
+      timer = setInterval(function () { show(idx + 1); }, delay);
+    }
+    function sync() {
+      if (msMq.matches === live) return;
+      live = msMq.matches;
+      box.classList.toggle('ms-on', live);
+      if (live) {
+        // off-screen cards never trip the reveal observer - show them upfront
+        cards.forEach(function (c) { c.classList.add('in'); });
+        show(0);
+        play();
+      } else {
+        stop();
+        track.style.transform = '';
+      }
+    }
+
+    box.addEventListener('touchstart', stop, { passive: true });
+    box.addEventListener('touchend', play, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { stop(); } else { play(); }
+    });
+    sync();
+    if (msMq.addEventListener) msMq.addEventListener('change', sync);
+  });
+
   // ---------- fancy dropdown: upgrades a native <select> ----------
   var NS_CARET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   var NS_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';

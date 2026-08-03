@@ -1314,6 +1314,30 @@ body.lbx-open{overflow:hidden}
 .disclaimer b{color:var(--ink);font-weight:700}
 .section.alt + .disclaimer-sec .disclaimer{background:var(--cream)}
 
+/* ---------- mobile card slider ----------
+   a desktop grid (.ms-track) turns into one rotating card on phones. the layout
+   only switches once JS adds .ms-on, so without JS the grid stays as-is. */
+.ms-dots{display:none}
+@media(max-width:640px){
+  /* side padding keeps the cards' shadows from being clipped by overflow:hidden */
+  .mslider.ms-on{--ms-gap:26px;overflow:hidden;margin-inline:-9px;padding:9px}
+  .mslider.ms-on .ms-track{
+    /* gap > 2x the gutter, so the neighbouring card never peeks into the padding */
+    display:flex;gap:var(--ms-gap);max-width:none;margin-inline:0;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform;
+  }
+  .mslider.ms-on .ms-track > *{flex:0 0 100%;min-width:100%}
+  /* the track carries the transform now - hover lift would fight it */
+  .mslider.ms-on .ms-track > *:hover{transform:none}
+  .mslider.ms-on .ms-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+  .ms-dots button{
+    width:9px;height:9px;padding:0;border:0;border-radius:999px;cursor:pointer;
+    background:rgba(95,122,106,.28);transition:.25s;
+  }
+  .ms-dots button.on{background:var(--sage-deep);width:26px}
+}
+@media(prefers-reduced-motion:reduce){.mslider.ms-on .ms-track{transition:none}}
+
 /* ---------- reveal animation ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -1433,7 +1457,9 @@ body.lbx-open{overflow:hidden}
 }
 @media(max-width:560px){
   .cards-grid,.cards-grid.g2,.cards-grid.g4,.audience-grid,.steps,.clinic-feats{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
+  /* brand + contact stay full width, the two link lists sit side by side */
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px 18px}
+  .footer-grid > div:first-child,.footer-grid > div:last-child{grid-column:1/-1}
   .form-row{grid-template-columns:1fr}
   .hero-ctas .btn{width:100%}
 }
