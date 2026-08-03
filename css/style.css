@@ -1280,7 +1280,8 @@ html.acc-motion .reveal{opacity:1;transform:none}
 
 /* ---------- lightbox (הגדלת תעודה) ---------- */
 .lbx{
-  position:fixed;inset:0;z-index:120;
+  /* above the sticky header (100) and the accessibility fab (200) */
+  position:fixed;inset:0;z-index:300;
   display:flex;align-items:center;justify-content:center;
   padding:clamp(14px,4vw,44px);
   background:rgba(28,38,34,.88);
