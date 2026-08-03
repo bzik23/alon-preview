@@ -812,10 +812,22 @@ html.acc-motion .nselect.open .ns-opt{animation:none}
    מברירת המחדל של photo-hero, אחרת הכיתוב הלבן נבלע */
 .photo-hero.ph-dim::before{
   background:
-    linear-gradient(to top,rgba(24,34,29,.6) 0%,rgba(24,34,29,.46) 48%,rgba(24,34,29,.38) 100%),
-    radial-gradient(78% 100% at 44% 58%,rgba(24,34,29,.42),transparent 74%),
+    linear-gradient(to top,rgba(24,34,29,.3) 0%,rgba(24,34,29,.16) 48%,rgba(24,34,29,.1) 100%),
+    radial-gradient(66% 86% at 42% 62%,rgba(24,34,29,.3),transparent 72%),
     /* נגיעת מותג בצד הכיתוב, שהקיר הלבן המטושטש לא יישאר אפור שטוח */
-    linear-gradient(115deg,rgba(124,58,237,.34) 0%,rgba(95,122,106,.2) 40%,transparent 66%);
+    linear-gradient(115deg,rgba(124,58,237,.24) 0%,rgba(95,122,106,.12) 40%,transparent 66%);
+}
+/* התמונה בהירה, אז הכיתוב הלבן נשען על צל טקסט חזק יותר במקום על סקרים כהה */
+.photo-hero.ph-dim h1{text-shadow:0 2px 10px rgba(24,34,29,.6),0 1px 34px rgba(24,34,29,.45)}
+.photo-hero.ph-dim p{text-shadow:0 1px 8px rgba(24,34,29,.62),0 1px 26px rgba(24,34,29,.4)}
+/* במובייל אין חיתוך אנכי (התמונה בדיוק בגובה ההירו), אז הכיתוב נופל ישירות על
+   הפנים ולא על הקיר המטושטש - שם עדיין נדרש סקרים חזק יותר מאשר בדסקטופ */
+@media(max-width:600px){
+  .photo-hero.ph-dim::before{
+    background:
+      linear-gradient(to top,rgba(24,34,29,.46) 0%,rgba(24,34,29,.32) 50%,rgba(24,34,29,.24) 100%),
+      radial-gradient(84% 62% at 50% 66%,rgba(24,34,29,.4),transparent 76%);
+  }
 }
 .photo-hero .eyebrow{background:rgba(255,255,255,.16);color:#fff;backdrop-filter:blur(8px)}
 
