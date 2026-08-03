@@ -657,6 +657,126 @@
     eps.forEach(function (ep) { initEpisode(ep, players); });
   }
 
+  // ---------- הרשמה לעדכון על פרק פודקאסט חדש (MailerLite) ----------
+  // ===== להשלמה כשחשבון ה-MailerLite מוכן =====
+  // ב-MailerLite: Forms > Embedded forms > צרו טופס > "Code" - בקוד ההטמעה מופיעה כתובת
+  // בצורה  https://assets.mailerlite.com/jsonp/<ACCOUNT>/forms/<FORM>/subscribe
+  // מעתיקים משם את שני המספרים לכאן. אלה מזהים ציבוריים, לא מפתח API סודי -
+  // מפתח API אסור להכניס לקוד צד-לקוח.
+  var ML_ACCOUNT = '';
+  var ML_FORM = '';
+
+  var subModal = document.getElementById('subModal');
+  if (subModal) {
+    var subCard = subModal.querySelector('.sub-card');
+    var subForm = subModal.querySelector('.sub-form');
+    var subDone = subModal.querySelector('.sub-done');
+    var subErr = subModal.querySelector('.sub-err');
+    var subEmail = subModal.querySelector('#sub-email');
+    var subName = subModal.querySelector('#sub-name');
+    var subConsent = subModal.querySelector('#sub-consent');
+    var subHp = subModal.querySelector('.sub-hp input');
+    var subOpener = null;
+
+    function subOpen(origin) {
+      subOpener = origin || null;
+      subModal.hidden = false;
+      document.body.classList.add('sub-open');
+      requestAnimationFrame(function () { subModal.classList.add('open'); });
+      setTimeout(function () { subEmail.focus(); }, 60);
+    }
+    function subClose() {
+      subModal.classList.remove('open');
+      document.body.classList.remove('sub-open');
+      setTimeout(function () {
+        subModal.hidden = true;
+        // איפוס, כדי שפתיחה חוזרת תתחיל מטופס נקי ולא ממסך התודה
+        subForm.hidden = false;
+        subDone.hidden = true;
+        subForm.classList.remove('busy');
+        subErr.hidden = true;
+        subForm.reset();
+        [subEmail, subConsent].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      }, 250);
+      if (subOpener) subOpener.focus();
+    }
+
+    document.querySelectorAll('[data-sub-open]').forEach(function (btn) {
+      btn.addEventListener('click', function () { subOpen(btn); });
+    });
+    subModal.querySelectorAll('[data-sub-close]').forEach(function (btn) {
+      btn.addEventListener('click', subClose);
+    });
+    subModal.addEventListener('click', function (e) {
+      if (e.target === subModal) subClose();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (subModal.hidden) return;
+      if (e.key === 'Escape') { subClose(); return; }
+      if (e.key !== 'Tab') return;
+      // מלכודת פוקוס - החלון מודאלי, הטאב לא אמור לברוח לעמוד שמאחור
+      var f = subCard.querySelectorAll('button,input,a[href],[tabindex]:not([tabindex="-1"])');
+      f = [].filter.call(f, function (el) { return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    function subFail(msg, field) {
+      subErr.textContent = msg;
+      subErr.hidden = false;
+      if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); }
+    }
+
+    subForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      subErr.hidden = true;
+      [subEmail, subConsent].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      if (subHp && subHp.value) return;                       // בוט מילא את ה-honeypot
+      var email = subEmail.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        return subFail('נראה שכתובת המייל לא תקינה. אפשר לבדוק אותה שוב?', subEmail);
+      }
+      if (!subConsent.checked) {
+        return subFail('צריך לאשר קבלת עדכונים כדי שנוכל לשלוח לכם הודעה על פרק חדש.', subConsent);
+      }
+
+      function subSucceed() {
+        subForm.hidden = true;
+        subDone.hidden = false;
+        subDone.querySelector('.btn').focus();
+      }
+
+      if (!ML_ACCOUNT || !ML_FORM) {
+        // הטופס עוד לא חובר ל-MailerLite - בפריוויו מציגים את חוויית המשתמש המלאה,
+        // בדיוק כמו טופס יצירת הקשר שעדיין דמו
+        console.warn('[subscribe] MailerLite not configured - set ML_ACCOUNT / ML_FORM in js/site.js');
+        subSucceed();
+        return;
+      }
+
+      var fd = new FormData();
+      fd.append('fields[email]', email);
+      fd.append('fields[name]', subName.value.trim());
+      fd.append('ml-submit', '1');
+      fd.append('anticsrf', 'true');
+      subForm.classList.add('busy');
+      fetch('https://assets.mailerlite.com/jsonp/' + ML_ACCOUNT + '/forms/' + ML_FORM + '/subscribe',
+            { method: 'POST', body: fd })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          subForm.classList.remove('busy');
+          if (data && data.success) subSucceed();
+          else subFail('משהו השתבש בהרשמה. אפשר לנסות שוב, או לשלוח מייל ל-alonsms73@gmail.com');
+        })
+        .catch(function () {
+          subForm.classList.remove('busy');
+          subFail('לא הצלחנו להתחבר כרגע. אפשר לנסות שוב, או לשלוח מייל ל-alonsms73@gmail.com');
+        });
+    });
+  }
+
   // demo form handler (prototype only)
   var form = document.getElementById('leadForm');
   if (form) {

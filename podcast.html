@@ -222,13 +222,44 @@
         <h3>פרקים חדשים בדרך</h3>
         <p>פרקים נוספים מוקלטים בימים אלה - על חרדות, גבולות, הורות ושינוי הרגלים. רוצים לדעת כשעולה פרק חדש? השאירו פרטים ותקבלו עדכון, או עקבו אחרי אלון ברשתות.</p>
         <div class="pod-next-links">
-          <a href="contact.html" class="btn btn-primary">עדכנו אותי בפרק הבא</a>
+          <button type="button" class="btn btn-primary" data-sub-open>עדכנו אותי בפרק הבא</button>
           <a href="https://www.facebook.com/alon.shemesh.121" target="_blank" rel="noopener" class="btn btn-outline">לעמוד הפייסבוק</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="sub-modal" id="subModal" hidden>
+  <div class="sub-card" role="dialog" aria-modal="true" aria-labelledby="subTitle">
+    <button type="button" class="sub-x" data-sub-close aria-label="סגירת החלון">✕</button>
+    <div class="sub-body">
+      <div class="sub-ico">🎧</div>
+      <h3 id="subTitle">שנעדכן אתכם כשעולה פרק חדש?</h3>
+      <p class="sub-lead">משאירים כתובת מייל, ומקבלים הודעה קצרה עם קישור לפרק ברגע שהוא עולה לאתר. בלי ספאם, ואפשר להסיר את עצמכם בכל רגע.</p>
+      <form class="sub-form" novalidate>
+        <label for="sub-name">שם (לא חובה)</label>
+        <input id="sub-name" name="name" type="text" autocomplete="given-name" placeholder="איך לפנות אליכם?">
+        <label for="sub-email">כתובת מייל <span class="req">*</span></label>
+        <input id="sub-email" name="email" type="email" required autocomplete="email" placeholder="name@email.com">
+        <label class="form-consent" for="sub-consent">
+          <input id="sub-consent" type="checkbox" required>
+          <span>מאשר/ת קבלת עדכונים על פרקים חדשים, בהתאם ל<a href="privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a> <span class="req">*</span></span>
+        </label>
+        <div class="sub-hp" aria-hidden="true"><label>אל תמלאו שדה זה<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <p class="sub-err" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">עדכנו אותי בפרק הבא</button>
+        <p class="sub-note">בערך פעם בחודש, רק כשעולה פרק חדש.</p>
+      </form>
+      <div class="sub-done" hidden>
+        <div class="sub-ico ok">✅</div>
+        <h3>נרשמתם, תודה!</h3>
+        <p class="sub-lead">ברגע שעולה פרק חדש תקבלו מייל קצר עם קישור ישיר אליו.</p>
+        <button type="button" class="btn btn-outline" data-sub-close>סגירה</button>
+      </div>
+    </div>
+  </div>
+</div>
 <section class="section" style="padding-top:0">
   <div class="container">
     <div class="cta-band reveal">

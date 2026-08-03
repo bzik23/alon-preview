@@ -968,6 +968,63 @@ html.acc-motion .nselect.open .ns-opt{animation:none}
 .pod-next p{color:var(--ink-soft)}
 .pod-next-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
 
+/* --- חלון הרשמה לעדכון על פרק חדש --- */
+.sub-modal{
+  position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;
+  background:rgba(24,34,29,.55);backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .25s ease;
+}
+.sub-modal[hidden]{display:none}
+.sub-modal.open{opacity:1}
+.sub-card{
+  position:relative;width:min(470px,100%);max-height:calc(100vh - 40px);overflow:auto;
+  background:var(--white);border-radius:var(--radius);padding:34px 30px 30px;
+  box-shadow:0 30px 70px rgba(24,34,29,.35);
+  transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.8,.3,1);
+}
+.sub-modal.open .sub-card{transform:none}
+.sub-x{
+  position:absolute;inset-block-start:12px;inset-inline-end:12px;
+  width:34px;height:34px;border:0;border-radius:50%;cursor:pointer;
+  background:var(--sage-soft);color:var(--sage-deep);font-size:.95rem;line-height:1;
+  display:grid;place-items:center;transition:background .2s ease,color .2s ease;
+}
+.sub-x:hover{background:var(--sage-deep);color:#fff}
+.sub-ico{
+  width:62px;height:62px;border-radius:20px;margin-bottom:16px;
+  display:grid;place-items:center;font-size:1.7rem;
+  background:linear-gradient(140deg,var(--plum-soft),var(--sage-soft));
+}
+.sub-ico.ok{background:linear-gradient(140deg,#DFF3E4,var(--sage-soft))}
+.sub-card h3{font-size:1.35rem;margin-bottom:8px}
+.sub-lead{color:var(--ink-soft);font-size:.98rem}
+.sub-form{margin-top:20px}
+.sub-form label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px}
+.sub-form input[type=text],.sub-form input[type=email]{
+  width:100%;font:inherit;font-size:.98rem;color:var(--ink);margin-bottom:14px;
+  background:var(--cream);border:1.5px solid var(--sage-soft);border-radius:var(--radius-sm);
+  padding:11px 15px;transition:border-color .2s ease,background .2s ease;
+}
+.sub-form input:focus{outline:0;border-color:var(--plum);background:var(--white)}
+.sub-form input[aria-invalid="true"]{border-color:#C0564B;background:#FDF2F1}
+.sub-form .form-consent{margin:4px 0 16px}
+.sub-form .btn{width:100%;justify-content:center}
+.sub-err{
+  background:#FDF2F1;border:1px solid rgba(192,86,75,.3);color:#93372E;
+  border-radius:var(--radius-sm);padding:9px 14px;font-size:.9rem;margin-bottom:14px;
+}
+.sub-note{color:var(--ink-soft);font-size:.84rem;text-align:center;margin-top:12px}
+.sub-form.busy{opacity:.6;pointer-events:none}
+/* honeypot - clip ולא left שלילי, שלא ייווצר ואקום נגלל ב-RTL */
+.sub-hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sub-done{text-align:center}
+.sub-done .sub-ico{margin-inline:auto}
+.sub-done .btn{margin-top:20px}
+body.sub-open{overflow:hidden}
+@media(prefers-reduced-motion:reduce){
+  .sub-modal,.sub-card{transition:none}
+}
+
 @media(max-width:860px){
   .ep{grid-template-columns:132px 1fr;gap:20px;padding:18px}
   .ep-big{width:50px;height:50px}
