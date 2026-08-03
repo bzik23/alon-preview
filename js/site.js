@@ -610,10 +610,22 @@
       if (!seeking && audio.currentTime > 5) localStorage.setItem(storeKey, audio.currentTime);
     });
     audio.addEventListener('progress', paintBuffered);
-    audio.addEventListener('play', function () { ep.classList.add('playing'); });
-    audio.addEventListener('pause', function () { ep.classList.remove('playing'); });
+    // התווית של כפתור הנגינה מתחלפת בין "השמעת..." ל"עצירת...", כדי שקורא מסך
+    // ידע מה המצב הנוכחי ולא רק מה הפעולה
+    var ppBtns = ep.querySelectorAll('[data-pp]');
+    ppBtns.forEach(function (b) {
+      b.setAttribute('data-label', (b.getAttribute('aria-label') || '').replace(/^השמעת /, ''));
+    });
+    function label(playing) {
+      ppBtns.forEach(function (b) {
+        b.setAttribute('aria-label', (playing ? 'עצירת ' : 'השמעת ') + b.getAttribute('data-label'));
+      });
+    }
+    audio.addEventListener('play', function () { ep.classList.add('playing'); label(true); });
+    audio.addEventListener('pause', function () { ep.classList.remove('playing'); label(false); });
     audio.addEventListener('ended', function () {
       ep.classList.remove('playing');
+      label(false);
       localStorage.removeItem(storeKey);
       audio.currentTime = 0;
       restored = true;
