@@ -1080,9 +1080,10 @@ body.sub-open{overflow:hidden}
 .f-creds{margin-top:22px}
 .f-creds-title{display:block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:#7E9086;margin-bottom:9px}
 .f-creds-row{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
-.f-cred-mark{flex:0 0 auto;display:block;opacity:.9;transition:opacity .2s}
+.f-cred-mark{flex:0 0 auto;display:block;opacity:.9;transition:opacity .2s,transform .2s}
 .f-cred-mark img{display:block;width:auto;height:52px}
 .f-cred-mark:hover{opacity:1}
+a.f-cred-mark:hover,a.f-cred-mark:focus-visible{transform:translateY(-2px)}
 .fb-credit{margin-inline-start:auto;font-size:.8rem;color:#71837A}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:16px 0;font-size:.85rem;color:#8FA096}
 .fb-inner{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px 22px}
