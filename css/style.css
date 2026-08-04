@@ -1077,13 +1077,23 @@ body.sub-open{overflow:hidden}
 .waze-btn:hover{background:#33CCFF;color:#0B2239 !important;padding-inline-start:18px !important}
 /* credential marks - deliberately quiet: small and muted, under the social row.
    Both PNGs are already transparent and stay legible straight on the dark green. */
+/* honeypot: must be reachable to bots but never seen or read out.
+   NOT left:-9999px - in RTL that creates a scrollable void [[rtl-offscreen-left]] */
+.hp-field{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.form-status{margin-top:12px;font-size:.92rem;font-weight:600;min-height:1.2em}
+.form-status.is-ok{color:var(--sage-deep)}
+.form-status.is-err{color:#B4442F}
 .f-creds{margin-top:22px}
 .f-creds-title{display:block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:#7E9086;margin-bottom:9px}
 .f-creds-row{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
 .f-cred-mark{flex:0 0 auto;display:block;opacity:.9;transition:opacity .2s,transform .2s}
 .f-cred-mark img{display:block;width:auto;height:52px}
 .f-cred-mark:hover{opacity:1}
-a.f-cred-mark:hover,a.f-cred-mark:focus-visible{transform:translateY(-2px)}
+/* the linked mark needs to read as clickable; negative margin keeps the
+   hover halo from shifting the row */
+a.f-cred-mark{padding:5px;margin:-5px;border-radius:12px}
+a.f-cred-mark:hover,a.f-cred-mark:focus-visible{opacity:1;transform:translateY(-2px);background:rgba(255,255,255,.09)}
+a.f-cred-mark:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
 .fb-credit{margin-inline-start:auto;font-size:.8rem;color:#71837A}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:16px 0;font-size:.85rem;color:#8FA096}
 .fb-inner{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:8px 22px}

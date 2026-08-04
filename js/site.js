@@ -777,13 +777,60 @@
     });
   }
 
-  // demo form handler (prototype only)
+  // lead form -> contact.php -> mail to Alon
   var form = document.getElementById('leadForm');
   if (form) {
+    var statusEl = document.getElementById('formStatus');
+    var btn = form.querySelector('button[type=submit]');
+    var btnText = btn ? btn.textContent : '';
+    var renderedAt = Date.now();
+
+    // GitHub Pages / file:// have no PHP - keep the preview demo-friendly
+    var DEMO = location.protocol === 'file:' || /github\.io$/i.test(location.hostname);
+
+    function say(msg, kind) {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.className = 'form-status' + (kind ? ' is-' + kind : '');
+    }
+
+    function done() {
+      form.reset();
+      say('תודה! הפרטים התקבלו. אלון יחזור אליכם בהקדם לשיחת היכרות.', 'ok');
+      renderedAt = Date.now();
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('תודה! הפרטים נשלחו. אלון יחזור אליכם בהקדם לשיחת היכרות.');
-      form.reset();
+      if (!form.reportValidity()) return;
+
+      if (btn) { btn.disabled = true; btn.textContent = 'שולח...'; }
+      say('');
+
+      function release() {
+        if (btn) { btn.disabled = false; btn.textContent = btnText; }
+      }
+
+      if (DEMO) {
+        setTimeout(function () { release(); done(); }, 400);
+        return;
+      }
+
+      var data = new FormData(form);
+      data.append('t', String(renderedAt));
+      data.append('page', location.pathname);
+
+      fetch('contact.php', { method: 'POST', body: data })
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+        .then(function (res) {
+          release();
+          if (res && res.ok) done();
+          else say((res && res.error) || 'השליחה נכשלה. אפשר להתקשר ל-054-3333265.', 'err');
+        })
+        .catch(function () {
+          release();
+          say('לא הצלחנו לשלוח כרגע. אפשר להתקשר ל-054-3333265 או לשלוח מייל ל-alonsms73@gmail.com', 'err');
+        });
     });
   }
 })();
