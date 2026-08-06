@@ -67,7 +67,10 @@
         io.unobserve(en.target);
       }
     });
-  }, { threshold: 0.12 });
+    // the bottom margin extends the root past the fold, so a block that only
+    // peeks into the first screen (the "תחומי טיפול" head) still counts as
+    // intersecting and animates in on load instead of sitting there blank
+  }, { threshold: 0.12, rootMargin: '0px 0px 90px 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
 
   // animated counters

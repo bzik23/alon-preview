@@ -53,6 +53,10 @@ h2{font-size:clamp(1.6rem,3.2vw,2.4rem)}
 h3{font-size:1.25rem}
 
 .section{padding:clamp(56px,8vw,100px) 0}
+/* first section under the home hero: the trust strip already separates it, so
+   the full section padding only bought an empty band at the bottom of the
+   fold. Tightened so the "תחומי טיפול" head reaches up into the first screen. */
+.section.tight-top{padding-top:clamp(32px,2.4vw,38px)}
 .section.alt{background:var(--white)}
 .section.tint{background:var(--sage-soft)}
 /* soft plum wave behind a section's content - decorative band, not a full background */
@@ -229,7 +233,7 @@ h3{font-size:1.25rem}
     radial-gradient(900px 560px at 44% 104%,rgba(139,92,246,.30),transparent 66%),
     radial-gradient(720px 460px at 22% 92%,rgba(139,92,246,.14),transparent 62%),
     var(--cream);
-  padding:clamp(44px,7vw,100px) 0 clamp(36px,6vw,86px);
+  padding:clamp(44px,4.6vw,68px) 0 clamp(28px,3vw,40px);
 }
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
 .hero-kicker{
@@ -1553,9 +1557,9 @@ body.lbx-open{overflow:hidden}
   }
   .trust-items div:nth-child(2) .t-ico{background:#F8E9D8}
   .trust-items div:nth-child(3) .t-ico{background:var(--plum-soft)}
-  /* card chips: wrapping pills came out ragged - one full-width pill per line instead */
-  .card .mini{flex-direction:column;flex-wrap:nowrap;gap:7px;margin-top:14px}
-  .card .mini li{width:100%;padding:9px 15px;font-size:.9rem}
+  /* card chips: one pill per line, but the pill hugs its own text instead of the full width */
+  .card .mini{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:7px;margin-top:14px}
+  .card .mini li{width:auto;max-width:100%;padding:9px 15px;font-size:.9rem}
   /* "מי אני": lift the eyebrow + heading above the photo (display:contents unwraps .split-text) */
   .split.split-hoist{gap:0}
   .split.split-hoist .split-text{display:contents}
