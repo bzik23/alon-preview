@@ -574,7 +574,33 @@ h3{font-size:1.25rem}
 .testi .t-name small{display:block;font-weight:500;color:var(--ink-soft);font-size:.82rem}
 
 /* ---------- FAQ ---------- */
-.faq{max-width:780px;margin-inline:auto}
+/* צ'יפים לסינון לפי נושא. הרשימה עצמה flex-column כדי ש-site.js יוכל לשלוט
+   בסדר דרך order (שאלות ייעודיות לנושא ראשונות, הכלליות אחריהן). */
+.faq-filter{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  margin:0 auto 30px;max-width:780px;
+}
+.faq-chip{
+  background:var(--white);border:1px solid var(--sage-soft);border-radius:999px;
+  padding:9px 20px;font-family:var(--font-body);font-size:.92rem;font-weight:600;
+  color:var(--sage-deep);cursor:pointer;transition:.2s;box-shadow:var(--shadow);
+}
+.faq-chip:hover{background:var(--sage-soft);border-color:var(--sage)}
+.faq-chip.is-on{background:var(--sage-deep);border-color:var(--sage-deep);color:#fff;box-shadow:var(--shadow-lg)}
+.faq-chip.is-on:nth-child(2){background:var(--plum-deep);border-color:var(--plum-deep)}
+.faq-chip.is-on:nth-child(3){background:var(--apricot-deep);border-color:var(--apricot-deep)}
+.faq-chip.is-on:nth-child(4){background:var(--sun-deep);border-color:var(--sun-deep)}
+.faq{max-width:780px;margin-inline:auto;display:flex;flex-direction:column}
+.faq [hidden]{display:none}
+.faq-more{
+  order:900;align-self:center;margin-top:10px;
+  background:none;border:1px solid var(--sage-soft);border-radius:999px;
+  padding:10px 26px;font-family:var(--font-body);font-size:.95rem;font-weight:700;
+  color:var(--sage-deep);cursor:pointer;transition:.2s;
+}
+.faq-more:hover{background:var(--white);border-color:var(--sage);box-shadow:var(--shadow)}
+.faq-ask{order:901;text-align:center;margin-top:22px;color:var(--ink-soft);font-size:.95rem}
+.faq-ask a{color:var(--sage-deep);font-weight:700;text-decoration:underline}
 .faq-item{background:var(--white);border-radius:var(--radius-sm);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;border:1px solid rgba(95,122,106,.07);border-inline-start:4px solid transparent;transition:border-color .3s}
 .faq-item.open{border-inline-start-color:var(--plum)}
 .faq-item.open:nth-child(even){border-inline-start-color:var(--apricot)}

@@ -43,21 +43,92 @@
   });
 
   // FAQ accordion
+  function faqClose(item) {
+    item.classList.remove('open');
+    var a = item.querySelector('.faq-a');
+    if (a) a.style.maxHeight = null;
+    var q = item.querySelector('.faq-q');
+    if (q) q.setAttribute('aria-expanded', 'false');
+  }
+
   document.querySelectorAll('.faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var item = btn.parentElement;
       var ans = item.querySelector('.faq-a');
       var isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(function (o) {
-        o.classList.remove('open');
-        o.querySelector('.faq-a').style.maxHeight = null;
-      });
+      document.querySelectorAll('.faq-item.open').forEach(faqClose);
       if (!isOpen) {
         item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
         ans.style.maxHeight = ans.scrollHeight + 'px';
       }
     });
   });
+
+  // FAQ filter by topic. A question carrying more than one tag is a general one:
+  // it shows under every filter, but sinks below the questions written for the
+  // topic the visitor actually picked. Only the first `data-visible` matches are
+  // shown; the rest sit behind the "more" button, per filter.
+  var faqWrap = document.querySelector('[data-faq]');
+  var faqBar = document.querySelector('[data-faq-filter]');
+  if (faqWrap && faqBar) {
+    var faqItems = [].slice.call(faqWrap.querySelectorAll('.faq-item'));
+    var faqChips = [].slice.call(faqBar.querySelectorAll('.faq-chip'));
+    var faqMore = faqWrap.querySelector('[data-faq-more]');
+    var faqMoreTxt = faqWrap.querySelector('[data-faq-more-txt]');
+    var faqLimit = parseInt(faqWrap.getAttribute('data-visible'), 10) || 8;
+    var faqCur = 'all';
+    var faqOpen = false;
+
+    function faqTags(el) { return (el.getAttribute('data-tags') || '').split(' '); }
+
+    function faqApply(initial) {
+      var match = faqItems.filter(function (it) {
+        return faqCur === 'all' || faqTags(it).indexOf(faqCur) > -1;
+      });
+      if (faqCur !== 'all') {
+        var own = match.filter(function (it) { return faqTags(it).length === 1; });
+        var gen = match.filter(function (it) { return faqTags(it).length > 1; });
+        match = own.concat(gen);
+      }
+      faqItems.forEach(function (it) { it.hidden = true; it.style.order = ''; });
+      match.forEach(function (it, i) {
+        var show = faqOpen || i < faqLimit;
+        it.hidden = !show;
+        it.style.order = i;
+        if (!show) faqClose(it);
+        // items that were hidden at load never intersected, so the reveal
+        // observer never fired for them - unhide them outright
+        else if (!initial) it.classList.add('in');
+      });
+      var rest = match.length - faqLimit;
+      faqMore.hidden = faqOpen || rest <= 0;
+      if (!faqMore.hidden && faqMoreTxt) {
+        faqMoreTxt.textContent = 'עוד ' + rest + ' שאלות';
+      }
+    }
+
+    faqChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        faqCur = chip.getAttribute('data-f');
+        faqOpen = false;
+        faqChips.forEach(function (c) {
+          var on = c === chip;
+          c.classList.toggle('is-on', on);
+          c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('.faq-item.open').forEach(faqClose);
+        faqApply(false);
+      });
+    });
+
+    faqMore.addEventListener('click', function () {
+      faqOpen = true;
+      faqApply(false);
+    });
+
+    faqApply(true);
+  }
 
   // reveal on scroll
   var io = new IntersectionObserver(function (entries) {
