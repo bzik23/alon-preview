@@ -55,8 +55,9 @@ h3{font-size:1.25rem}
 .section{padding:clamp(56px,8vw,100px) 0}
 /* first section under the home hero: the trust strip already separates it, so
    the full section padding only bought an empty band at the bottom of the
-   fold. Tightened so the "תחומי טיפול" head reaches up into the first screen. */
-.section.tight-top{padding-top:clamp(32px,2.4vw,38px)}
+   fold. Tightened so the "תחומי טיפול" chip and the heading reach up into the
+   first screen - and no further: the rule under the heading stays below it. */
+.section.tight-top{padding-top:clamp(20px,2vw,26px)}
 .section.alt{background:var(--white)}
 .section.tint{background:var(--sage-soft)}
 /* soft plum wave behind a section's content - decorative band, not a full background */
@@ -233,7 +234,14 @@ h3{font-size:1.25rem}
     radial-gradient(900px 560px at 44% 104%,rgba(139,92,246,.30),transparent 66%),
     radial-gradient(720px 460px at 22% 92%,rgba(139,92,246,.14),transparent 62%),
     var(--cream);
-  padding:clamp(44px,4.6vw,68px) 0 clamp(28px,3vw,40px);
+  /* The bottom padding is what decides where the fold cuts: everything above
+     it (header 69 + hero content + trust strip 77) is a fixed height, so
+     100vh-873px keeps the trust strip ending ~132px above the fold on any
+     window. That is exactly the room the "תחומי טיפול" chip and the heading
+     need - the gradient rule under the heading stays just below the cut.
+     The clamp keeps the original 86-100px look on tall screens and never
+     goes under 36px on short ones (and on mobile it is always the minimum). */
+  padding:clamp(44px,7vw,100px) 0 clamp(36px,calc(100vh - 873px),150px);
 }
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
 .hero-kicker{
@@ -1557,9 +1565,11 @@ body.lbx-open{overflow:hidden}
   }
   .trust-items div:nth-child(2) .t-ico{background:#F8E9D8}
   .trust-items div:nth-child(3) .t-ico{background:var(--plum-soft)}
-  /* card chips: one pill per line, but the pill hugs its own text instead of the full width */
-  .card .mini{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:7px;margin-top:14px}
-  .card .mini li{width:auto;max-width:100%;padding:9px 15px;font-size:.9rem}
+  /* card chips: pills hug their own text and flow side by side, so the block
+     stays compact instead of running down one tall column */
+  .card .mini:not(.ep-tags){flex-direction:row;flex-wrap:wrap;justify-content:center;gap:7px 6px;margin-top:14px}
+  .card .mini:not(.ep-tags) li{width:auto;max-width:100%;padding:7px 12px;gap:6px;font-size:.85rem}
+  .card .mini:not(.ep-tags) li::before{width:6px;height:6px}
   /* "מי אני": lift the eyebrow + heading above the photo (display:contents unwraps .split-text) */
   .split.split-hoist{gap:0}
   .split.split-hoist .split-text{display:contents}
