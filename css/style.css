@@ -1850,3 +1850,23 @@ body.lbx-open{overflow:hidden}
 }
 /* one or two pieces sit centred; the three-up grid only kicks in with three */
 .art-grid.few{grid-template-columns:repeat(auto-fit,minmax(300px,340px));justify-content:center}
+
+/* coming-soon slots - dashed frames that make room for the pieces on their way;
+   --acc is set inline per card and rotates through the site accents */
+.art-card.soon{
+  background:transparent;box-shadow:none;
+  border:1.5px dashed rgba(95,122,106,.32);
+}
+.art-card.soon:hover{transform:none;box-shadow:none}
+.art-card.soon .ac-media{
+  display:flex;align-items:center;justify-content:center;background:var(--cream-2);
+}
+.soon-num{
+  font-family:var(--font-head);font-weight:700;letter-spacing:.05em;
+  font-size:clamp(2.5rem,4vw,3.3rem);color:var(--acc,var(--sage));opacity:.42;
+}
+.art-card.soon .ac-cat{
+  background:transparent;border:1px dashed var(--acc,var(--sage));color:var(--ink-soft);
+}
+.art-card.soon .ac-title{color:var(--ink-soft)}
+.art-card.soon .ac-desc{opacity:.85}
