@@ -1812,6 +1812,9 @@ body.lbx-open{overflow:hidden}
 .art-meta span+span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--sage)}
 
 .art-cover{max-width:900px;margin:0 auto clamp(28px,4vw,44px);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg)}
+/* the width/height attributes reserve space; without height:auto the fixed
+   attribute height stretches the picture once the container shrinks it */
+.art-cover img,.art-fig img{width:100%;height:auto;display:block}
 .art-body{font-size:1.045rem}
 .art-body h2{font-size:clamp(1.35rem,2.6vw,1.72rem);margin:40px 0 14px}
 .art-body h3{font-size:1.14rem;margin:28px 0 8px}
