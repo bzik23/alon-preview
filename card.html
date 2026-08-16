@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אלון שמש | כרטיס ביקור דיגיטלי</title>
-<meta name="description" content="אלון שמש, מטפל רגשי ומאמן להתפתחות אישית ברחובות. כל דרכי ההתקשרות במקום אחד. כנסו לפרטים.">
+<meta name="description" content="אלון שמש, מאמן להתפתחות אישית ברחובות. כל דרכי ההתקשרות במקום אחד. כנסו לפרטים.">
 <!-- כרטיס הביקור מכוון לשיתוף ישיר (קישור/QR) ולא לתוצאות החיפוש. הוא חוזר על
      המסרים של עמוד הבית, ולכן noindex מונע קניבליזציה; follow שומר על העברת קישורים. -->
 <meta name="robots" content="noindex, follow">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="אלון שמש">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://www.alonsms.com/card">
-<meta property="og:title" content="אלון שמש | מטפל רגשי ומאמן להתפתחות אישית">
+<meta property="og:title" content="אלון שמש | מאמן להתפתחות אישית">
 <meta property="og:description" content="כרטיס הביקור הדיגיטלי של אלון שמש. חיוג, וואטסאפ, ניווט לקליניקה ושמירה באנשי הקשר בלחיצה אחת.">
 <meta property="og:image" content="https://www.alonsms.com/assets/og/card.jpg">
 <meta property="og:image:width" content="1200">
@@ -30,7 +30,7 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"אלון שמש",
-"jobTitle":"מטפל רגשי ומאמן להתפתחות אישית",
+"jobTitle":"מאמן להתפתחות אישית",
 "url":"https://www.alonsms.com/","image":"https://www.alonsms.com/assets/card-avatar.jpg",
 "telephone":"+972-54-3333265","email":"alonsms73@gmail.com",
 "address":{"@type":"PostalAddress","streetAddress":"דובנוב 51","addressLocality":"רחובות","addressCountry":"IL"},
@@ -291,6 +291,27 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .native.on{display:flex}
 .native svg{width:19px;height:19px}
 
+/* ---------------------------------------------------------- scan-me */
+.scan{
+  display:flex;align-items:center;gap:16px;
+  background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:15px 16px;
+}
+.scan-code{
+  width:112px;height:112px;flex:none;background:#fff;border-radius:13px;padding:7px;
+  box-shadow:0 4px 14px rgba(51,68,62,.09);
+}
+.scan-code img{width:100%;height:100%;image-rendering:pixelated}
+.scan b{display:block;font-size:.98rem;font-weight:800}
+.scan p{font-size:.85rem;color:var(--ink-soft);line-height:1.5;margin-top:4px}
+.scan .url{
+  display:inline-block;margin-top:8px;font-size:.78rem;font-weight:700;
+  color:var(--sage-deep);background:var(--sage-soft);border-radius:999px;padding:3px 11px;
+  direction:ltr;
+}
+@media (max-width:359px){
+  .scan{flex-direction:column;text-align:center;gap:12px}
+}
+
 /* ---------------------------------------------------------- footer */
 .foot{
   background:var(--cream-2);padding:22px clamp(18px,5vw,26px);text-align:center;
@@ -405,18 +426,17 @@ body.has-sticky{padding-bottom:78px}
   </header>
 
   <div class="avatar-wrap">
-    <img class="avatar" src="assets/card-avatar.jpg" alt="אלון שמש, מטפל רגשי ומאמן להתפתחות אישית" width="760" height="760">
+    <img class="avatar" src="assets/card-avatar.jpg" alt="אלון שמש, מאמן להתפתחות אישית" width="760" height="760">
     <span class="avatar-badge" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
   </div>
 
   <div class="pad">
     <div class="ident">
       <h1>אלון שמש</h1>
-      <p class="role">מטפל רגשי ומאמן להתפתחות אישית</p>
+      <p class="role">מאמן להתפתחות אישית</p>
       <div class="tags">
         <span>מאסטר NLP</span>
-        <span class="alt">בוגר בית הספר תות תקשורת</span>
-        <span class="sun">חבר לשכת ה-NLP הישראלית</span>
+        <span class="alt">חבר לשכת ה-NLP הישראלית</span>
       </div>
       <p class="where"><svg><use href="#i-pin"></use></svg>דובנוב 51, רחובות &middot; מפגשים גם בזום</p>
     </div>
@@ -562,13 +582,28 @@ body.has-sticky{padding-bottom:78px}
         <button type="button" class="q" data-qr><svg><use href="#i-qr"></use></svg>קוד QR</button>
       </div>
     </section>
+
+    <!-- ---------------------------------------------- סריקה לאתר -->
+    <!-- הקוד עצמו הוא הקובץ שאלון הפיק (pdf24), מקודד את https://www.alonsms.com/ -->
+    <section class="sec rv">
+      <div class="scan">
+        <span class="scan-code">
+          <img src="assets/card-site-qr.png" alt="קוד QR לסריקה שפותח את האתר alonsms.com" width="500" height="500" loading="lazy">
+        </span>
+        <span>
+          <b>סרקו לכניסה לאתר</b>
+          <p>מכוונים את מצלמת הטלפון לקוד, והאתר נפתח מיד בלי להקליד כתובת.</p>
+          <span class="url">alonsms.com</span>
+        </span>
+      </div>
+    </section>
   </div>
 
   <!-- ---------------------------------------------- פוטר -->
   <footer class="foot">
     <span class="mark"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-sun"></use></svg></span>
     <div class="nm">אלון שמש</div>
-    <div class="tagline">טיפול רגשי ואימון להתפתחות אישית</div>
+    <div class="tagline">אימון וליווי להתפתחות אישית</div>
     <nav class="lnk" aria-label="קישורי תחתית">
       <a href="./">לאתר המלא</a>
       <a href="contact">שיחת היכרות</a>
@@ -600,7 +635,7 @@ body.has-sticky{padding-bottom:78px}
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var URLC = 'https://www.alonsms.com/card';
-  var TITLE = 'אלון שמש | מטפל רגשי ומאמן להתפתחות אישית';
+  var TITLE = 'אלון שמש | מאמן להתפתחות אישית';
 
   document.querySelector('[data-year]').textContent = new Date().getFullYear();
 
