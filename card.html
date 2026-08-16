@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אלון שמש | כרטיס ביקור דיגיטלי</title>
+<meta name="description" content="אלון שמש, מטפל רגשי ומאמן להתפתחות אישית ברחובות. כל דרכי ההתקשרות במקום אחד. כנסו לפרטים.">
+<!-- כרטיס הביקור מכוון לשיתוף ישיר (קישור/QR) ולא לתוצאות החיפוש. הוא חוזר על
+     המסרים של עמוד הבית, ולכן noindex מונע קניבליזציה; follow שומר על העברת קישורים. -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.alonsms.com/card">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F2">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="אלון שמש">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://www.alonsms.com/card">
+<meta property="og:title" content="אלון שמש | מטפל רגשי ומאמן להתפתחות אישית">
+<meta property="og:description" content="כרטיס הביקור הדיגיטלי של אלון שמש. חיוג, וואטסאפ, ניווט לקליניקה ושמירה באנשי הקשר בלחיצה אחת.">
+<meta property="og:image" content="https://www.alonsms.com/assets/og/card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"אלון שמש",
+"jobTitle":"מטפל רגשי ומאמן להתפתחות אישית",
+"url":"https://www.alonsms.com/","image":"https://www.alonsms.com/assets/card-avatar.jpg",
+"telephone":"+972-54-3333265","email":"alonsms73@gmail.com",
+"address":{"@type":"PostalAddress","streetAddress":"דובנוב 51","addressLocality":"רחובות","addressCountry":"IL"},
+"sameAs":["https://www.facebook.com/alon.shemesh.121","https://www.instagram.com/alon_shemesh_/"]}
+</script>
+
+<style>
+/* ============================================================
+   אלון שמש - כרטיס ביקור דיגיטלי
+   עמוד עצמאי: כל ה-CSS/JS מוטמעים כדי שייטען מיידית בנייד,
+   על אותה מערכת עיצוב של האתר (מרווה + קרם + אפרסק + סגול).
+   ============================================================ */
+:root{
+  --cream:#FAF7F2; --cream-2:#F4EEE4; --sand:#F2E8DC;
+  --sage:#A8C3B0; --sage-soft:#DCE8DF; --sage-deep:#5F7A6A;
+  --ink:#33443E; --ink-soft:#5C6B64;
+  --apricot:#E9B384; --apricot-deep:#B9773C;
+  --plum:#8B5CF6; --plum-deep:#7C3AED; --plum-soft:#EFE8FF;
+  --sun:#F2C24E; --sun-deep:#C68A2E; --sun-soft:#FBF0D6;
+  --line:#E7E0D6; --white:#fff;
+  --shadow:0 10px 30px rgba(51,68,62,.08);
+  --shadow-lg:0 22px 60px rgba(51,68,62,.14);
+  --r:26px; --r-sm:16px;
+  --head:'Frank Ruhl Libre',serif; --body:'Assistant',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body);color:var(--ink);background:var(--cream);
+  direction:rtl;text-align:right;line-height:1.65;font-size:16.5px;
+  overflow-x:clip;min-height:100%;
+  padding:clamp(14px,3vw,34px) clamp(12px,3vw,20px) 0;
+}
+/* זוהר אווירה מאחורי הכרטיס - לא רקע מלא, כדי שהעמוד יישאר רגוע */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(620px 420px at 88% -4%,rgba(139,92,246,.20),transparent 62%),
+    radial-gradient(560px 400px at 4% 24%,rgba(168,195,176,.34),transparent 64%),
+    radial-gradient(520px 420px at 76% 96%,rgba(242,194,78,.18),transparent 66%);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:8px}
+
+/* ---------------------------------------------------------- shell */
+.card{
+  width:min(482px,100%);margin:0 auto;background:var(--white);
+  border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden;
+  border:1px solid rgba(255,255,255,.7);
+}
+.pad{padding:0 clamp(18px,5vw,26px)}
+.sec{padding-block:26px;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-head h2{font-family:var(--head);font-size:1.24rem;font-weight:700;line-height:1.3}
+.sec-head .bullet{width:9px;height:9px;border-radius:50%;background:var(--apricot);flex:none}
+.sec-head .bullet.p{background:var(--plum)}
+.sec-head .bullet.s{background:var(--sage-deep)}
+.sec-head .bullet.y{background:var(--sun-deep)}
+
+/* ---------------------------------------------------------- cover + avatar */
+.cover{position:relative;height:172px}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.cover::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(51,68,62,.30) 0%,rgba(51,68,62,.06) 42%,rgba(255,255,255,.55) 78%,#fff 100%);
+}
+.cover .brand{
+  position:absolute;top:14px;inset-inline-start:16px;z-index:2;
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.92);border-radius:999px;padding:6px 14px 6px 10px;
+  box-shadow:0 6px 18px rgba(51,68,62,.16);
+  font-weight:800;font-size:.8rem;letter-spacing:.01em;color:var(--sage-deep);
+}
+.cover .brand svg{width:20px;height:20px;flex:none}
+
+.avatar-wrap{position:relative;margin-top:-84px;display:flex;justify-content:center;z-index:2}
+.avatar{
+  width:148px;height:148px;border-radius:50%;object-fit:cover;
+  border:6px solid #fff;box-shadow:0 16px 38px rgba(51,68,62,.20);
+  background:var(--sage-soft);
+}
+.avatar-badge{
+  position:absolute;bottom:6px;inset-inline-start:calc(50% + 40px);
+  width:44px;height:44px;border-radius:50%;background:#fff;
+  display:grid;place-items:center;box-shadow:0 8px 20px rgba(51,68,62,.18);
+}
+.avatar-badge svg{width:26px;height:26px}
+
+/* ---------------------------------------------------------- identity */
+.ident{text-align:center;padding-top:14px}
+.ident h1{font-family:var(--head);font-weight:900;font-size:clamp(2rem,7.4vw,2.5rem);line-height:1.12}
+.ident .role{color:var(--ink-soft);font-weight:600;margin-top:6px;font-size:1.02rem}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:14px}
+.tags span{
+  background:var(--sage-soft);color:#3F5749;font-weight:700;font-size:.78rem;
+  padding:5px 13px;border-radius:999px;line-height:1.5;
+}
+.tags span.alt{background:var(--plum-soft);color:#5B3FA8}
+.tags span.sun{background:var(--sun-soft);color:#8A5E17}
+.where{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  color:var(--ink-soft);font-size:.88rem;margin-top:12px;font-weight:600;
+}
+.where svg{width:16px;height:16px;flex:none;color:var(--apricot-deep)}
+
+/* ---------------------------------------------------------- primary buttons */
+.cta{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:20px}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  min-height:54px;border-radius:15px;font-weight:800;font-size:1rem;
+  transition:transform .16s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn svg{width:21px;height:21px;flex:none}
+.btn:active{transform:translateY(1px)}
+.btn-wa{background:var(--sage-deep);color:#fff;box-shadow:0 10px 24px rgba(95,122,106,.34)}
+.btn-wa:hover{background:#546D5E}
+.btn-tel{background:var(--sand);color:var(--ink);box-shadow:inset 0 0 0 1.5px #E4D3BE}
+.btn-tel:hover{background:#EDDFCC}
+.btn-save{
+  width:100%;margin-top:10px;background:#fff;color:var(--ink);
+  box-shadow:inset 0 0 0 1.8px var(--ink);min-height:52px;font-size:.98rem;
+}
+.btn-save:hover{background:var(--ink);color:#fff}
+.btn-save small{display:block;font-weight:600;font-size:.72rem;opacity:.72;margin-top:-2px}
+
+/* ---------------------------------------------------------- tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}
+.tile{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:12px 4px 10px;border-radius:15px;background:var(--cream);
+  border:1px solid var(--line);font-weight:700;font-size:.73rem;color:var(--ink-soft);
+  transition:transform .16s ease,background .2s ease,border-color .2s ease,color .2s ease;
+  min-height:74px;text-align:center;
+}
+.tile:hover{transform:translateY(-2px);background:#fff;border-color:var(--sage);color:var(--ink)}
+.tile .ic{
+  width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:var(--white);box-shadow:0 3px 10px rgba(51,68,62,.08);
+}
+.tile .ic svg{width:18px;height:18px}
+.tile:nth-child(1) .ic{color:#3E7BAF}
+.tile:nth-child(2) .ic{color:var(--apricot-deep)}
+.tile:nth-child(3) .ic{color:#4C7DBE}
+.tile:nth-child(4) .ic{color:#2E6BC6}
+.tile:nth-child(5) .ic{color:#C0398B}
+.tile:nth-child(6) .ic{color:var(--plum-deep)}
+.tile:nth-child(7) .ic{color:var(--sun-deep)}
+.tile:nth-child(8) .ic{color:var(--sage-deep)}
+
+/* ---------------------------------------------------------- about + stats */
+.about p{color:var(--ink-soft);font-size:.97rem}
+.about p + p{margin-top:10px}
+.more{
+  display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+  font-weight:800;color:var(--plum-deep);font-size:.92rem;
+}
+.more svg{width:15px;height:15px;transition:transform .18s ease}
+.more:hover svg{transform:translateX(-3px)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}
+.stat{
+  background:var(--cream);border:1px solid var(--line);border-radius:14px;
+  padding:12px 6px;text-align:center;
+}
+.stat b{display:block;font-family:var(--head);font-weight:700;font-size:1.28rem;line-height:1.1}
+.stat span{display:block;font-size:.72rem;color:var(--ink-soft);font-weight:700;margin-top:3px}
+.stat:nth-child(1) b{color:var(--plum-deep)}
+.stat:nth-child(2) b{color:var(--apricot-deep)}
+.stat:nth-child(3) b{color:var(--sage-deep)}
+
+/* ---------------------------------------------------------- services */
+.svc{display:grid;gap:9px}
+.svc a{
+  display:flex;align-items:center;gap:13px;padding:13px 14px;border-radius:16px;
+  background:var(--cream);border:1px solid var(--line);
+  transition:transform .16s ease,border-color .2s ease,background .2s ease;
+}
+.svc a:hover{transform:translateX(-3px);background:#fff;border-color:var(--sage)}
+.svc .em{
+  width:42px;height:42px;border-radius:13px;flex:none;display:grid;place-items:center;
+  font-size:1.22rem;background:#fff;box-shadow:0 3px 10px rgba(51,68,62,.07);
+}
+.svc b{display:block;font-size:.98rem;font-weight:800}
+.svc small{display:block;color:var(--ink-soft);font-size:.82rem;line-height:1.45;text-wrap:pretty}
+.svc .arw{margin-inline-start:auto;color:var(--sage-deep);flex:none}
+.svc .arw svg{width:16px;height:16px}
+.svc a:nth-child(1) .em{background:#FCEFE3}
+.svc a:nth-child(2) .em{background:var(--sun-soft)}
+.svc a:nth-child(3) .em{background:var(--plum-soft)}
+.svc a:nth-child(4) .em{background:var(--sage-soft)}
+
+/* ---------------------------------------------------------- testimonials */
+.testi{position:relative;min-height:186px}
+.tslide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s ease;
+  background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:16px 17px;
+}
+.tslide.on{opacity:1;visibility:visible;position:relative}
+.tslide .stars{color:var(--sun-deep);letter-spacing:2px;font-size:.9rem}
+.tslide p{font-size:.94rem;color:var(--ink);margin-top:7px;line-height:1.6}
+.tslide .who{margin-top:11px;font-weight:800;font-size:.88rem}
+.tslide .who small{display:block;font-weight:600;color:var(--ink-soft);font-size:.78rem}
+.tdots{display:flex;justify-content:center;gap:7px;margin-top:12px}
+.tdots button{width:8px;height:8px;border-radius:50%;background:#D8D0C4;transition:all .25s ease}
+.tdots button.on{background:var(--sage-deep);width:22px;border-radius:999px}
+
+/* ---------------------------------------------------------- gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gal button{
+  border-radius:13px;overflow:hidden;aspect-ratio:1;background:var(--cream);
+  transition:transform .18s ease,box-shadow .2s ease;position:relative;
+}
+.gal button:hover{transform:scale(1.035);box-shadow:0 8px 20px rgba(51,68,62,.16)}
+.gal img{width:100%;height:100%;object-fit:cover}
+
+/* ---------------------------------------------------------- share */
+.share{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.share a,.share button{
+  display:flex;flex-direction:column;align-items:center;gap:6px;padding:13px 4px;
+  border-radius:15px;background:var(--cream);border:1px solid var(--line);
+  font-weight:700;font-size:.76rem;color:var(--ink-soft);
+  transition:transform .16s ease,background .2s ease,border-color .2s ease;
+}
+.share a:hover,.share button:hover{transform:translateY(-2px);background:#fff;border-color:var(--sage)}
+/* הצבע יושב על האייקון בלבד - תוויות צבעוניות הפכו את הרצועה לרועשת */
+.share svg{width:20px;height:20px;color:var(--ink-soft)}
+.share .w svg{color:var(--sage-deep)}
+.share .f svg{color:#2E6BC6}
+.share .t svg{color:#2AA3DA}
+.share .m svg{color:var(--apricot-deep)}
+.share .c svg{color:var(--plum-deep)}
+.share .q svg{color:var(--ink)}
+.native{
+  width:100%;margin-bottom:10px;min-height:50px;border-radius:15px;
+  background:var(--plum-deep);color:#fff;
+  display:none;align-items:center;justify-content:center;gap:9px;font-weight:800;
+  box-shadow:0 8px 20px rgba(124,58,237,.24);
+}
+.native:hover{background:#6D2FD4}
+.native.on{display:flex}
+.native svg{width:19px;height:19px}
+
+/* ---------------------------------------------------------- footer */
+.foot{
+  background:var(--cream-2);padding:22px clamp(18px,5vw,26px);text-align:center;
+  border-top:1px solid var(--line);
+}
+.foot .mark{display:flex;justify-content:center;margin-bottom:8px}
+.foot .mark svg{width:38px;height:38px}
+.foot .nm{font-family:var(--head);font-weight:700;font-size:1.05rem}
+.foot .lnk{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:12px;font-size:.8rem;font-weight:700}
+.foot .lnk a{color:var(--sage-deep)}
+.foot .lnk a:hover{text-decoration:underline}
+.foot .cr{margin-top:12px;font-size:.74rem;color:var(--ink-soft)}
+.tagline{margin-top:4px;font-size:.82rem;color:var(--ink-soft);font-weight:600}
+
+/* ---------------------------------------------------------- sticky bar */
+.sticky{
+  position:fixed;inset-inline:0;bottom:0;z-index:60;
+  padding:9px clamp(12px,3vw,20px) calc(9px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);box-shadow:0 -6px 26px rgba(51,68,62,.10);
+  transform:translateY(120%);transition:transform .3s ease;
+}
+.sticky.on{transform:none}
+.sticky .in{width:min(482px,100%);margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px}
+.sticky .btn{min-height:46px;font-size:.9rem;border-radius:13px}
+.sticky .btn svg{width:18px;height:18px}
+.sticky .btn-sv{background:var(--cream);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+body.has-sticky{padding-bottom:78px}
+
+/* ---------------------------------------------------------- lightbox + qr + toast */
+.lbx{
+  position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:18px;
+  background:rgba(29,40,36,.86);backdrop-filter:blur(4px);
+}
+.lbx.on{display:grid}
+.lbx img{max-width:min(760px,94vw);max-height:86vh;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lbx .qrbox{background:#fff;border-radius:22px;padding:22px;text-align:center;max-width:330px}
+.lbx .qrbox img{width:214px;height:214px;margin:0 auto;box-shadow:none;border-radius:8px}
+.lbx .qrbox b{display:block;font-family:var(--head);font-size:1.1rem;margin-bottom:12px}
+.lbx .qrbox small{display:block;color:var(--ink-soft);font-size:.82rem;margin-top:12px;line-height:1.5}
+.lbx .x{
+  position:absolute;top:14px;inset-inline-end:14px;width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.94);color:var(--ink);display:grid;place-items:center;font-size:1.3rem;line-height:1;
+}
+.toast{
+  position:fixed;bottom:96px;inset-inline:0;z-index:400;display:flex;justify-content:center;
+  pointer-events:none;opacity:0;transform:translateY(10px);transition:all .28s ease;
+}
+.toast.on{opacity:1;transform:none}
+.toast span{
+  background:var(--ink);color:#fff;font-weight:700;font-size:.86rem;
+  padding:10px 20px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+/* ---------------------------------------------------------- motion */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------------------------------------------------------- narrow phones */
+@media (max-width:360px){
+  .tiles{grid-template-columns:repeat(4,1fr);gap:7px}
+  .tile{font-size:.68rem;min-height:68px}
+  .cta{grid-template-columns:1fr 1fr}
+  .btn{font-size:.94rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ספריית האייקונים: symbol אחד לכל אייקון, שימוש חוזר דרך <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-sun" viewBox="0 0 48 48">
+    <circle cx="24" cy="19" r="8.5" fill="#E9B384"/>
+    <g stroke="#D89A63" stroke-width="2.4" stroke-linecap="round">
+      <line x1="24" y1="3.5" x2="24" y2="7"/><line x1="8.5" y1="19" x2="12" y2="19"/>
+      <line x1="36" y1="19" x2="39.5" y2="19"/><line x1="13" y1="8" x2="15.5" y2="10.5"/>
+      <line x1="35" y1="8" x2="32.5" y2="10.5"/>
+    </g>
+    <path d="M7 38 Q24 27 41 38" stroke="#5F7A6A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <path d="M14 44 Q24 37 34 44" stroke="#A8C3B0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8 1.6.7 2.2.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="3"/><path d="m3.4 7.2 7.5 5.3c.7.5 1.6.5 2.2 0l7.5-5.3"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+  <symbol id="i-waze" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 9.6C20.1 5.4 16.4 2.2 12.1 2.5 8.2 2.8 5 6 4.8 9.9c-.1 1.5.2 2.9.9 4.2-.5.4-1.2.6-2 .6-.4 0-.7.4-.6.8.6 1.9 2.2 3.3 4.2 3.7.4 1.3 1.6 2.3 3.1 2.3 1.4 0 2.6-.9 3-2.1h.7c.4 1.2 1.6 2.1 3 2.1 1.8 0 3.2-1.4 3.2-3.2 0-.4-.1-.8-.2-1.1 2.2-2 3.1-4.6 2.4-7.6zM9.5 8.3c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm5.8 5.6c-.7 1.1-1.9 1.7-3.2 1.7-1.3 0-2.5-.6-3.2-1.7-.2-.3-.1-.7.2-.9.3-.2.7-.1.9.2.5.7 1.3 1.1 2.1 1.1.9 0 1.6-.4 2.1-1.1.2-.3.6-.4.9-.2.3.2.4.6.2.9zm-.8-3.6c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.6V3.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V10H7.6v3h2.7v8h3.2z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 2c-3.1 0-3.5 0-4.8.1-1.1.1-1.4.2-1.7.3-.4.2-.7.3-1 .6-.3.3-.5.6-.6 1-.1.3-.3.6-.3 1.7-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.4.3 1.7.2.4.3.7.6 1 .3.3.6.5 1 .6.3.1.6.3 1.7.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.4-.2 1.7-.3.4-.2.7-.3 1-.6.3-.3.5-.6.6-1 .1-.3.3-.6.3-1.7.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.4-.3-1.7-.2-.4-.3-.7-.6-1-.3-.3-.6-.5-1-.6-.3-.1-.6-.3-1.7-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 7.2a2.9 2.9 0 1 0 0-5.7 2.9 2.9 0 0 0 0 5.7zm5.6-7.4a1 1 0 1 1-2.1 0 1 1 0 0 1 2.1 0z"/></symbol>
+  <symbol id="i-pod" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5z"/><path d="M4.5 11.5a7.5 7.5 0 0 0 15 0M12 19v2.5"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0v5a6 6 0 0 0 12 0z" opacity=".0"/><path d="M4 10v2a8 8 0 0 0 16 0v-2"/><path d="M9 21h6M12 18v3"/><rect x="8.5" y="2.5" width="7" height="11" rx="3.5"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.6 6.8-4M8.6 13.4l6.8 4"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H6.4A3.4 3.4 0 0 0 3 18.4V20"/><circle cx="9.2" cy="7.6" r="3.6"/><path d="M18.5 8v6M21.5 11h-6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5.5 15H5a1.9 1.9 0 0 1-2-1.9V6A1.9 1.9 0 0 1 5 4h7.2A1.9 1.9 0 0 1 14 6v.5"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM21 14v3M18 21h3M14 21h1.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 4.3 2.9 11.5c-1 .4-1 1 0 1.3l4.8 1.5 1.8 5.5c.2.6.6.7 1.1.3l2.6-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8l3.1-14.5c.2-1.1-.4-1.6-1-.9zM8.9 13.9l9.4-5.9c.4-.3.8-.1.5.2l-8 7.3-.3 3z"/></symbol>
+  <symbol id="i-arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8 12l7 6.5"/></symbol>
+</svg>
+
+<main class="card">
+
+  <!-- ---------------------------------------------- כותרת ותמונה -->
+  <header class="cover">
+    <img src="assets/card-cover.jpg" alt="" loading="eager" fetchpriority="high" width="1200" height="420">
+    <span class="brand"><svg><use href="#i-sun"></use></svg>כרטיס ביקור דיגיטלי</span>
+  </header>
+
+  <div class="avatar-wrap">
+    <img class="avatar" src="assets/card-avatar.jpg" alt="אלון שמש, מטפל רגשי ומאמן להתפתחות אישית" width="760" height="760">
+    <span class="avatar-badge" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
+  </div>
+
+  <div class="pad">
+    <div class="ident">
+      <h1>אלון שמש</h1>
+      <p class="role">מטפל רגשי ומאמן להתפתחות אישית</p>
+      <div class="tags">
+        <span>מאסטר NLP</span>
+        <span class="alt">בוגר בית הספר תות תקשורת</span>
+        <span class="sun">חבר לשכת ה-NLP הישראלית</span>
+      </div>
+      <p class="where"><svg><use href="#i-pin"></use></svg>דובנוב 51, רחובות &middot; מפגשים גם בזום</p>
+    </div>
+
+    <!-- ---------------------------------------------- פעולות ראשיות -->
+    <div class="cta">
+      <a class="btn btn-wa" href="https://wa.me/972543333265?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%95%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%94%D7%91%D7%99%D7%A7%D7%95%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%99%D7%9B%D7%A8%D7%95%D7%AA" target="_blank" rel="noopener" data-ev="whatsapp">
+        <svg><use href="#i-wa"></use></svg>וואטסאפ
+      </a>
+      <a class="btn btn-tel" href="tel:0543333265" data-ev="call">
+        <svg><use href="#i-tel"></use></svg>חיוג
+      </a>
+    </div>
+
+    <a class="btn btn-save" href="assets/alon-shemesh.vcf" download="alon-shemesh.vcf" type="text/vcard" data-ev="save_contact">
+      <svg><use href="#i-save"></use></svg>
+      <span>שמרו אותי באנשי הקשר<small>כרטיס איש קשר עם טלפון, מייל וכתובת</small></span>
+    </a>
+
+    <!-- ---------------------------------------------- אריחי קישור -->
+    <nav class="tiles" aria-label="קישורים מהירים">
+      <a class="tile" href="./" data-ev="website"><span class="ic"><svg><use href="#i-web"></use></svg></span>לאתר</a>
+      <a class="tile" href="mailto:alonsms73@gmail.com" data-ev="email"><span class="ic"><svg><use href="#i-mail"></use></svg></span>מייל</a>
+      <a class="tile" href="https://waze.com/ul?q=%D7%93%D7%95%D7%91%D7%A0%D7%95%D7%91%2051%20%D7%A8%D7%97%D7%95%D7%91%D7%95%D7%AA&amp;navigate=yes" target="_blank" rel="noopener" data-ev="waze"><span class="ic"><svg><use href="#i-waze"></use></svg></span>ניווט</a>
+      <a class="tile" href="https://www.facebook.com/alon.shemesh.121" target="_blank" rel="noopener" data-ev="facebook"><span class="ic"><svg><use href="#i-fb"></use></svg></span>פייסבוק</a>
+      <a class="tile" href="https://www.instagram.com/alon_shemesh_/" target="_blank" rel="noopener" data-ev="instagram"><span class="ic"><svg><use href="#i-ig"></use></svg></span>אינסטגרם</a>
+      <a class="tile" href="podcast" data-ev="podcast"><span class="ic"><svg><use href="#i-pod"></use></svg></span>פודקאסט</a>
+      <a class="tile" href="workshops" data-ev="workshops"><span class="ic"><svg><use href="#i-mic"></use></svg></span>סדנאות</a>
+      <a class="tile" href="#share" data-ev="share_jump"><span class="ic"><svg><use href="#i-share"></use></svg></span>שיתוף</a>
+    </nav>
+
+    <!-- ---------------------------------------------- נעים להכיר -->
+    <section class="sec about rv">
+      <div class="sec-head"><span class="bullet"></span><h2>נעים להכיר</h2></div>
+      <p>ליווי רגשי ומעשי לבני זוג, לילדים ולנוער ולמבוגרים שמרגישים תקועים, מוצפים או בלי כיוון. העבודה משלבת כלים של NLP, דמיון מודרך ועבודה רגשית, ומכוונת לשינוי שנשאר גם אחרי שהתהליך נגמר.</p>
+      <p>הקליניקה ברחובות כוללת חדר טיפולים אינטימי וחצר פסטורלית, ואפשר להיפגש גם בזום מכל מקום בארץ.</p>
+      <a class="more" href="about">להכיר אותי לעומק<svg><use href="#i-arw"></use></svg></a>
+      <div class="stats">
+        <div class="stat"><b>+3,782</b><span>שעות טיפול ואימון</span></div>
+        <div class="stat"><b>3</b><span>סדנאות פעילות</span></div>
+        <div class="stat"><b>120</b><span>שעות הכשרת NLP</span></div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------- תחומי טיפול -->
+    <section class="sec rv">
+      <div class="sec-head"><span class="bullet p"></span><h2>במה אפשר לעזור לכם</h2></div>
+      <div class="svc">
+        <a href="couples" data-ev="svc_couples">
+          <span class="em" aria-hidden="true">💞</span>
+          <span><b>טיפול זוגי</b><small>תקשורת, משברים וזוגיות שנשחקה</small></span>
+          <span class="arw"><svg><use href="#i-arw"></use></svg></span>
+        </a>
+        <a href="kids-teens" data-ev="svc_kids">
+          <span class="em" aria-hidden="true">🧸</span>
+          <span><b>ילדים ונוער</b><small>ויסות רגשי, קשב וריכוז וקשיים חברתיים</small></span>
+          <span class="arw"><svg><use href="#i-arw"></use></svg></span>
+        </a>
+        <a href="personal-coaching" data-ev="svc_coaching">
+          <span class="em" aria-hidden="true">🌱</span>
+          <span><b>אימון אישי</b><small>תקיעות, חרדות ושינוי דפוסים</small></span>
+          <span class="arw"><svg><use href="#i-arw"></use></svg></span>
+        </a>
+        <a href="treatments" data-ev="svc_treatments">
+          <!-- אמוג'י ותיק בכוונה: Segoe UI Emoji ב-Win10 מרנדר חדשים כריבוע ריק -->
+          <span class="em" aria-hidden="true">🧘</span>
+          <span><b>טיפולים נוספים</b><small>טראומה, פוביות, ביטחון עצמי ולחץ</small></span>
+          <span class="arw"><svg><use href="#i-arw"></use></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------- המלצות -->
+    <section class="sec rv">
+      <div class="sec-head"><span class="bullet y"></span><h2>מספרים עליי</h2></div>
+      <div class="testi" data-testi>
+        <figure class="tslide on">
+          <div class="stars" aria-label="חמישה מתוך חמישה">★★★★★</div>
+          <p>"אווירה נעימה, שירות מקצועי ומדהים, וכיוון ברור להצלחה. אלון יודע להקשיב באמת, ומהמפגש הראשון הרגשתי שמישהו סוף-סוף רואה אותי."</p>
+          <figcaption class="who">מירי דרורי<small>ליווי אישי</small></figcaption>
+        </figure>
+        <figure class="tslide">
+          <div class="stars" aria-label="חמישה מתוך חמישה">★★★★★</div>
+          <p>"הגעתי תקוע, בלי לדעת מה אני רוצה מהחיים. אחרי כמה מפגשים התחלתי לראות דברים אחרת, והיום אני יודע לאן אני הולך ולמה."</p>
+          <figcaption class="who">לקוח, שנות ה-20 שלו<small>אימון אישי אחרי צבא</small></figcaption>
+        </figure>
+        <figure class="tslide">
+          <div class="stars" aria-label="חמישה מתוך חמישה">★★★★★</div>
+          <p>"הבן שלנו קיבל כלים לוויסות רגשי שאנחנו רואים בבית כל יום. אלון דיבר אליו בגובה העיניים, והשינוי הורגש כבר אחרי זמן קצר."</p>
+          <figcaption class="who">הורים לנער בן 15<small>טיפול רגשי לנוער</small></figcaption>
+        </figure>
+      </div>
+      <div class="tdots" data-tdots role="tablist" aria-label="מעבר בין המלצות"></div>
+    </section>
+
+    <!-- ---------------------------------------------- גלריה -->
+    <section class="sec rv">
+      <div class="sec-head"><span class="bullet s"></span><h2>הצצה לקליניקה ולסדנאות</h2></div>
+      <div class="gal" data-gal>
+        <button type="button" data-full="assets/card-g1.jpg" data-cap="החצר של הקליניקה ברחובות"><img src="assets/card-g1-t.jpg" alt="החצר של הקליניקה ברחובות" loading="lazy" width="440" height="440"></button>
+        <button type="button" data-full="assets/card-g2.jpg" data-cap="חדר הטיפולים"><img src="assets/card-g2-t.jpg" alt="חדר הטיפולים" loading="lazy" width="440" height="440"></button>
+        <button type="button" data-full="assets/card-g3.jpg" data-cap="סדנה בהנחיית אלון שמש"><img src="assets/card-g3-t.jpg" alt="סדנה בהנחיית אלון שמש" loading="lazy" width="440" height="440"></button>
+        <button type="button" data-full="assets/card-g4.jpg" data-cap="הקלטת פרק פודקאסט"><img src="assets/card-g4-t.jpg" alt="הקלטת פרק פודקאסט" loading="lazy" width="440" height="440"></button>
+        <button type="button" data-full="assets/card-g5.jpg" data-cap="הרצאה במכללת גודלמן"><img src="assets/card-g5-t.jpg" alt="הרצאה במכללת גודלמן" loading="lazy" width="440" height="440"></button>
+        <button type="button" data-full="assets/card-g6.jpg" data-cap="פעילות חווייתית בטבע"><img src="assets/card-g6-t.jpg" alt="פעילות חווייתית בטבע" loading="lazy" width="440" height="440"></button>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------- שיתוף -->
+    <section class="sec rv" id="share">
+      <div class="sec-head"><span class="bullet p"></span><h2>שתפו את הכרטיס</h2></div>
+      <button type="button" class="native" data-native><svg><use href="#i-share"></use></svg>שיתוף הכרטיס</button>
+      <div class="share">
+        <a class="w" href="#" data-sh="wa" target="_blank" rel="noopener"><svg><use href="#i-wa"></use></svg>וואטסאפ</a>
+        <a class="f" href="#" data-sh="fb" target="_blank" rel="noopener"><svg><use href="#i-fb"></use></svg>פייסבוק</a>
+        <a class="t" href="#" data-sh="tg" target="_blank" rel="noopener"><svg><use href="#i-tg"></use></svg>טלגרם</a>
+        <a class="m" href="#" data-sh="mail"><svg><use href="#i-mail"></use></svg>מייל</a>
+        <button type="button" class="c" data-copy><svg><use href="#i-copy"></use></svg>העתקת קישור</button>
+        <button type="button" class="q" data-qr><svg><use href="#i-qr"></use></svg>קוד QR</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---------------------------------------------- פוטר -->
+  <footer class="foot">
+    <span class="mark"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-sun"></use></svg></span>
+    <div class="nm">אלון שמש</div>
+    <div class="tagline">טיפול רגשי ואימון להתפתחות אישית</div>
+    <nav class="lnk" aria-label="קישורי תחתית">
+      <a href="./">לאתר המלא</a>
+      <a href="contact">שיחת היכרות</a>
+      <a href="privacy">מדיניות פרטיות</a>
+      <a href="accessibility">הצהרת נגישות</a>
+    </nav>
+    <p class="cr">&copy; <span data-year>2026</span> אלון שמש. כל הזכויות שמורות.</p>
+  </footer>
+</main>
+
+<!-- ---------------------------------------------- סרגל דביק -->
+<div class="sticky" data-sticky aria-hidden="true">
+  <div class="in">
+    <a class="btn btn-wa" href="https://wa.me/972543333265" target="_blank" rel="noopener" tabindex="-1" data-ev="whatsapp_sticky"><svg><use href="#i-wa"></use></svg>וואטסאפ</a>
+    <a class="btn btn-tel" href="tel:0543333265" tabindex="-1" data-ev="call_sticky"><svg><use href="#i-tel"></use></svg>חיוג</a>
+    <a class="btn btn-sv" href="assets/alon-shemesh.vcf" download="alon-shemesh.vcf" tabindex="-1" data-ev="save_sticky"><svg><use href="#i-save"></use></svg>שמירה</a>
+  </div>
+</div>
+
+<!-- ---------------------------------------------- לייטבוקס + טוסט -->
+<div class="lbx" data-lbx role="dialog" aria-modal="true" aria-label="תצוגה מוגדלת">
+  <button type="button" class="x" data-lbx-close aria-label="סגירה">&times;</button>
+  <div data-lbx-body></div>
+</div>
+<div class="toast" data-toast aria-live="polite"><span></span></div>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var URLC = 'https://www.alonsms.com/card';
+  var TITLE = 'אלון שמש | מטפל רגשי ומאמן להתפתחות אישית';
+
+  document.querySelector('[data-year]').textContent = new Date().getFullYear();
+
+  /* -------- מדידה ב-GA4: כל לחיצה על פעולת יצירת קשר או קישור בכרטיס */
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-ev]');
+    if(!el || typeof gtag !== 'function') return;
+    gtag('event', 'card_click', {action: el.getAttribute('data-ev')});
+  });
+
+  /* -------- ריוויל בגלילה */
+  var rv = document.querySelectorAll('.rv');
+  if(reduce || !('IntersectionObserver' in window)){
+    rv.forEach(function(n){ n.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+    rv.forEach(function(n){ io.observe(n); });
+  }
+
+  /* -------- סרגל דביק: נכנס אחרי שהכפתורים הראשיים יצאו מהמסך */
+  var sticky = document.querySelector('[data-sticky]');
+  var anchor = document.querySelector('.cta');
+  document.body.classList.add('has-sticky');
+  function syncSticky(){
+    var past = anchor.getBoundingClientRect().bottom < 0;
+    sticky.classList.toggle('on', past);
+    sticky.setAttribute('aria-hidden', past ? 'false' : 'true');
+    sticky.querySelectorAll('a').forEach(function(a){ a.tabIndex = past ? 0 : -1; });
+  }
+  window.addEventListener('scroll', syncSticky, {passive:true});
+  window.addEventListener('resize', syncSticky);
+  syncSticky();
+
+  /* -------- קרוסלת המלצות */
+  var wrap = document.querySelector('[data-testi]');
+  var slides = wrap ? [].slice.call(wrap.querySelectorAll('.tslide')) : [];
+  var dotsBox = document.querySelector('[data-tdots]');
+  if(slides.length > 1){
+    var cur = 0, timer = null;
+    slides.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-label','המלצה ' + (i+1));
+      if(i === 0){ b.className = 'on'; b.setAttribute('aria-selected','true'); }
+      b.addEventListener('click', function(){ show(i); restart(); });
+      dotsBox.appendChild(b);
+    });
+    var dots = [].slice.call(dotsBox.children);
+    function show(i){
+      slides[cur].classList.remove('on');
+      dots[cur].classList.remove('on');
+      dots[cur].setAttribute('aria-selected','false');
+      cur = i;
+      slides[cur].classList.add('on');
+      dots[cur].classList.add('on');
+      dots[cur].setAttribute('aria-selected','true');
+    }
+    function restart(){
+      if(reduce) return;
+      clearInterval(timer);
+      timer = setInterval(function(){ show((cur + 1) % slides.length); }, 5200);
+    }
+    restart();
+    wrap.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    wrap.addEventListener('mouseleave', restart);
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ clearInterval(timer); } else { restart(); }
+    });
+  }
+
+  /* -------- לייטבוקס משותף: גלריה + קוד QR */
+  var lbx = document.querySelector('[data-lbx]');
+  var lbxBody = lbx.querySelector('[data-lbx-body]');
+  var lastFocus = null;
+  function openLbx(html){
+    lastFocus = document.activeElement;
+    lbxBody.innerHTML = html;
+    lbx.classList.add('on');
+    document.body.style.overflow = 'hidden';
+    lbx.querySelector('[data-lbx-close]').focus();
+  }
+  function closeLbx(){
+    lbx.classList.remove('on');
+    lbxBody.innerHTML = '';
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  lbx.addEventListener('click', function(e){
+    if(e.target === lbx || e.target.closest('[data-lbx-close]')) closeLbx();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && lbx.classList.contains('on')) closeLbx();
+  });
+
+  document.querySelectorAll('[data-gal] button').forEach(function(b){
+    b.addEventListener('click', function(){
+      openLbx('<img src="' + b.getAttribute('data-full') + '" alt="' +
+              b.getAttribute('data-cap') + '">');
+    });
+  });
+
+  var qrBtn = document.querySelector('[data-qr]');
+  if(qrBtn) qrBtn.addEventListener('click', function(){
+    openLbx('<div class="qrbox"><b>סרקו כדי לפתוח את הכרטיס</b>' +
+            '<img src="assets/card-qr.svg" alt="קוד QR לכרטיס הביקור של אלון שמש">' +
+            '<small>מצלמת הטלפון פותחת את הכרטיס ישירות.<br>אפשר גם להדפיס אותו על כרטיס פיזי.</small></div>');
+  });
+
+  /* -------- שיתוף */
+  var enc = encodeURIComponent;
+  var links = {
+    wa:   'https://wa.me/?text=' + enc(TITLE + ' - ' + URLC),
+    fb:   'https://www.facebook.com/sharer/sharer.php?u=' + enc(URLC),
+    tg:   'https://t.me/share/url?url=' + enc(URLC) + '&text=' + enc(TITLE),
+    mail: 'mailto:?subject=' + enc(TITLE) + '&body=' + enc('כרטיס הביקור הדיגיטלי של אלון שמש: ' + URLC)
+  };
+  document.querySelectorAll('[data-sh]').forEach(function(a){
+    a.href = links[a.getAttribute('data-sh')];
+  });
+
+  var toast = document.querySelector('[data-toast]');
+  var toastT = null;
+  function say(msg){
+    toast.querySelector('span').textContent = msg;
+    toast.classList.add('on');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toast.classList.remove('on'); }, 2400);
+  }
+
+  var copyBtn = document.querySelector('[data-copy]');
+  copyBtn.addEventListener('click', function(){
+    var done = function(){ say('הקישור הועתק'); };
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(URLC).then(done, fallback);
+    } else { fallback(); }
+    function fallback(){
+      // דפדפנים ישנים / הקשר לא מאובטח: שדה זמני + execCommand
+      var t = document.createElement('textarea');
+      t.value = URLC;
+      t.setAttribute('readonly','');
+      t.style.cssText = 'position:fixed;top:-1000px';
+      document.body.appendChild(t);
+      t.select();
+      try { document.execCommand('copy'); done(); }
+      catch(err){ say('העתיקו ידנית: ' + URLC); }
+      document.body.removeChild(t);
+    }
+  });
+
+  var nativeBtn = document.querySelector('[data-native]');
+  if(navigator.share){
+    nativeBtn.classList.add('on');
+    nativeBtn.addEventListener('click', function(){
+      navigator.share({title: TITLE, text: 'כרטיס הביקור הדיגיטלי של אלון שמש', url: URLC})
+        .catch(function(){ /* המשתמש ביטל - לא שגיאה */ });
+    });
+  }
+})();
+</script>
+</body>
+</html>
