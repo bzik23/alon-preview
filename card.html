@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אלון שמש | כרטיס ביקור דיגיטלי</title>
 <meta name="description" content="אלון שמש, מאמן להתפתחות אישית ברחובות. כל דרכי ההתקשרות במקום אחד. כנסו לפרטים.">
-<!-- הכרטיס יושב על card.alonsms.com כשורש התת-דומיין, ולכן כל קישורי העמודים
-     מוחלטים אל www - נתיב יחסי היה נפתר אל התת-דומיין ומחזיר 404.
+<!-- הכרטיס יושב כ-www.alonsms.com/card (החלטת זיו 20/08 - במקום תת-דומיין),
+     כלומר על אותו מקור כמו האתר: הקישורים והנכסים יחסיים בדיוק כמו בשאר
+     העמודים, ו-`download` של ה-vCard עובד כי הוא same-origin.
      noindex בכוונה: הכרטיס חוזר על המסרים של עמוד הבית ומיועד לשיתוף ישיר/QR. -->
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://card.alonsms.com/">
+<link rel="canonical" href="https://www.alonsms.com/card">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -17,10 +18,10 @@
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="אלון שמש">
 <meta property="og:locale" content="he_IL">
-<meta property="og:url" content="https://card.alonsms.com/">
+<meta property="og:url" content="https://www.alonsms.com/card">
 <meta property="og:title" content="אלון שמש | מאמן להתפתחות אישית">
 <meta property="og:description" content="כרטיס הביקור הדיגיטלי של אלון שמש. חיוג, וואטסאפ, ניווט לקליניקה ושמירה באנשי הקשר בלחיצה אחת.">
-<meta property="og:image" content="https://card.alonsms.com/assets/og/card.jpg">
+<meta property="og:image" content="https://www.alonsms.com/assets/og/card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,7 +33,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"אלון שמש",
 "jobTitle":"מאמן להתפתחות אישית",
-"url":"https://www.alonsms.com/","image":"https://card.alonsms.com/assets/card-avatar.jpg",
+"url":"https://www.alonsms.com/","image":"https://www.alonsms.com/assets/card-avatar.jpg",
 "telephone":"+972-54-3333265","email":"alonsms73@gmail.com",
 "address":{"@type":"PostalAddress","streetAddress":"דובנוב 51","addressLocality":"רחובות","addressCountry":"IL"},
 "sameAs":["https://www.facebook.com/alon.shemesh.121","https://www.instagram.com/alon_shemesh_/"]}
@@ -482,15 +483,15 @@ body.has-sticky{padding-bottom:78px}
 
     <!-- ---------------------------------------------- אריחי קישור -->
     <nav class="tiles" aria-label="קישורים מהירים">
-      <a class="tile" href="https://www.alonsms.com/" data-ev="website"><span class="ic"><svg><use href="#i-web"></use></svg></span>לאתר</a>
+      <a class="tile" href="./" data-ev="website"><span class="ic"><svg><use href="#i-web"></use></svg></span>לאתר</a>
       <a class="tile" href="mailto:alonsms73@gmail.com" data-ev="email"><span class="ic"><svg><use href="#i-mail"></use></svg></span>מייל</a>
       <!-- ll ולא q: החיפוש הטקסטואלי של וויז לא נעל את הכתובת (הרחוב הוא
            "שמעון דובנוב"). 31.887137,34.794343 = דובנוב 51 רחובות. -->
       <a class="tile" href="https://waze.com/ul?ll=31.887137%2C34.794343&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener" data-ev="waze"><span class="ic"><svg><use href="#i-waze"></use></svg></span>ניווט</a>
       <a class="tile" href="https://www.facebook.com/alon.shemesh.121" target="_blank" rel="noopener" data-ev="facebook"><span class="ic"><svg><use href="#i-fb"></use></svg></span>פייסבוק</a>
       <a class="tile" href="https://www.instagram.com/alon_shemesh_/" target="_blank" rel="noopener" data-ev="instagram"><span class="ic"><svg><use href="#i-ig"></use></svg></span>אינסטגרם</a>
-      <a class="tile" href="https://www.alonsms.com/podcast" data-ev="podcast"><span class="ic"><svg><use href="#i-pod"></use></svg></span>פודקאסט</a>
-      <a class="tile" href="https://www.alonsms.com/workshops" data-ev="workshops"><span class="ic"><svg><use href="#i-mic"></use></svg></span>סדנאות</a>
+      <a class="tile" href="podcast" data-ev="podcast"><span class="ic"><svg><use href="#i-pod"></use></svg></span>פודקאסט</a>
+      <a class="tile" href="workshops" data-ev="workshops"><span class="ic"><svg><use href="#i-mic"></use></svg></span>סדנאות</a>
       <a class="tile" href="#share" data-ev="share_jump"><span class="ic"><svg><use href="#i-share"></use></svg></span>שיתוף</a>
     </nav>
 
@@ -504,7 +505,7 @@ body.has-sticky{padding-bottom:78px}
       <p class="ev-lead">ערב חווייתי בן 3 שעות, בהנחיית אלון שמש ומירי דרורי. מספר המקומות מוגבל.</p>
       <!-- הבאנר מוביל לטופס יצירת הקשר באתר כשנושא הפנייה כבר בחור
            (site.js קורא את ?topic= ובוחר את השורה עם data-key תואם) -->
-      <a class="ev-banner" href="https://www.alonsms.com/contact?topic=seminar" data-ev="seminar_banner">
+      <a class="ev-banner" href="contact?topic=seminar" data-ev="seminar_banner">
         <img src="assets/card-seminar.jpg" width="900" height="900" loading="lazy" decoding="async"
              alt="סמינר זוגיות ואהבה - 7 המפתחות לאהבה ולזוגיות בריאה. מסע של 3 שעות בהנחיית אלון שמש ומירי דרורי, ב-15.09.26 בשעה 18:00 ברחובות. 269 ₪ לזוג, 149 ₪ ליחיד. מספר המקומות מוגבל.">
       </a>
@@ -515,7 +516,7 @@ body.has-sticky{padding-bottom:78px}
         <li><svg><use href="#i-tag"></use></svg>269 ₪ לזוג &middot; 149 ₪ ליחיד</li>
       </ul>
       <div class="ev-cta">
-        <a class="btn btn-ev" href="https://www.alonsms.com/contact?topic=seminar" data-ev="seminar_signup">
+        <a class="btn btn-ev" href="contact?topic=seminar" data-ev="seminar_signup">
           <svg><use href="#i-mail"></use></svg>להרשמה לסמינר
         </a>
         <a class="btn btn-wa" href="https://wa.me/972543333265?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%95%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%94%D7%91%D7%99%D7%A7%D7%95%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A1%D7%9E%D7%99%D7%A0%D7%A8%20%D7%94%D7%96%D7%95%D7%92%D7%99%D7%95%D7%AA%20%D7%91-15.09" target="_blank" rel="noopener" data-ev="seminar_whatsapp">
@@ -529,7 +530,7 @@ body.has-sticky{padding-bottom:78px}
       <div class="sec-head"><span class="bullet"></span><h2>נעים להכיר</h2></div>
       <p>ליווי אישי לנשים ולגברים שרוצים לשבור דפוסים תקועים, להנמיך את הרעש הפנימי ולהתקדם באמת. במפגשים אחד-על-אחד משולבים כלים מעשיים, NLP ושינוי הרגלים, בתהליך שנבנה לפי האופי והמציאות של כל אחת ואחד.</p>
       <p>לצד הליווי האישי יש גם טיפול זוגי, עבודה רגשית עם ילדים ונוער והנחיית סדנאות. הקליניקה ברחובות כוללת חדר טיפולים אינטימי וחצר פסטורלית, ואפשר להיפגש גם בזום מכל מקום בארץ.</p>
-      <a class="more" href="https://www.alonsms.com/about">להכיר אותי לעומק<svg><use href="#i-arw"></use></svg></a>
+      <a class="more" href="about">להכיר אותי לעומק<svg><use href="#i-arw"></use></svg></a>
       <div class="stats">
         <div class="stat"><b>+3,782</b><span>שעות טיפול ואימון</span></div>
         <div class="stat"><b>3</b><span>סדנאות פעילות</span></div>
@@ -549,7 +550,7 @@ body.has-sticky{padding-bottom:78px}
           </button>
           <div class="svc-panel" id="svc-couples" role="region" aria-label="טיפול זוגי"><div><div class="svc-in">
             <p>כשהשיחות הופכות לוויכוחים והמרחק גדל בשקט, קל להאמין שזה פשוט מה שיש. בפגישות הזוגיות עובדים על תקשורת מדויקת יותר, על הדפוסים שחוזרים בכל מריבה ועל הפערים שהצטברו לאורך השנים. מגיעים לכאן זוגות לפני חתונה שרוצים להתחיל נכון, זוגות שהשגרה שחקה אותם, וגם מי שנמצא בזוגיות שפוגעת בו. חלק מהמפגשים משותפים וחלקם אישיים, לפי מה שהזוג צריך. המטרה איננה להכריע מי צודק, אלא לבנות דרך חדשה לדבר ולהחליט יחד.</p>
-            <a class="more" href="https://www.alonsms.com/couples">לעמוד הטיפול הזוגי<svg><use href="#i-arw"></use></svg></a>
+            <a class="more" href="couples">לעמוד הטיפול הזוגי<svg><use href="#i-arw"></use></svg></a>
           </div></div></div>
         </div>
         <div class="svc-item">
@@ -560,7 +561,7 @@ body.has-sticky{padding-bottom:78px}
           </button>
           <div class="svc-panel" id="svc-kids" role="region" aria-label="ילדים ונוער"><div><div class="svc-in">
             <p>ילדים ובני נוער לא תמיד יודעים להסביר במילים מה עובר עליהם, וזה יוצא בהתפרצויות, בהסתגרות או בקושי בבית הספר. העבודה כאן נעשית בגובה העיניים ובכלים שמתאימים לגיל: ויסות רגשי, התמודדות עם קשיי קשב וריכוז, בניית ביטחון עצמי וחזרה למעגל החברתי. ההורים הם חלק מהתהליך ומקבלים כלים מעשיים לבית, כי שינוי שנשאר צריך להיות מתורגל גם בשגרה. חלק מהמפגשים משלבים קלפי השראה ודמיון מודרך, שפותחים שיחה גם עם ילדים מופנמים.</p>
-            <a class="more" href="https://www.alonsms.com/kids-teens">לעמוד הטיפול בילדים ובנוער<svg><use href="#i-arw"></use></svg></a>
+            <a class="more" href="kids-teens">לעמוד הטיפול בילדים ובנוער<svg><use href="#i-arw"></use></svg></a>
           </div></div></div>
         </div>
         <div class="svc-item">
@@ -571,7 +572,7 @@ body.has-sticky{padding-bottom:78px}
           </button>
           <div class="svc-panel" id="svc-coaching" role="region" aria-label="אימון אישי"><div><div class="svc-in">
             <p>תחושת תקיעות לא תמיד מגיעה ממשבר גדול. לפעמים זו החלטה שנדחית כבר שנים, רעש פנימי שלא נרגע, או דפוס שחוזר בכל מקום עבודה ובכל מערכת יחסים. באימון האישי מתחילים במיפוי: מה באמת מעכב, לאן רוצים להגיע, ומה המחיר של להישאר במקום. משם עובדים עם כלים של NLP, שינוי הרגלים ודמיון מודרך, צעד אחרי צעד. התהליך נבנה לפי הקצב והאופי של כל אחת ואחד, ומסתיים כשהכלים כבר עובדים בלי צורך בליווי.</p>
-            <a class="more" href="https://www.alonsms.com/personal-coaching">לעמוד האימון האישי<svg><use href="#i-arw"></use></svg></a>
+            <a class="more" href="personal-coaching">לעמוד האימון האישי<svg><use href="#i-arw"></use></svg></a>
           </div></div></div>
         </div>
         <div class="svc-item">
@@ -583,7 +584,7 @@ body.has-sticky{padding-bottom:78px}
           </button>
           <div class="svc-panel" id="svc-more" role="region" aria-label="טיפולים נוספים"><div><div class="svc-in">
             <p>יש נושאים שלא נכנסים לקטגוריה אחת: אירוע טראומטי שממשיך להשפיע, פחד שמגביל את היומיום, ביטחון עצמי שנשחק, לחץ מתמשך או קושי להציב גבולות מול הסביבה. גם כאן העבודה מעשית ומותאמת אישית, ומשלבת עבודה רגשית עם כלים של NLP ודמיון מודרך. חשוב לומר: הליווי אינו מחליף טיפול פסיכולוגי או פסיכיאטרי, ובמצבים שמצריכים אבחון או טיפול של איש מקצוע מתחום בריאות הנפש תקבלו הפניה לגורם המתאים.</p>
-            <a class="more" href="https://www.alonsms.com/treatments">לעמוד הטיפולים הנוספים<svg><use href="#i-arw"></use></svg></a>
+            <a class="more" href="treatments">לעמוד הטיפולים הנוספים<svg><use href="#i-arw"></use></svg></a>
           </div></div></div>
         </div>
       </div>
@@ -661,10 +662,10 @@ body.has-sticky{padding-bottom:78px}
     <div class="nm">אלון שמש</div>
     <div class="tagline">אימון וליווי להתפתחות אישית</div>
     <nav class="lnk" aria-label="קישורי תחתית">
-      <a href="https://www.alonsms.com/">לאתר המלא</a>
-      <a href="https://www.alonsms.com/contact">שיחת היכרות</a>
-      <a href="https://www.alonsms.com/privacy">מדיניות פרטיות</a>
-      <a href="https://www.alonsms.com/accessibility">הצהרת נגישות</a>
+      <a href="./">לאתר המלא</a>
+      <a href="contact">שיחת היכרות</a>
+      <a href="privacy">מדיניות פרטיות</a>
+      <a href="accessibility">הצהרת נגישות</a>
     </nav>
     <p class="cr">&copy; <span data-year>2026</span> אלון שמש. כל הזכויות שמורות.</p>
   </footer>
@@ -690,7 +691,7 @@ body.has-sticky{padding-bottom:78px}
 (function(){
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var URLC = 'https://card.alonsms.com/';
+  var URLC = 'https://www.alonsms.com/card';
   var TITLE = 'אלון שמש | מאמן להתפתחות אישית';
 
   document.querySelector('[data-year]').textContent = new Date().getFullYear();
