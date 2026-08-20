@@ -577,6 +577,36 @@
   });
   document.querySelectorAll('select[data-nice], .contact-form select').forEach(niceSelect);
 
+  // ---------- deep link into the form: /contact?topic=<data-key> ----------
+  // הבאנר בכרטיס הביקור הדיגיטלי (card.alonsms.com) מקשר לכאן עם ?topic=seminar,
+  // כדי שהמבקר ינחת על הטופס כשהנושא כבר בחור. ה-change מרענן גם את ה-nselect.
+  (function () {
+    var q = (location.search.match(/[?&]topic=([^&]*)/) || [])[1];
+    if (!q) return;
+    var want = decodeURIComponent(q).replace(/\+/g, ' ').trim().toLowerCase();
+    var sel = document.getElementById('f-topic');
+    if (!sel || !want) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      var o = sel.options[i];
+      var key = (o.dataset.key || '').toLowerCase();
+      if (key && key === want) {
+        sel.selectedIndex = i;
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        var form = sel.closest('form');
+        if (form) {
+          // גלילה אחרי הפריים הראשון, אחרת ה-reveal עוד מזיז את הפריסה
+          requestAnimationFrame(function () {
+            form.scrollIntoView({
+              behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+              block: 'start'
+            });
+          });
+        }
+        break;
+      }
+    }
+  })();
+
   // ---------- podcast players ----------
   // נגן מותאם לכל פרק: preload="none" כדי שקובץ של 20MB לא ירד בטעינת העמוד,
   // רק פרק אחד מתנגן בכל רגע, ומיקום ההאזנה נשמר ב-localStorage כדי לחזור לאותו מקום.

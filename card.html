@@ -204,6 +204,26 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .stat:nth-child(2) b{color:var(--apricot-deep)}
 .stat:nth-child(3) b{color:var(--sage-deep)}
 
+/* ---------------------------------------------------------- event (סמינר) */
+.ev-lead{color:var(--ink-soft);font-size:.94rem;margin:-6px 0 14px;text-wrap:pretty}
+.ev-banner{
+  display:block;width:100%;position:relative;border-radius:18px;overflow:hidden;
+  background:var(--cream);box-shadow:0 10px 26px rgba(51,68,62,.12);
+  transition:transform .18s ease,box-shadow .2s ease;
+}
+.ev-banner:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(51,68,62,.18)}
+.ev-banner img{width:100%;height:auto}
+.ev-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.ev-meta li{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--sun-soft);color:#8A5E17;font-weight:700;font-size:.8rem;
+  padding:5px 12px;border-radius:999px;
+}
+.ev-meta svg{width:14px;height:14px;flex:none}
+.ev-cta{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-top:12px}
+.btn-ev{background:var(--plum-deep);color:#fff;box-shadow:0 10px 24px rgba(124,58,237,.26)}
+.btn-ev:hover{background:#6D2FD4}
+
 /* ---------------------------------------------------------- services (accordion) */
 .svc{display:grid;gap:9px}
 .svc-item{
@@ -416,6 +436,9 @@ body.has-sticky{padding-bottom:78px}
   <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 4.3 2.9 11.5c-1 .4-1 1 0 1.3l4.8 1.5 1.8 5.5c.2.6.6.7 1.1.3l2.6-2.1 4.6 3.4c.9.5 1.5.2 1.7-.8l3.1-14.5c.2-1.1-.4-1.6-1-.9zM8.9 13.9l9.4-5.9c.4-.3.8-.1.5.2l-8 7.3-.3 3z"/></symbol>
   <symbol id="i-arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 8 12l7 6.5"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 9 12 15.5 18.5 9"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="5" width="17.6" height="16" rx="3"/><path d="M3.2 10h17.6M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.3l3.4 2"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.3 13.3 20.6a2 2 0 0 1-2.8 0l-7.1-7.1a2 2 0 0 1-.6-1.6l.4-5.8a2 2 0 0 1 1.9-1.9l5.8-.4a2 2 0 0 1 1.6.6l7.1 7.1a2 2 0 0 1 0 2.8z"/><circle cx="8.2" cy="8.2" r="1.4"/></symbol>
 </svg>
 
 <main class="card">
@@ -468,6 +491,36 @@ body.has-sticky{padding-bottom:78px}
       <a class="tile" href="https://www.alonsms.com/workshops" data-ev="workshops"><span class="ic"><svg><use href="#i-mic"></use></svg></span>סדנאות</a>
       <a class="tile" href="#share" data-ev="share_jump"><span class="ic"><svg><use href="#i-share"></use></svg></span>שיתוף</a>
     </nav>
+
+    <!-- ---------------------------------------------- סמינר קרוב -->
+    <!-- באנר שאלון עיצב בעצמו. כל הפרטים יושבים בתוך התמונה, ולכן ה-alt מלא
+         והצ'יפים מתחת חוזרים על התאריך/השעה/המקום כטקסט אמיתי (מקריא מסך + העתקה).
+         data-until: הסקשן מסיר את עצמו מהיום שאחרי האירוע, כדי שלא יישאר כאן
+         אירוע שעבר. לסמינר הבא: להחליף באנר, כותרת ותאריך - או למחוק את הסקשן. -->
+    <section class="sec ev rv" data-event data-until="2026-09-16">
+      <div class="sec-head"><span class="bullet y"></span><h2>סמינר קרוב</h2></div>
+      <p class="ev-lead">ערב חווייתי בן 3 שעות, בהנחיית אלון שמש ומירי דרורי. מספר המקומות מוגבל.</p>
+      <!-- הבאנר מוביל לטופס יצירת הקשר באתר כשנושא הפנייה כבר בחור
+           (site.js קורא את ?topic= ובוחר את השורה עם data-key תואם) -->
+      <a class="ev-banner" href="https://www.alonsms.com/contact?topic=seminar" data-ev="seminar_banner">
+        <img src="assets/card-seminar.jpg" width="900" height="900" loading="lazy" decoding="async"
+             alt="סמינר זוגיות ואהבה - 7 המפתחות לאהבה ולזוגיות בריאה. מסע של 3 שעות בהנחיית אלון שמש ומירי דרורי, ב-15.09.26 בשעה 18:00 ברחובות. 269 ₪ לזוג, 149 ₪ ליחיד. מספר המקומות מוגבל.">
+      </a>
+      <ul class="ev-meta">
+        <li><svg><use href="#i-cal"></use></svg>15.09.26</li>
+        <li><svg><use href="#i-clock"></use></svg>18:00</li>
+        <li><svg><use href="#i-pin"></use></svg>רחובות</li>
+        <li><svg><use href="#i-tag"></use></svg>269 ₪ לזוג &middot; 149 ₪ ליחיד</li>
+      </ul>
+      <div class="ev-cta">
+        <a class="btn btn-ev" href="https://www.alonsms.com/contact?topic=seminar" data-ev="seminar_signup">
+          <svg><use href="#i-mail"></use></svg>להרשמה לסמינר
+        </a>
+        <a class="btn btn-wa" href="https://wa.me/972543333265?text=%D7%94%D7%99%D7%99%20%D7%90%D7%9C%D7%95%D7%9F%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%94%D7%91%D7%99%D7%A7%D7%95%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A1%D7%9E%D7%99%D7%A0%D7%A8%20%D7%94%D7%96%D7%95%D7%92%D7%99%D7%95%D7%AA%20%D7%91-15.09" target="_blank" rel="noopener" data-ev="seminar_whatsapp">
+          <svg><use href="#i-wa"></use></svg>שאלות
+        </a>
+      </div>
+    </section>
 
     <!-- ---------------------------------------------- נעים להכיר -->
     <section class="sec about rv">
@@ -645,6 +698,13 @@ body.has-sticky{padding-bottom:78px}
     var el = e.target.closest('[data-ev]');
     if(!el || typeof gtag !== 'function') return;
     gtag('event', 'card_click', {action: el.getAttribute('data-ev')});
+  });
+
+  /* -------- אירוע עם תאריך: הסקשן יורד מעצמו ביום שאחרי, כדי שלא יישאר
+     על הכרטיס אירוע שכבר עבר. רץ לפני הריוויל כדי לא לצפות בצומת שהוסר. */
+  document.querySelectorAll('[data-event][data-until]').forEach(function(s){
+    var until = new Date(s.getAttribute('data-until') + 'T00:00:00');
+    if(!isNaN(until.getTime()) && new Date() >= until) s.remove();
   });
 
   /* -------- ריוויל בגלילה */
