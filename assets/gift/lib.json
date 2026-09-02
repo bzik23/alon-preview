@@ -1,0 +1,77 @@
+[
+ {
+  "slug": "alon",
+  "label": "אלון - חיוך",
+  "group": "alon"
+ },
+ {
+  "slug": "smile",
+  "label": "אלון - קליניקה",
+  "group": "alon"
+ },
+ {
+  "slug": "yardman",
+  "label": "אלון - בחצר",
+  "group": "alon"
+ },
+ {
+  "slug": "think",
+  "label": "אלון - הקשבה",
+  "group": "alon"
+ },
+ {
+  "slug": "session",
+  "label": "מפגש בחצר",
+  "group": "alon"
+ },
+ {
+  "slug": "lecture",
+  "label": "הרצאה",
+  "group": "alon"
+ },
+ {
+  "slug": "podcast",
+  "label": "אולפן הפודקאסט",
+  "group": "alon"
+ },
+ {
+  "slug": "workshop",
+  "label": "סדנה",
+  "group": "alon"
+ },
+ {
+  "slug": "crater",
+  "label": "במכתש",
+  "group": "alon"
+ },
+ {
+  "slug": "room",
+  "label": "חדר הטיפולים",
+  "group": "place"
+ },
+ {
+  "slug": "yard",
+  "label": "חצר הקליניקה",
+  "group": "place"
+ },
+ {
+  "slug": "sunrise",
+  "label": "זריחה",
+  "group": "nature"
+ },
+ {
+  "slug": "calm",
+  "label": "שלווה על המים",
+  "group": "nature"
+ },
+ {
+  "slug": "leaves",
+  "label": "עלים",
+  "group": "nature"
+ },
+ {
+  "slug": "group",
+  "label": "מעגל בטבע",
+  "group": "nature"
+ }
+]

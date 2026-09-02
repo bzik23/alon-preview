@@ -72,9 +72,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .panel{
   background:var(--white); border:1px solid var(--sage-soft); border-radius:20px;
   padding:clamp(18px,2.2vw,26px); box-shadow:var(--shadow);
-  position:sticky; top:78px;
 }
-@media (max-width:940px){ .panel{position:static} }
 .panel h2{font-family:var(--font-head);font-size:1.25rem;margin-bottom:4px}
 .panel .hint{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
 .field{margin-bottom:15px}
@@ -94,21 +92,53 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .check{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:8px;cursor:pointer}
 .check input{width:17px;height:17px;accent-color:var(--sage-deep);cursor:pointer}
 
-/* theme swatches */
-.themes{display:flex;gap:9px}
-.themes button{
-  flex:1; border:2px solid transparent; border-radius:13px; overflow:hidden;
-  background:var(--cream-2); padding:0; line-height:0; position:relative;
-  box-shadow:0 2px 8px rgba(51,68,62,.07);
+/* --- photo picker --------------------------------------------------
+   Three slots, any of the fifteen library photos (or an upload) in any of
+   them. The slot buttons carry the current pick as a thumbnail, so the
+   mapping between "ימין / פורטרט / שמאל" and the board is visible without
+   having to look back and forth. */
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
+.presets button{
+  font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;
+  background:var(--cream-2);color:var(--ink-soft);border:1px solid transparent;
 }
-.themes button img{width:100%;height:52px;object-fit:cover}
-.themes button span{
-  display:block;line-height:1.5;font-size:11.5px;font-weight:600;padding:4px 2px;
-  font-family:var(--font-body);color:var(--ink-soft);
+.presets button:hover{border-color:var(--sage)}
+.presets button[aria-pressed=true]{background:var(--sage-soft);color:var(--sage-deep);border-color:var(--sage)}
+
+.slots{display:flex;gap:8px;margin-bottom:10px}
+.slots button{
+  flex:1;border:2px solid transparent;border-radius:13px;overflow:hidden;
+  background:var(--cream-2);padding:0;box-shadow:0 2px 8px rgba(51,68,62,.07);
 }
-.themes button[aria-pressed=true]{border-color:var(--sage-deep)}
-.themes button[aria-pressed=true] span{color:var(--sage-deep)}
-.themes .no-photo{display:grid;place-items:center;height:52px;font-size:19px;color:var(--sage-deep)}
+.slots img{width:100%;height:54px;object-fit:cover;display:block;background:var(--sand)}
+.slots .empty{height:54px;display:grid;place-items:center;color:var(--sage-deep);font-size:17px}
+.slots .ph{display:block;padding:0;line-height:0}
+.slots span{
+  display:block;font-size:11.5px;font-weight:600;padding:4px 2px;line-height:1.5;
+  color:var(--ink-soft);
+}
+.slots button[aria-pressed=true]{border-color:var(--sage-deep)}
+.slots button[aria-pressed=true] span{color:var(--sage-deep)}
+
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;
+  max-height:212px;overflow-y:auto;padding:3px;margin:0 -3px 10px;
+}
+.grid button{
+  border:2px solid transparent;border-radius:11px;overflow:hidden;padding:0;line-height:0;
+  aspect-ratio:1;background:var(--cream-2);
+}
+.grid img{width:100%;height:100%;object-fit:cover}
+.grid button:hover{border-color:var(--sage)}
+.grid button[aria-pressed=true]{border-color:var(--sage-deep);box-shadow:0 0 0 2px rgba(168,195,176,.45)}
+
+.upload{
+  display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;
+  font-size:13.5px;font-weight:600;color:var(--sage-deep);
+  border:1px dashed var(--sage);border-radius:12px;padding:9px;background:var(--cream);
+}
+.upload:hover{background:var(--sage-soft)}
+#picker[hidden]{display:none}
 
 /* --- actions --- */
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
@@ -128,7 +158,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .btn[disabled]{opacity:.55;pointer-events:none}
 
 /* --- stage --- */
-.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+/* the preview sticks, not the form: with the photo picker open the panel is
+   taller than the viewport, and pinning it would put its own bottom out of reach
+   while scrolling away the thing you are editing */
+.stage{display:flex;flex-direction:column;align-items:center;gap:14px;position:sticky;top:78px}
+@media (max-width:940px){ .stage{position:static} }
 /* The voucher is a fixed 720x900 canvas - it is scaled to fit, never reflowed,
    so what the screen shows is pixel-for-pixel what the PNG will contain. A
    transform leaves the 720px layout box behind, which on a phone would poke out
@@ -367,16 +401,24 @@ body.view .stage{padding-top:6px}
 
     <div class="field">
       <label>תמונות על השובר</label>
-      <div class="themes" id="fThemes">
-        <button type="button" data-theme="clinic" aria-pressed="true">
-          <img src="assets/gift/g-room.jpg" alt="" width="570" height="760"><span>הקליניקה</span>
-        </button>
-        <button type="button" data-theme="nature" aria-pressed="false">
-          <img src="assets/gift/g-calm.jpg" alt="" width="570" height="760"><span>טבע ורוגע</span>
-        </button>
-        <button type="button" data-theme="none" aria-pressed="false">
-          <span class="no-photo">✦</span><span>בלי תמונות</span>
-        </button>
+      <div class="presets" id="fPresets">
+        <button type="button" data-preset="clinic">הקליניקה</button>
+        <button type="button" data-preset="nature">טבע ורוגע</button>
+        <button type="button" data-preset="alon">אלון בעבודה</button>
+        <button type="button" data-preset="off">בלי תמונות</button>
+      </div>
+      <div id="picker">
+        <div class="slots" id="fSlots">
+          <button type="button" data-slot="0" aria-pressed="true"><span class="ph"></span><span>ימין</span></button>
+          <button type="button" data-slot="1" aria-pressed="false"><span class="ph"></span><span>פורטרט</span></button>
+          <button type="button" data-slot="2" aria-pressed="false"><span class="ph"></span><span>שמאל</span></button>
+        </div>
+        <div class="grid" id="fGrid"></div>
+        <label class="upload">
+          <input type="file" accept="image/*" id="fUpload" hidden>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V8"/><path d="m7 12 5-5 5 5"/><path d="M4 4h16"/></svg>
+          העלאת תמונה משלכם
+        </label>
       </div>
     </div>
 
@@ -415,10 +457,12 @@ body.view .stage{padding-top:6px}
     <h1 class="v-title">שובר מתנה</h1>
     <p class="v-kicker">מסע אישי של שינוי, צמיחה והתפתחות</p>
 
+    <!-- DOM order is right, middle, left: the first child lands on the right of
+         an RTL row, and the slot labels in the panel follow that -->
     <div class="v-photos">
-      <img class="side" id="pL" src="assets/gift/g-room.jpg" alt="" width="570" height="760" data-key="left">
-      <img class="mid" id="pM" src="assets/gift/g-alon.jpg" alt="" width="600" height="600" data-key="alon">
-      <img class="side" id="pR" src="assets/gift/g-yard.jpg" alt="" width="570" height="760" data-key="right">
+      <img class="side" id="p1" src="assets/gift/lib/room-s.jpg" alt="" width="570" height="760">
+      <img class="mid"  id="p2" src="assets/gift/lib/alon-p.jpg" alt="" width="600" height="600">
+      <img class="side" id="p3" src="assets/gift/lib/yard-s.jpg" alt="" width="570" height="760">
     </div>
 
     <div class="v-for">
@@ -484,12 +528,22 @@ const W = 720, H = 900, SCALE = 3;
 const $ = s => document.querySelector(s);
 const voucher = $('#voucher'), scaler = $('#scaler');
 
-/* --- theme -> the two side photos ------------------------------- */
-const THEMES = {
-  clinic: ['assets/gift/g-room.jpg',   'assets/gift/g-yard.jpg'],
-  nature: ['assets/gift/g-calm.jpg',   'assets/gift/g-nature.jpg'],
-  none:   null
+/* --- photos ------------------------------------------------------
+   Three slots in DOM order: right, portrait, left. Each holds a library slug
+   (see assets/gift/lib.json, built by _src/make_gift_assets.py) or the literal
+   'custom' for a photo the user uploaded in this session. Every library photo
+   exists in both shapes - "-s" 3:4 for the sides, "-p" 1:1 for the circle. */
+const SHAPES = ['s', 'p', 's'];
+const PRESETS = {
+  clinic: ['room', 'alon', 'yard'],
+  nature: ['calm', 'alon', 'leaves'],
+  alon:   ['session', 'alon', 'lecture']
 };
+const libSrc = (slug, i) => 'assets/gift/lib/' + slug + '-' + SHAPES[i] + '.jpg';
+
+let LIB = [];                       // [{slug, label, group}] from lib.json
+let slot = 0;                       // which slot the grid is currently editing
+const custom = [null, null, null];  // uploaded data: URIs - never leave the session
 
 /* --- fonts to inline into the exported SVG ---------------------- */
 /* Both families are variable fonts, so one file per subset covers every
@@ -511,13 +565,17 @@ const DEFAULTS = {
   note:  '',
   valid: '',            // filled with today+12m on load
   code:  '',            // generated on load
-  theme: 'clinic'
+  photos: true,
+  pics:  PRESETS.clinic.slice()
 };
 
 /* =============================================================
    state <-> form <-> voucher
    ============================================================= */
-let state = Object.assign({}, DEFAULTS);
+function freshState(over){
+  return Object.assign({}, DEFAULTS, {pics: DEFAULTS.pics.slice()}, over || {});
+}
+let state = freshState();
 
 function pad(n){ return String(n).padStart(2,'0'); }
 function toISO(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
@@ -574,9 +632,64 @@ function paint(){
 
   $('#oCode').textContent = state.code || '-';
 
-  const pics = THEMES[state.theme];
-  v.classList.toggle('no-photos', !pics);
-  if (pics){ $('#pL').src = pics[0]; $('#pR').src = pics[1]; }
+  v.classList.toggle('no-photos', !state.photos);
+  if (state.photos){
+    state.pics.forEach((s, i) => {
+      const el = $('#p' + (i + 1));
+      const src = (s === 'custom' && custom[i]) ? custom[i] : libSrc(s, i);
+      if (el.getAttribute('src') !== src) el.setAttribute('src', src);
+    });
+  }
+}
+
+/* --- the picker ------------------------------------------------- */
+function slotThumb(i){
+  const s = state.pics[i];
+  return (s === 'custom' && custom[i]) ? custom[i] : 'assets/gift/lib/' + s + '-t.jpg';
+}
+
+function paintPicker(){
+  $('#picker').hidden = !state.photos;
+
+  document.querySelectorAll('#fPresets button').forEach(b => {
+    const p = b.dataset.preset;
+    const on = p === 'off'
+      ? !state.photos
+      : state.photos && PRESETS[p].join() === state.pics.join();
+    b.setAttribute('aria-pressed', String(on));
+  });
+  if (!state.photos) return;
+
+  document.querySelectorAll('#fSlots button').forEach((b, i) => {
+    b.setAttribute('aria-pressed', String(i === slot));
+    const ph = b.querySelector('.ph');
+    ph.className = 'ph';
+    ph.textContent = '';
+    const im = document.createElement('img');
+    im.src = slotThumb(i); im.alt = '';
+    ph.appendChild(im);
+  });
+
+  const grid = $('#fGrid');
+  grid.textContent = '';
+  if (custom[slot]) grid.appendChild(tile('custom', custom[slot], 'התמונה שהעליתם'));
+  LIB.forEach(e => grid.appendChild(
+    tile(e.slug, 'assets/gift/lib/' + e.slug + '-t.jpg', e.label)));
+  const on = grid.querySelector('[aria-pressed=true]');
+  if (on) on.scrollIntoView({block:'nearest'});
+}
+
+function tile(slug, src, label){
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.title = label;
+  b.setAttribute('aria-label', label);
+  b.setAttribute('aria-pressed', String(state.pics[slot] === slug));
+  const im = document.createElement('img');
+  im.src = src; im.alt = '';
+  b.appendChild(im);
+  b.addEventListener('click', () => { state.pics[slot] = slug; paint(); paintPicker(); });
+  return b;
 }
 
 function formToState(){
@@ -598,9 +711,8 @@ function stateToForm(){
   $('#fNoExpiry').checked = !state.valid;
   $('#fValid').value = state.valid || toISO(plusMonths(new Date(), 12));
   $('#fValid').disabled = !state.valid;
-  document.querySelectorAll('#fThemes button').forEach(b =>
-    b.setAttribute('aria-pressed', String(b.dataset.theme === state.theme)));
   paint();
+  paintPicker();
 }
 
 /* =============================================================
@@ -611,8 +723,21 @@ const b64 = s => btoa(String.fromCharCode.apply(null, new TextEncoder().encode(s
 const unb64 = s => new TextDecoder().decode(
   Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')), c => c.charCodeAt(0)));
 
+/* An uploaded photo lives only in this tab - it is far too big to travel in a URL
+   hash. The link therefore falls back to the preset photo for that slot, and the
+   caller is told so rather than quietly shipping a different voucher. */
 function linkFor(){
-  return location.origin + location.pathname + '#d=' + b64(JSON.stringify(state));
+  const s = JSON.parse(JSON.stringify(state));
+  s.dropped = false;
+  s.pics = s.pics.map((p, i) => {
+    if (p !== 'custom') return p;
+    s.dropped = true;
+    return DEFAULTS.pics[i];
+  });
+  const dropped = s.dropped;
+  delete s.dropped;
+  return {url: location.origin + location.pathname + '#d=' + b64(JSON.stringify(s)),
+          dropped: dropped};
 }
 
 /* =============================================================
@@ -623,6 +748,7 @@ function linkFor(){
    ============================================================= */
 const cache = new Map();
 async function asDataURI(url){
+  if (url.slice(0, 5) === 'data:') return url;   // an upload is already inline
   if (cache.has(url)) return cache.get(url);
   const p = fetch(url)
     .then(r => { if (!r.ok) throw new Error(url + ' -> ' + r.status); return r.blob(); })
@@ -778,16 +904,18 @@ $('#bPdf').addEventListener('click', async function(){
 });
 
 $('#bLink').addEventListener('click', async function(){
-  const url = linkFor();
-  try { await navigator.clipboard.writeText(url); toast('הקישור הועתק'); }
+  const {url, dropped} = linkFor();
+  const msg = dropped
+    ? 'הקישור הועתק - אך בלי התמונה שהעליתם (היא נשמרת רק בקובץ שמורידים)'
+    : 'הקישור הועתק';
+  try { await navigator.clipboard.writeText(url); toast(msg); }
   catch(e){ window.prompt('העתיקו את הקישור:', url); }
 });
 
 $('#bReset').addEventListener('click', function(){
-  state = Object.assign({}, DEFAULTS, {
-    code: makeCode(),
-    valid: toISO(plusMonths(new Date(), 12))
-  });
+  state = freshState({code: makeCode(), valid: toISO(plusMonths(new Date(), 12))});
+  custom[0] = custom[1] = custom[2] = null;
+  slot = 0;
   history.replaceState(null, '', location.pathname);
   stateToForm();
   toast('שובר חדש');
@@ -800,13 +928,59 @@ $('#fNoExpiry').addEventListener('change', function(){
   $('#fValid').disabled = this.checked;
   formToState();
 });
-document.querySelectorAll('#fThemes button').forEach(b =>
+document.querySelectorAll('#fPresets button').forEach(b =>
   b.addEventListener('click', function(){
-    state.theme = this.dataset.theme;
-    document.querySelectorAll('#fThemes button').forEach(x =>
-      x.setAttribute('aria-pressed', String(x === this)));
-    paint();
+    const p = this.dataset.preset;
+    if (p === 'off'){ state.photos = false; }
+    else { state.photos = true; state.pics = PRESETS[p].slice(); }
+    paint(); paintPicker(); resize();
   }));
+
+document.querySelectorAll('#fSlots button').forEach(b =>
+  b.addEventListener('click', function(){ slot = +this.dataset.slot; paintPicker(); }));
+
+/* clicking a photo on the board selects that slot - the shortcut you reach for
+   before you have found the three buttons in the panel */
+document.querySelectorAll('.v-photos img').forEach((im, i) => {
+  im.style.cursor = 'pointer';
+  im.title = 'לחצו כדי להחליף את התמונה';
+  im.addEventListener('click', () => {
+    if (document.body.classList.contains('view')) return;
+    slot = i; paintPicker();
+    $('#fGrid').scrollIntoView({block:'nearest', behavior:'smooth'});
+  });
+});
+
+/* An upload is cropped to the slot's shape here rather than with object-fit, so
+   the picture that goes into the export is exactly the picture on screen - and a
+   12MP phone photo does not become a 16MB data: URI inside the SVG. */
+$('#fUpload').addEventListener('change', function(){
+  const file = this.files && this.files[0];
+  this.value = '';
+  if (!file) return;
+  if (!/^image\//.test(file.type)) { toast('אפשר להעלות תמונות בלבד'); return; }
+  const fr = new FileReader();
+  fr.onerror = () => toast('לא הצלחתי לקרוא את הקובץ');
+  fr.onload = () => {
+    const img = new Image();
+    img.onerror = () => toast('הקובץ אינו תמונה תקינה');
+    img.onload = () => {
+      const [tw, th] = slot === 1 ? [600, 600] : [570, 760];
+      const cv = document.createElement('canvas');
+      cv.width = tw; cv.height = th;
+      const ctx = cv.getContext('2d');
+      const scale = Math.max(tw / img.width, th / img.height);   // cover
+      const w = img.width * scale, h = img.height * scale;
+      ctx.drawImage(img, (tw - w) / 2, (th - h) / 2, w, h);
+      custom[slot] = cv.toDataURL('image/jpeg', 0.86);
+      state.pics[slot] = 'custom';
+      paint(); paintPicker();
+      toast('התמונה הוחלפה');
+    };
+    img.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+});
 
 /* --- fit the fixed-size board into whatever room the viewport has --- */
 function resize(){
@@ -824,11 +998,21 @@ window.addEventListener('resize', resize);
   let fromLink = false;
   if (m){
     try {
-      state = Object.assign({}, DEFAULTS, JSON.parse(unb64(m[1])));
+      const sent = JSON.parse(unb64(m[1]));
+      state = freshState(sent);
+      // links minted before the photo picker carried one `theme` for all three
+      // slots - they still have to open
+      if (sent.theme && !Array.isArray(sent.pics)){
+        state.photos = sent.theme !== 'none';
+        state.pics = (PRESETS[sent.theme] || PRESETS.clinic).slice();
+      }
       document.body.classList.add('view');
       fromLink = true;
     } catch(e){ console.error('bad voucher link', e); }
   }
+  delete state.theme;
+  if (!Array.isArray(state.pics) || state.pics.length !== 3) state.pics = DEFAULTS.pics.slice();
+
   // an empty `valid` means "no expiry" - a meaningful choice, so it is only
   // overwritten with the 12-month default when it did not come from a link
   if (!fromLink) state.valid = toISO(plusMonths(new Date(), 12));
@@ -837,6 +1021,13 @@ window.addEventListener('resize', resize);
   resize();
   // web fonts land after first paint and change the name's width
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { paint(); resize(); });
+
+  // the picker's catalogue - the voucher itself renders from the slugs alone,
+  // so a failure here costs the thumbnails, not the page
+  fetch('assets/gift/lib.json')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(list => { LIB = list; paintPicker(); })
+    .catch(e => console.error('lib.json', e));
 })();
 
 })();
