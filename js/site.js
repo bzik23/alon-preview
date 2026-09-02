@@ -881,6 +881,230 @@
     });
   }
 
+  // ---------- פופאפ ההרשמה לסמינר (עמוד הסדנאות) ----------
+  // ה-CTA בכרטיס הסמינר הוא קישור אמיתי ל-contact?topic=seminar, ורק אם
+  // הסקריפט הזה רץ הקליק נתפס ופותח את החלון במקום לעזוב את העמוד.
+  var semModal = document.getElementById('semModal');
+  if (semModal) {
+    var semCard = semModal.querySelector('.sem-card');
+    var semForm = document.getElementById('semForm');
+    var semDone = semModal.querySelector('.sem-done');
+    var semErr = semModal.querySelector('.sem-err');
+    var semName = semModal.querySelector('#sem-name');
+    var semPhone = semModal.querySelector('#sem-phone');
+    var semEmail = semModal.querySelector('#sem-email');
+    var semConsent = semModal.querySelector('#sem-consent');
+    var semHp = semModal.querySelector('.sem-hp input');
+    var semBtn = semForm.querySelector('button[type=submit]');
+    var semBtnText = semBtn ? semBtn.textContent : '';
+    var semOpener = null;
+    var semShownAt = Date.now();
+    // ‏?popup=demo מכריח את פופאפ היציאה להיפתח כאן ועכשיו, בלי חלון החסד ובלי
+    // קשר לכך שהדפדפן הזה כבר ראה אותו - כדי שאפשר יהיה להראות אותו ללקוח.
+    // ‏?popup=reset רק מנקה את הסימון, והפופאפ חוזר להתנהג כרגיל.
+    // ב-/seminar אותו מארקאפ בדיוק מוגש כתוכן העמוד (מחלקת inline, בלי hidden).
+    // הטופס עובד בדיוק אותו דבר, אבל כל ההתנהגויות של חלון - פתיחה, סגירה,
+    // Escape, מלכודת פוקוס ופופאפ היציאה - צריכות לשתוק שם.
+    var semInline = semModal.classList.contains('inline');
+    var semDemo = /[?&]popup=demo(&|$)/.test(location.search);
+    // אין PHP ב-GitHub Pages / file:// - שם החלון מדגים את החוויה המלאה
+    var SEM_DEMO = location.protocol === 'file:' || /github\.io$/i.test(location.hostname);
+
+    function semOpen(origin, mode) {
+      semOpener = origin || null;
+      semShownAt = Date.now();
+      semModal.hidden = false;
+      semModal.classList.toggle('exit', mode === 'exit' || mode === 'demo');
+      document.body.classList.add('sem-open');
+      requestAnimationFrame(function () { semModal.classList.add('open'); });
+      // בדסקטופ הפוקוס נכנס ישר לשדה השם; במובייל זה היה מקפיץ את המקלדת מעל
+      // פרטי הערב, ולכן שם הפוקוס נכנס לחלון עצמו והמשתמש בוחר מתי להתחיל למלא.
+      // בפופאפ יציאה הפוקוס תמיד נכנס לחלון - הגולש לא ביקש את זה, ולכפות עליו
+      // סמן מהבהב בשדה זה כבר קצת יותר מדי
+      var semWide = window.matchMedia('(min-width:821px)').matches;
+      setTimeout(function () {
+        ((semWide && mode !== 'exit') ? semName : semCard).focus();
+      }, 60);
+      // מרגע שהחלון נראה - בכל דרך - פופאפ היציאה כבר לא יקפוץ מאוחר יותר.
+      // בהדגמה לא שורפים, אחרת אי אפשר להראות אותו פעמיים ברצף
+      if (mode !== 'demo') exitBurn();
+      if (typeof gtag === 'function' && mode !== 'demo') {
+        gtag('event', 'seminar_popup_open', { method: mode === 'exit' ? 'exit_intent' : 'cta' });
+      }
+    }
+    function semClose() {
+      semModal.classList.remove('open');
+      document.body.classList.remove('sem-open');
+      setTimeout(function () {
+        semModal.hidden = true;
+        semModal.classList.remove('exit');
+        // איפוס, כדי שפתיחה חוזרת תתחיל מטופס נקי ולא ממסך התודה
+        semForm.hidden = false;
+        semDone.hidden = true;
+        semForm.classList.remove('busy');
+        semErr.hidden = true;
+        semForm.reset();
+        [semName, semPhone, semEmail, semConsent].forEach(function (el) {
+          el.removeAttribute('aria-invalid');
+        });
+      }, 250);
+      if (semOpener) semOpener.focus();
+    }
+
+    document.querySelectorAll('[data-sem-open]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); semOpen(el); });
+    });
+
+    // ----- פופאפ יציאה: אותו חלון, פעם אחת לגולש, כשהוא מסמן שהוא עוזב -----
+    // המפתח נושא את תאריך האירוע, כך שהסמינר הבא מתחיל מדף חלק אצל כל הגולשים
+    // שכבר ראו את הנוכחי.
+    var semUntil = semModal.getAttribute('data-until') || '';
+    var EXIT_KEY = 'alon-seminar-exit-' + semUntil;
+
+    function exitSeen() {
+      // דפדפן שחוסם אחסון מקומי (גלישה פרטית מסוימת) יזרוק כאן - ואז עדיף
+      // להתנהג כאילו הפופאפ כבר הוצג מאשר להקפיץ אותו בכל טעינת עמוד
+      try { return localStorage.getItem(EXIT_KEY) === '1'; } catch (e) { return true; }
+    }
+    function exitBurn() {
+      try { localStorage.setItem(EXIT_KEY, '1'); } catch (e) {}
+    }
+
+    if (/[?&]popup=reset(&|$)/.test(location.search)) {
+      try { localStorage.removeItem(EXIT_KEY); } catch (e) {}
+    }
+    if (semDemo && !semInline) {
+      setTimeout(function () { semOpen(null, 'demo'); }, 700);
+    }
+
+    // ההרשמה נסגרה -> אין יותר פופאפ יציאה, גם אם החלון עצמו עוד בעמוד
+    var semLive = semUntil && new Date() < new Date(semUntil);
+
+    // מי שכבר עומד מול טופס ההרשמה לא צריך שיקפיצו לו אותו בעמוד הבא
+    if (semInline) exitBurn();
+
+    if (semLive && !exitSeen() && !semInline) {
+      var exitReady = false;
+      // חלון חסד קצר: עכבר שיוצא מהקצה העליון בשנייה הראשונה הוא בדרך כלל
+      // מישהו שרק חוזר לטאב, לא מישהו שקרא ומחליט לעזוב
+      setTimeout(function () { exitReady = true; }, 6000);
+
+      function exitFire() {
+        if (!exitReady || exitSeen()) return;
+        if (!semModal.hidden) return;                     // כבר פתוח
+        if (subModal && !subModal.hidden) return;         // חלון אחר תופס את המסך
+        exitBurn();
+        semOpen(null, 'exit');
+      }
+
+      if (window.matchMedia('(hover:none)').matches) {
+        // במגע אין mouseout. הסימן המקביל ליציאה הוא גולש שירד לעומק העמוד
+        // ואז גלל בחזרה למעלה, אל התפריט או אל כפתור החזרה
+        var wentDeep = false;
+        window.addEventListener('scroll', function () {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          if (h > 0 && (window.scrollY / h) > 0.5) wentDeep = true;
+          if (wentDeep && window.scrollY < 200) exitFire();
+        }, { passive: true });
+      } else {
+        document.addEventListener('mouseout', function (e) {
+          // יציאה דרך הקצה העליון של החלון: הסמן לא עבר לאלמנט אחר בעמוד,
+          // והוא יצא מהרצועה העליונה - כלומר בדרך ל-✕ / לשורת הכתובת.
+          // 50px ולא 4: בתנועת עכבר מהירה הדפדפן מדווח על נקודת החצייה
+          // האחרונה שהספיק לדגום, והיא כמעט אף פעם לא בדיוק 0
+          if (e.relatedTarget) return;
+          if (e.clientY > 50) return;
+          exitFire();
+        });
+      }
+    }
+    semModal.querySelectorAll('[data-sem-close]').forEach(function (btn) {
+      btn.addEventListener('click', semClose);
+    });
+    semModal.addEventListener('click', function (e) {
+      if (!semInline && e.target === semModal) semClose();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (semInline || semModal.hidden) return;
+      if (e.key === 'Escape') { semClose(); return; }
+      if (e.key !== 'Tab') return;
+      // מלכודת פוקוס - החלון מודאלי, הטאב לא אמור לברוח לעמוד שמאחור
+      var f = semCard.querySelectorAll('button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])');
+      f = [].filter.call(f, function (el) { return el.offsetParent !== null && !el.disabled; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    function semFail(msg, field) {
+      semErr.textContent = msg;
+      semErr.hidden = false;
+      if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); }
+    }
+    function semSucceed() {
+      semForm.hidden = true;
+      semDone.hidden = false;
+      semDone.querySelector('.btn').focus();
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { form: 'seminar', value: 0, currency: 'ILS' });
+      }
+    }
+
+    semForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      semErr.hidden = true;
+      [semName, semPhone, semEmail, semConsent].forEach(function (el) {
+        el.removeAttribute('aria-invalid');
+      });
+      if (semHp && semHp.value) return;                       // בוט מילא את ה-honeypot
+
+      // אותה ולידציה שה-PHP עושה בצד השרת, רק שכאן היא מנוסחת בעברית ובמקום
+      if (semName.value.trim().length < 2) {
+        return semFail('נשמח לדעת איך לפנות אליכם - נא למלא שם מלא.', semName);
+      }
+      var digits = semPhone.value.replace(/\D+/g, '');
+      if (digits.length < 9 || digits.length > 15) {
+        return semFail('מספר הטלפון לא נראה תקין. אפשר לבדוק אותו שוב?', semPhone);
+      }
+      var mail = semEmail.value.trim();
+      if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) {
+        return semFail('נראה שכתובת המייל לא תקינה. אפשר להשאיר אותה ריקה.', semEmail);
+      }
+      if (!semConsent.checked) {
+        return semFail('כדי שנוכל לחזור אליכם צריך לאשר את מדיניות הפרטיות.', semConsent);
+      }
+
+      function semRelease() {
+        semForm.classList.remove('busy');
+        if (semBtn) { semBtn.disabled = false; semBtn.textContent = semBtnText; }
+      }
+      semForm.classList.add('busy');
+      if (semBtn) { semBtn.disabled = true; semBtn.textContent = 'שולח...'; }
+
+      if (SEM_DEMO) {
+        setTimeout(function () { semRelease(); semSucceed(); }, 400);
+        return;
+      }
+
+      var data = new FormData(semForm);
+      data.append('t', String(semShownAt));
+      data.append('page', location.pathname);
+
+      fetch('contact.php', { method: 'POST', body: data })
+        .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+        .then(function (res) {
+          semRelease();
+          if (res && res.ok) semSucceed();
+          else semFail((res && res.error) || 'השליחה נכשלה. אפשר להתקשר ל-054-3333265.');
+        })
+        .catch(function () {
+          semRelease();
+          semFail('לא הצלחנו לשלוח כרגע. אפשר להתקשר ל-054-3333265 או לכתוב ל-alonsms73@gmail.com');
+        });
+    });
+  }
+
   // lead form -> contact.php -> mail to Alon
   var form = document.getElementById('leadForm');
   if (form) {
