@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שובר מתנה | אלון שמש</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="שובר מתנה אישי לליווי ואימון אישי עם אלון שמש.">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="שובר מתנה - אלון שמש">
+<meta property="og:description" content="מתנה שנשארת: מסע אישי של שינוי, צמיחה והתפתחות.">
+<meta property="og:image" content="https://www.alonsms.com/assets/og/card.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     EDITOR CHROME - everything outside the voucher itself.
+     Deliberately kept in its own <style>: only #vcss below travels
+     into the SVG that becomes the PNG, so nothing here can leak
+     into the exported image.
+     ============================================================ -->
+<style>
+:root{
+  --cream:#FAF7F2; --cream-2:#F4EEE4; --sand:#F2E8DC;
+  --sage:#A8C3B0; --sage-soft:#DCE8DF; --sage-deep:#5F7A6A;
+  --ink:#33443E; --ink-soft:#5C6B64;
+  --apricot:#E9B384; --apricot-deep:#D89A63;
+  --plum:#8B5CF6; --sun:#F2C24E; --sun-deep:#C68A2E; --sun-soft:#FBF0D6;
+  --white:#fff;
+  --shadow:0 10px 30px rgba(51,68,62,.08);
+  --shadow-lg:0 18px 50px rgba(51,68,62,.16);
+  --font-head:'Frank Ruhl Libre',serif;
+  --font-body:'Assistant',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip}
+body{
+  font-family:var(--font-body); color:var(--ink); background:var(--cream);
+  direction:rtl; text-align:right; line-height:1.65; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* --- top bar --- */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(16px,3vw,32px); background:var(--white);
+  border-bottom:1px solid var(--sage-soft); position:sticky; top:0; z-index:20;
+}
+.tb-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700}
+.tb-brand svg{width:34px;height:34px;flex:none}
+.tb-brand small{display:block;font-family:var(--font-body);font-weight:400;font-size:12px;color:var(--ink-soft);line-height:1.2}
+.tb-back{font-size:14px;color:var(--sage-deep);text-decoration:none;border-bottom:1px solid transparent}
+.tb-back:hover{border-bottom-color:currentColor}
+
+/* --- layout --- */
+.app{
+  display:grid; grid-template-columns:minmax(320px,380px) 1fr;
+  gap:clamp(16px,2.4vw,34px); align-items:start;
+  padding:clamp(16px,2.4vw,32px); max-width:1440px; margin-inline:auto;
+}
+@media (max-width:940px){ .app{grid-template-columns:1fr} }
+
+/* --- form panel --- */
+.panel{
+  background:var(--white); border:1px solid var(--sage-soft); border-radius:20px;
+  padding:clamp(18px,2.2vw,26px); box-shadow:var(--shadow);
+  position:sticky; top:78px;
+}
+@media (max-width:940px){ .panel{position:static} }
+.panel h2{font-family:var(--font-head);font-size:1.25rem;margin-bottom:4px}
+.panel .hint{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
+.field{margin-bottom:15px}
+.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.field .sub{font-weight:400;color:var(--ink-soft);font-size:12.5px}
+.field input[type=text],.field input[type=date],.field textarea,.field select{
+  width:100%; font:inherit; font-size:15px; color:var(--ink);
+  background:var(--cream); border:1px solid var(--sage-soft); border-radius:12px;
+  padding:9px 12px; transition:border-color .15s, box-shadow .15s;
+}
+.field textarea{min-height:82px;resize:vertical;line-height:1.55}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(168,195,176,.28);
+}
+.row{display:flex;gap:10px}
+.row>*{flex:1;min-width:0}
+.check{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:8px;cursor:pointer}
+.check input{width:17px;height:17px;accent-color:var(--sage-deep);cursor:pointer}
+
+/* theme swatches */
+.themes{display:flex;gap:9px}
+.themes button{
+  flex:1; border:2px solid transparent; border-radius:13px; overflow:hidden;
+  background:var(--cream-2); padding:0; line-height:0; position:relative;
+  box-shadow:0 2px 8px rgba(51,68,62,.07);
+}
+.themes button img{width:100%;height:52px;object-fit:cover}
+.themes button span{
+  display:block;line-height:1.5;font-size:11.5px;font-weight:600;padding:4px 2px;
+  font-family:var(--font-body);color:var(--ink-soft);
+}
+.themes button[aria-pressed=true]{border-color:var(--sage-deep)}
+.themes button[aria-pressed=true] span{color:var(--sage-deep)}
+.themes .no-photo{display:grid;place-items:center;height:52px;font-size:19px;color:var(--sage-deep)}
+
+/* --- actions --- */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 18px;border-radius:999px;font-weight:700;font-size:15px;
+  transition:transform .15s, box-shadow .15s, background .15s; white-space:nowrap;
+}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--sage-deep);color:#fff;box-shadow:0 8px 20px rgba(95,122,106,.28)}
+.btn-primary:hover{background:#527063}
+.btn-ghost{background:var(--white);color:var(--ink);border:1px solid var(--sage-soft)}
+.btn-ghost:hover{border-color:var(--sage)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.28)}
+.btn[disabled]{opacity:.55;pointer-events:none}
+
+/* --- stage --- */
+.stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+/* The voucher is a fixed 720x900 canvas - it is scaled to fit, never reflowed,
+   so what the screen shows is pixel-for-pixel what the PNG will contain. A
+   transform leaves the 720px layout box behind, which on a phone would poke out
+   past the viewport, so the board is taken out of flow and the wrapper carries
+   the scaled height instead. */
+.v-wrap{position:relative;width:100%}
+.v-scaler{position:absolute;top:0;left:50%;transform-origin:top center}
+.stage-note{font-size:13px;color:var(--ink-soft);text-align:center;max-width:52ch}
+.toast{
+  position:fixed;inset-inline:0;bottom:22px;margin-inline:auto;width:max-content;max-width:88vw;
+  background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-size:14.5px;
+  box-shadow:var(--shadow-lg);opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity .2s,transform .2s;z-index:60;
+}
+.toast.on{opacity:1;transform:translateY(0)}
+
+/* --- recipient mode (#d=... in the URL): the voucher alone, no editor --- */
+body.view .panel,body.view .editor-only{display:none}
+body.view .app{grid-template-columns:1fr;max-width:860px}
+body.view .stage{padding-top:6px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* --- print: the voucher fills an A5 page, everything else disappears --- */
+@media print{
+  @page{size:A5 portrait;margin:0}
+  body{background:#fff}
+  .topbar,.panel,.actions,.stage-note,.toast{display:none!important}
+  .app{display:block;padding:0;max-width:none}
+  .v-scaler{position:relative;left:auto;transform:scale(.775)!important;transform-origin:top center}
+}
+</style>
+
+<!-- ============================================================
+     VOUCHER CSS - this block, and only this block, is copied
+     verbatim into the <foreignObject> that gets rasterised to PNG.
+     Rules therefore have to be self-contained: no var() reaching
+     outside .v, no external url() that is not swapped for a data:
+     URI at render time (Chrome silently drops external resources
+     inside a foreignObject), and no @import.
+     ============================================================ -->
+<style id="vcss">
+.v{
+  --cream:#FAF7F2; --cream-2:#F4EEE4; --sand:#F2E8DC;
+  --sage:#A8C3B0; --sage-soft:#DCE8DF; --sage-deep:#5F7A6A;
+  --ink:#33443E; --ink-soft:#5C6B64;
+  --apricot:#E9B384; --apricot-deep:#D89A63;
+  --sun:#F2C24E; --sun-deep:#C68A2E; --sun-soft:#FBF0D6;
+  --wash:url("assets/gift/g-wash.jpg");
+
+  width:720px; height:900px; position:relative; overflow:hidden;
+  background:var(--cream); color:var(--ink);
+  font-family:'Assistant',sans-serif; direction:rtl; text-align:right;
+  line-height:1.6; font-size:16px; box-sizing:border-box;
+  -webkit-font-smoothing:antialiased;
+}
+.v *{box-sizing:border-box;margin:0;padding:0}
+.v ul{list-style:none}
+
+/* the paper: a blurred leaf wash, then two warm light sources - a sun in the
+   top-inline-start corner and a sage breath at the bottom */
+.v-bg{position:absolute;inset:0;background-image:var(--wash);background-size:200% auto;opacity:.5}
+.v-glow{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(460px 340px at 88% -6%, rgba(242,194,78,.30), rgba(242,194,78,0) 68%),
+    radial-gradient(420px 320px at 6% 104%, rgba(168,195,176,.34), rgba(168,195,176,0) 70%),
+    radial-gradient(600px 420px at 50% 46%, rgba(255,255,255,.62), rgba(255,255,255,0) 72%);
+}
+
+/* double frame: a solid hairline with a dashed apricot echo inside it */
+.v-frame{
+  position:absolute; inset:24px;
+  border:1.5px solid rgba(95,122,106,.30); border-radius:22px;
+  padding:30px 40px 26px; display:flex; flex-direction:column;
+}
+.v-frame::before{
+  content:""; position:absolute; inset:7px; border-radius:16px;
+  border:1px dashed rgba(216,154,99,.45); pointer-events:none;
+}
+
+/* --- header --- */
+.v-head{display:flex;align-items:center;justify-content:center;gap:11px}
+.v-head svg{width:40px;height:40px;flex:none}
+.v-brand{text-align:right;line-height:1.15}
+.v-brand b{display:block;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:21px;letter-spacing:-.2px}
+.v-brand span{display:block;font-size:11.5px;color:var(--ink-soft);letter-spacing:.2px}
+
+.v-rule{display:flex;align-items:center;gap:12px;margin:16px 0 14px;color:var(--apricot-deep)}
+.v-rule::before,.v-rule::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(216,154,99,0),rgba(216,154,99,.55),rgba(216,154,99,0));
+}
+.v-rule i{font-style:normal;font-size:13px;line-height:1}
+
+/* the middle of the card owns the leftover height: with the photo band present
+   it simply flows from the top, and without it the block centres itself rather
+   than leaving a hole above the footer */
+.v-body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+.v.no-photos .v-body{justify-content:center}
+
+/* --- title --- */
+.v-chip{
+  align-self:center;background:var(--sun-soft);color:var(--sun-deep);
+  border:1px solid rgba(198,138,46,.28);border-radius:999px;
+  padding:3px 15px;font-size:12.5px;font-weight:700;letter-spacing:.3px;
+}
+.v-title{
+  font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:58px;line-height:1.08;
+  text-align:center;margin-top:11px;letter-spacing:-1px;
+}
+.v-kicker{text-align:center;font-size:15.5px;color:var(--ink-soft);margin-top:7px}
+
+/* --- photo band: two tall crops with the portrait lifted between them --- */
+.v-photos{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px}
+.v-photos img{display:block}
+.v-photos .side{
+  width:152px;height:200px;object-fit:cover;border-radius:15px;
+  box-shadow:0 10px 24px rgba(51,68,62,.17);
+}
+.v-photos .mid{
+  width:150px;height:150px;object-fit:cover;border-radius:50%;
+  border:5px solid var(--cream);box-shadow:0 12px 26px rgba(51,68,62,.20);
+  transform:translateY(-8px);
+}
+.v.no-photos .v-photos{display:none}
+/* with the band gone the card would sit top-heavy, so the title breathes instead */
+.v.no-photos .v-title{font-size:66px;margin-top:20px}
+.v.no-photos .v-kicker{margin-top:12px}
+
+/* --- recipient --- */
+.v-for{text-align:center;margin-top:22px}
+.v-for .lbl{
+  display:inline-block;font-size:13px;font-weight:700;letter-spacing:.6px;
+  color:var(--sage-deep);
+}
+.v-name{margin-top:1px;line-height:1.2}
+.v-name span{
+  font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:40px;line-height:1.2;
+  white-space:nowrap;display:inline-block;
+}
+
+/* --- what the voucher buys --- */
+.v-card{
+  background:rgba(255,255,255,.72);border:1px solid rgba(168,195,176,.5);
+  border-radius:17px;padding:15px 20px;margin-top:16px;
+}
+.v-card ul{display:flex;flex-direction:column;gap:7px}
+.v-card li{display:flex;align-items:flex-start;gap:9px;font-size:16.5px;font-weight:600;line-height:1.45}
+.v-card li::before{
+  content:"";flex:none;width:9px;height:9px;margin-top:8px;border-radius:50%;
+  background:var(--apricot);box-shadow:0 0 0 3px rgba(233,179,132,.24);
+}
+.v.no-items .v-card{display:none}
+
+/* --- dedication --- */
+.v-note{
+  margin-top:14px;padding:11px 16px 11px 14px;border-inline-start:3px solid var(--sage);
+  background:rgba(220,232,223,.42);border-radius:0 12px 12px 0;
+  font-size:15px;line-height:1.6;color:var(--ink);white-space:pre-wrap;
+}
+.v.no-note .v-note{display:none}
+
+.v-from{text-align:center;margin-top:15px;font-size:16.5px;font-weight:600;color:var(--ink)}
+.v.no-from .v-from{display:none}
+
+/* --- footer --- */
+.v-foot{
+  padding-top:14px;margin-top:16px;border-top:1px dashed rgba(95,122,106,.32);
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-size:13.5px;color:var(--ink-soft);
+}
+.v-foot b{color:var(--ink);font-weight:700}
+.v-contact{
+  margin-top:8px;text-align:center;font-size:12.5px;color:var(--ink-soft);letter-spacing:.1px;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar editor-only">
+  <div class="tb-brand">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <circle cx="24" cy="19" r="8.5" fill="#E9B384"/>
+      <g stroke="#D89A63" stroke-width="2.4" stroke-linecap="round">
+        <line x1="24" y1="3.5" x2="24" y2="7"/><line x1="8.5" y1="19" x2="12" y2="19"/>
+        <line x1="36" y1="19" x2="39.5" y2="19"/><line x1="13" y1="8" x2="15.5" y2="10.5"/>
+        <line x1="35" y1="8" x2="32.5" y2="10.5"/>
+      </g>
+      <path d="M7 38 Q24 27 41 38" stroke="#5F7A6A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M14 44 Q24 37 34 44" stroke="#A8C3B0" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span>מחולל שוברי מתנה<small>אלון שמש - מאמן להתפתחות אישית</small></span>
+  </div>
+  <a class="tb-back" href="./">חזרה לאתר</a>
+</header>
+
+<div class="app">
+
+  <aside class="panel">
+    <h2>פרטי השובר</h2>
+    <p class="hint">מלאו את הפרטים - השובר מתעדכן מולכם בזמן אמת.</p>
+
+    <div class="field">
+      <label for="fName">שם מקבל השובר</label>
+      <input type="text" id="fName" autocomplete="off" placeholder="למשל: מתן ניגרקר">
+    </div>
+
+    <div class="field">
+      <label for="fFrom">חתימת המעניק <span class="sub">- מי נותן את המתנה</span></label>
+      <input type="text" id="fFrom" autocomplete="off" placeholder="למשל: באהבה, מהאחיות שלך">
+    </div>
+
+    <div class="field">
+      <label for="fItems">מה השובר כולל <span class="sub">- שורה לכל פריט</span></label>
+      <textarea id="fItems" placeholder="3 מפגשי אימון אישי&#10;כל מפגש כשעה, בקליניקה ברחובות או בזום"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="fNote">ברכה אישית <span class="sub">- לא חובה</span></label>
+      <textarea id="fNote" style="min-height:64px" placeholder="מילה אישית שתופיע על השובר"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="fValid">תוקף למימוש</label>
+      <div class="row">
+        <input type="date" id="fValid">
+      </div>
+      <label class="check"><input type="checkbox" id="fNoExpiry"> ללא הגבלת תוקף</label>
+    </div>
+
+    <div class="field">
+      <label for="fCode">מספר שובר</label>
+      <input type="text" id="fCode" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label>תמונות על השובר</label>
+      <div class="themes" id="fThemes">
+        <button type="button" data-theme="clinic" aria-pressed="true">
+          <img src="assets/gift/g-room.jpg" alt="" width="570" height="760"><span>הקליניקה</span>
+        </button>
+        <button type="button" data-theme="nature" aria-pressed="false">
+          <img src="assets/gift/g-calm.jpg" alt="" width="570" height="760"><span>טבע ורוגע</span>
+        </button>
+        <button type="button" data-theme="none" aria-pressed="false">
+          <span class="no-photo">✦</span><span>בלי תמונות</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="actions" style="margin-top:20px">
+      <button class="btn btn-ghost" id="bReset" type="button">שובר חדש</button>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <div class="v-wrap"><div class="v-scaler" id="scaler">
+
+<!-- ============ THE VOUCHER ============ -->
+<article class="v" id="voucher">
+  <div class="v-bg"></div>
+  <div class="v-glow"></div>
+  <div class="v-frame">
+
+    <div class="v-head">
+      <svg viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="19" r="8.5" fill="#E9B384"/>
+        <g stroke="#D89A63" stroke-width="2.4" stroke-linecap="round">
+          <line x1="24" y1="3.5" x2="24" y2="7"/><line x1="8.5" y1="19" x2="12" y2="19"/>
+          <line x1="36" y1="19" x2="39.5" y2="19"/><line x1="13" y1="8" x2="15.5" y2="10.5"/>
+          <line x1="35" y1="8" x2="32.5" y2="10.5"/>
+        </g>
+        <path d="M7 38 Q24 27 41 38" stroke="#5F7A6A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+        <path d="M14 44 Q24 37 34 44" stroke="#A8C3B0" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="v-brand"><b>אלון שמש</b><span>מאמן להתפתחות אישית</span></span>
+    </div>
+
+    <div class="v-rule"><i>✦</i></div>
+
+    <div class="v-body">
+    <span class="v-chip">מתנה עבורך</span>
+    <h1 class="v-title">שובר מתנה</h1>
+    <p class="v-kicker">מסע אישי של שינוי, צמיחה והתפתחות</p>
+
+    <div class="v-photos">
+      <img class="side" id="pL" src="assets/gift/g-room.jpg" alt="" width="570" height="760" data-key="left">
+      <img class="mid" id="pM" src="assets/gift/g-alon.jpg" alt="" width="600" height="600" data-key="alon">
+      <img class="side" id="pR" src="assets/gift/g-yard.jpg" alt="" width="570" height="760" data-key="right">
+    </div>
+
+    <div class="v-for">
+      <span class="lbl">עבור</span>
+      <div class="v-name"><span id="oName">מתן</span></div>
+    </div>
+
+    <div class="v-card"><ul id="oItems"></ul></div>
+
+    <p class="v-note" id="oNote"></p>
+
+    <p class="v-from" id="oFrom"></p>
+    </div>
+
+    <div class="v-foot">
+      <span id="oValidWrap">תוקף למימוש: <b id="oValid">-</b></span>
+      <span>שובר מס' <b id="oCode">-</b></span>
+    </div>
+    <p class="v-contact">לתיאום מפגש: 054-3333265 · alonsms.com · דובנוב 51 רחובות, ובזום</p>
+
+  </div>
+</article>
+<!-- ========== END OF THE VOUCHER ========== -->
+
+    </div></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="bPng" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+        הורדה כתמונה
+      </button>
+      <button class="btn btn-wa" id="bWa" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.6-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8 1.6.7 2.2.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3z"/></svg>
+        שליחה בוואטסאפ
+      </button>
+      <button class="btn btn-ghost editor-only" id="bPdf" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="7" rx="2"/><path d="M7 16h10v5H7z"/></svg>
+        PDF להדפסה
+      </button>
+      <button class="btn btn-ghost editor-only" id="bLink" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7L12.5 20"/></svg>
+        העתקת קישור לשובר
+      </button>
+    </div>
+
+    <p class="stage-note editor-only">כפתור "הורדה כתמונה" שומר PNG ברזולוציה מלאה (<bdi dir="ltr">2160×2700</bdi>) להדפסה ולשמירה; כפתור הוואטסאפ שולח גרסה קלה, מהירה לשליחה.</p>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------
+   The voucher is a fixed 720x900 board. Nothing about it reflows -
+   it is scaled to fit the viewport for display and rendered at 3x
+   for export, so the preview and the PNG can never disagree.
+   --------------------------------------------------------------- */
+const W = 720, H = 900, SCALE = 3;
+
+const $ = s => document.querySelector(s);
+const voucher = $('#voucher'), scaler = $('#scaler');
+
+/* --- theme -> the two side photos ------------------------------- */
+const THEMES = {
+  clinic: ['assets/gift/g-room.jpg',   'assets/gift/g-yard.jpg'],
+  nature: ['assets/gift/g-calm.jpg',   'assets/gift/g-nature.jpg'],
+  none:   null
+};
+
+/* --- fonts to inline into the exported SVG ---------------------- */
+/* Both families are variable fonts, so one file per subset covers every
+   weight - hence the weight ranges rather than single values. The unicode
+   ranges are Google's own, copied by _src/fetch_gift_fonts.py. */
+const HEB = 'U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F';
+const LAT = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,' +
+            'U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+const FONTS = [
+  {f:'Assistant',        w:'200 800', r:HEB, u:'assets/gift/fonts/assistant-hebrew.woff2'},
+  {f:'Assistant',        w:'200 800', r:LAT, u:'assets/gift/fonts/assistant-latin.woff2'},
+  {f:'Frank Ruhl Libre', w:'300 900', r:HEB, u:'assets/gift/fonts/frank-ruhl-libre-hebrew.woff2'}
+];
+
+const DEFAULTS = {
+  name:  '',
+  from:  '',
+  items: '3 מפגשי אימון אישי\nכל מפגש כשעה, בקליניקה ברחובות או בזום',
+  note:  '',
+  valid: '',            // filled with today+12m on load
+  code:  '',            // generated on load
+  theme: 'clinic'
+};
+
+/* =============================================================
+   state <-> form <-> voucher
+   ============================================================= */
+let state = Object.assign({}, DEFAULTS);
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function toISO(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function fmtHe(iso){
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');
+  return m ? m[3]+'/'+m[2]+'/'+m[1] : '';
+}
+function plusMonths(d, n){
+  const c = new Date(d.getTime()), day = c.getDate();
+  c.setMonth(c.getMonth()+n);
+  if (c.getDate() !== day) c.setDate(0);   // 31/03 + 12m must not spill into May
+  return c;
+}
+function makeCode(){
+  const d = new Date(), abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let tail = '';
+  for (let i=0;i<3;i++) tail += abc[Math.floor(Math.random()*abc.length)];
+  return 'AS-' + String(d.getFullYear()).slice(2) + pad(d.getMonth()+1) + '-' + tail;
+}
+
+/* The recipient name is the one field that can overflow: shrink it to fit rather
+   than wrapping, which would push the footer off the board. It is measured on an
+   inline-block, not on the block itself - in an RTL line the overflow runs to the
+   left, and scrollWidth does not grow in that direction. */
+function fitName(el){
+  el.style.fontSize = '';
+  const max = W - 92;
+  let size = 40;
+  while (el.offsetWidth > max && size > 19){ size -= 1; el.style.fontSize = size+'px'; }
+}
+
+function paint(){
+  const v = voucher;
+
+  $('#oName').textContent = state.name.trim() || 'שם מקבל השובר';
+  fitName($('#oName'));
+
+  const items = state.items.split('\n').map(s => s.trim()).filter(Boolean);
+  const ul = $('#oItems');
+  ul.textContent = '';
+  items.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+  v.classList.toggle('no-items', items.length === 0);
+
+  $('#oNote').textContent = state.note.trim();
+  v.classList.toggle('no-note', !state.note.trim());
+
+  $('#oFrom').textContent = state.from.trim();
+  v.classList.toggle('no-from', !state.from.trim());
+
+  $('#oValidWrap').innerHTML = state.valid
+    ? 'תוקף למימוש: <b id="oValid"></b>'
+    : '<b id="oValid"></b>';
+  $('#oValid').textContent = state.valid ? fmtHe(state.valid) : 'ללא הגבלת תוקף';
+
+  $('#oCode').textContent = state.code || '-';
+
+  const pics = THEMES[state.theme];
+  v.classList.toggle('no-photos', !pics);
+  if (pics){ $('#pL').src = pics[0]; $('#pR').src = pics[1]; }
+}
+
+function formToState(){
+  state.name  = $('#fName').value;
+  state.from  = $('#fFrom').value;
+  state.items = $('#fItems').value;
+  state.note  = $('#fNote').value;
+  state.code  = $('#fCode').value;
+  state.valid = $('#fNoExpiry').checked ? '' : $('#fValid').value;
+  paint();
+}
+
+function stateToForm(){
+  $('#fName').value  = state.name;
+  $('#fFrom').value  = state.from;
+  $('#fItems').value = state.items;
+  $('#fNote').value  = state.note;
+  $('#fCode').value  = state.code;
+  $('#fNoExpiry').checked = !state.valid;
+  $('#fValid').value = state.valid || toISO(plusMonths(new Date(), 12));
+  $('#fValid').disabled = !state.valid;
+  document.querySelectorAll('#fThemes button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.theme === state.theme)));
+  paint();
+}
+
+/* =============================================================
+   shareable link  (#d=<base64url of the state JSON>)
+   ============================================================= */
+const b64 = s => btoa(String.fromCharCode.apply(null, new TextEncoder().encode(s)))
+                   .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const unb64 = s => new TextDecoder().decode(
+  Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')), c => c.charCodeAt(0)));
+
+function linkFor(){
+  return location.origin + location.pathname + '#d=' + b64(JSON.stringify(state));
+}
+
+/* =============================================================
+   export: DOM -> <foreignObject> -> canvas -> PNG
+   Chrome drops every external resource inside a foreignObject, so the
+   fonts, the photos and the paper wash all have to arrive as data: URIs.
+   They are fetched once and cached.
+   ============================================================= */
+const cache = new Map();
+async function asDataURI(url){
+  if (cache.has(url)) return cache.get(url);
+  const p = fetch(url)
+    .then(r => { if (!r.ok) throw new Error(url + ' -> ' + r.status); return r.blob(); })
+    .then(b => new Promise((res, rej) => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(b);
+    }));
+  cache.set(url, p);
+  return p;
+}
+
+async function fontCSS(){
+  const faces = await Promise.all(FONTS.map(async f =>
+    "@font-face{font-family:'" + f.f + "';font-style:normal;font-weight:" + f.w +
+    ";src:url(" + (await asDataURI(f.u)) + ") format('woff2');unicode-range:" + f.r + ";}"));
+  return faces.join('');
+}
+
+async function toCanvas(scale){
+  const clone = voucher.cloneNode(true);
+
+  // photos: swap every src for its data: twin
+  const imgs = Array.prototype.slice.call(clone.querySelectorAll('img'));
+  await Promise.all(imgs.map(async im => {
+    im.setAttribute('src', await asDataURI(im.getAttribute('src')));
+  }));
+  // the paper wash rides on a CSS custom property, so it is swapped the same way
+  clone.style.setProperty('--wash', 'url("' + (await asDataURI('assets/gift/g-wash.jpg')) + '")');
+
+  const css = (await fontCSS()) + document.getElementById('vcss').textContent;
+  const body = new XMLSerializer().serializeToString(clone);
+  const html = '<div xmlns="http://www.w3.org/1999/xhtml" dir="rtl" ' +
+               'style="width:' + W + 'px;height:' + H + 'px">' +
+               '<style>' + css + '</style>' + body + '</div>';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + (W*scale) + '" height="' +
+              (H*scale) + '" viewBox="0 0 ' + W + ' ' + H + '">' +
+              '<foreignObject x="0" y="0" width="' + W + '" height="' + H + '">' +
+              html + '</foreignObject></svg>';
+
+  const img = new Image();
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  await img.decode();
+
+  const cv = document.createElement('canvas');
+  cv.width = W*scale; cv.height = H*scale;
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#FAF7F2';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+  ctx.drawImage(img, 0, 0, cv.width, cv.height);
+  return cv;
+}
+
+function fileName(ext){
+  const who = (state.name.trim() || 'שובר').replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '-');
+  return 'שובר-מתנה-' + who + '.' + (ext || 'png');
+}
+
+/* PNG at 3x for keeping and printing; JPEG at 2x for WhatsApp, which recompresses
+   whatever it is handed anyway - a 3MB PNG only buys a slower upload. */
+async function toBlob(kind){
+  const jpeg = kind === 'jpeg';
+  const cv = await toCanvas(jpeg ? 2 : SCALE);
+  return new Promise(res =>
+    cv.toBlob(res, jpeg ? 'image/jpeg' : 'image/png', jpeg ? 0.92 : undefined));
+}
+
+/* =============================================================
+   UI plumbing
+   ============================================================= */
+let toastTimer;
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 2600);
+}
+
+function busy(btn, on, label){
+  btn.disabled = on;
+  if (on){ btn.dataset.label = btn.innerHTML; btn.textContent = label; }
+  else if (btn.dataset.label){ btn.innerHTML = btn.dataset.label; delete btn.dataset.label; }
+}
+
+function download(blob, name){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+$('#bPng').addEventListener('click', async function(){
+  busy(this, true, 'מכין תמונה...');
+  try { download(await toBlob('png'), fileName('png')); toast('התמונה נשמרה'); }
+  catch(e){ console.error(e); toast('לא הצלחתי לשמור את התמונה - נסו דפדפן Chrome'); }
+  finally { busy(this, false); }
+});
+
+$('#bWa').addEventListener('click', async function(){
+  busy(this, true, 'מכין...');
+  try {
+    const blob = await toBlob('jpeg');
+    const file = new File([blob], fileName('jpg'), {type:'image/jpeg'});
+    if (navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({files:[file], title:'שובר מתנה'});
+    } else {
+      // desktop: no file sharing - hand over the image and open WhatsApp Web
+      download(blob, fileName('jpg'));
+      toast('התמונה ירדה - גררו אותה לשיחה בוואטסאפ');
+      window.open('https://web.whatsapp.com/', '_blank', 'noopener');
+    }
+  } catch(e){
+    if (e && e.name === 'AbortError') return;      // the user closed the share sheet
+    console.error(e); toast('השיתוף נכשל - נסו "הורדה כתמונה"');
+  } finally { busy(this, false); }
+});
+
+/* PDF = the exported PNG dropped onto an A5 page and sent to the printer.
+   Printing the live DOM would risk the browser re-laying the voucher out;
+   printing the same bitmap the recipient gets cannot drift. */
+$('#bPdf').addEventListener('click', async function(){
+  busy(this, true, 'מכין להדפסה...');
+  let frame;
+  try {
+    const blob = await toBlob('png');
+    const url = URL.createObjectURL(blob);
+    frame = document.createElement('iframe');
+    frame.setAttribute('aria-hidden', 'true');
+    // parked, not pushed off-screen: a negative inline offset in an RTL document
+    // drags the page's own scroll width with it
+    frame.style.cssText = 'position:fixed;top:0;inset-inline-start:0;width:1px;height:1px;' +
+                          'opacity:0;border:0;pointer-events:none';
+    document.body.appendChild(frame);
+    const d = frame.contentDocument;
+    d.open();
+    d.write('<!doctype html><html><head><meta charset="utf-8"><title>' +
+            'שובר מתנה - אלון שמש</title><style>' +
+            '@page{size:A5 portrait;margin:6mm}' +
+            'html,body{margin:0;padding:0}' +
+            'img{display:block;width:100%;height:auto}' +
+            '</style></head><body><img src="' + url + '"></body></html>');
+    d.close();
+    const im = d.querySelector('img');
+    if (!im.complete) await new Promise(r => { im.onload = r; im.onerror = r; });
+    frame.contentWindow.focus();
+    frame.contentWindow.print();
+    toast('בחלון ההדפסה בחרו "שמירה כ-PDF"');
+    setTimeout(() => { URL.revokeObjectURL(url); frame.remove(); }, 60000);
+  } catch(e){
+    console.error(e); if (frame) frame.remove();
+    toast('ההדפסה נכשלה - נסו "הורדה כתמונה"');
+  } finally { busy(this, false); }
+});
+
+$('#bLink').addEventListener('click', async function(){
+  const url = linkFor();
+  try { await navigator.clipboard.writeText(url); toast('הקישור הועתק'); }
+  catch(e){ window.prompt('העתיקו את הקישור:', url); }
+});
+
+$('#bReset').addEventListener('click', function(){
+  state = Object.assign({}, DEFAULTS, {
+    code: makeCode(),
+    valid: toISO(plusMonths(new Date(), 12))
+  });
+  history.replaceState(null, '', location.pathname);
+  stateToForm();
+  toast('שובר חדש');
+});
+
+['fName','fFrom','fItems','fNote','fCode'].forEach(id =>
+  $('#'+id).addEventListener('input', formToState));
+$('#fValid').addEventListener('change', formToState);
+$('#fNoExpiry').addEventListener('change', function(){
+  $('#fValid').disabled = this.checked;
+  formToState();
+});
+document.querySelectorAll('#fThemes button').forEach(b =>
+  b.addEventListener('click', function(){
+    state.theme = this.dataset.theme;
+    document.querySelectorAll('#fThemes button').forEach(x =>
+      x.setAttribute('aria-pressed', String(x === this)));
+    paint();
+  }));
+
+/* --- fit the fixed-size board into whatever room the viewport has --- */
+function resize(){
+  const room = scaler.parentElement.clientWidth;
+  const tall = window.innerHeight - (document.body.classList.contains('view') ? 150 : 190);
+  const s = Math.min(1, room / W, Math.max(0.28, tall / H));
+  scaler.style.transform = 'translateX(-50%) scale(' + s + ')';
+  scaler.parentElement.style.height = (H * s) + 'px';
+}
+window.addEventListener('resize', resize);
+
+/* --- boot ------------------------------------------------------- */
+(function boot(){
+  const m = /[#&]d=([A-Za-z0-9_-]+)/.exec(location.hash);
+  let fromLink = false;
+  if (m){
+    try {
+      state = Object.assign({}, DEFAULTS, JSON.parse(unb64(m[1])));
+      document.body.classList.add('view');
+      fromLink = true;
+    } catch(e){ console.error('bad voucher link', e); }
+  }
+  // an empty `valid` means "no expiry" - a meaningful choice, so it is only
+  // overwritten with the 12-month default when it did not come from a link
+  if (!fromLink) state.valid = toISO(plusMonths(new Date(), 12));
+  if (!state.code) state.code = makeCode();
+  stateToForm();
+  resize();
+  // web fonts land after first paint and change the name's width
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { paint(); resize(); });
+})();
+
+})();
+</script>
+</body>
+</html>
