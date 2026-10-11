@@ -1254,6 +1254,11 @@ a.f-cred-mark:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
 }
 @media(max-width:560px){.svc-grid.g5{grid-template-columns:1fr}}
 
+/* 6 tiles: two rows of 3 (the 4-up grid would leave a torn row of 2) */
+.svc-grid.g6{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1024px){.svc-grid.g6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.svc-grid.g6{grid-template-columns:1fr}}
+
 /* ---------- photo background hero ---------- */
 .page-hero.photo-hero{
   position:relative;overflow:hidden;isolation:isolate;

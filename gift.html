@@ -92,6 +92,27 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .check{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:8px;cursor:pointer}
 .check input{width:17px;height:17px;accent-color:var(--sage-deep);cursor:pointer}
 
+/* --- voucher kind: the gift voucher vs. the 50 NIS family-and-friends coupon --- */
+.kinds{display:flex;gap:8px}
+.kinds button{
+  flex:1;font-size:14px;font-weight:700;padding:9px 8px;border-radius:12px;line-height:1.35;
+  background:var(--cream-2);color:var(--ink-soft);border:1px solid transparent;
+}
+.kinds button small{display:block;font-weight:400;font-size:11.5px;opacity:.85}
+.kinds button:hover{border-color:var(--sage)}
+.kinds button[aria-pressed=true]{background:var(--sage-soft);color:var(--sage-deep);border-color:var(--sage)}
+
+/* --- the coupon's value: a number Alon sets, as a sum or as a percentage --- */
+.amt{display:flex;gap:8px;align-items:stretch}
+.amt input{flex:1;min-width:0}
+.units{display:flex;gap:6px;flex:none}
+.units button{
+  min-width:66px;font-size:13.5px;font-weight:700;padding:0 12px;border-radius:12px;
+  background:var(--cream-2);color:var(--ink-soft);border:1px solid transparent;
+}
+.units button:hover{border-color:var(--sage)}
+.units button[aria-pressed=true]{background:var(--sage-soft);color:var(--sage-deep);border-color:var(--sage)}
+
 /* --- photo picker --------------------------------------------------
    Three slots, any of the fifteen library photos (or an upload) in any of
    them. The slot buttons carry the current pick as a thumbnail, so the
@@ -202,7 +223,9 @@ body.view .stage{padding-top:6px}
      Rules therefore have to be self-contained: no var() reaching
      outside .v, no external url() that is not swapped for a data:
      URI at render time (Chrome silently drops external resources
-     inside a foreignObject), and no @import.
+     inside a foreignObject), and no @import. A bare & is fatal too - this
+     block is pasted into the XML as raw text, so even one in a comment
+     makes the whole SVG fail to decode.
      ============================================================ -->
 <style id="vcss">
 .v{
@@ -269,6 +292,9 @@ body.view .stage{padding-top:6px}
   align-self:center;background:var(--sun-soft);color:var(--sun-deep);
   border:1px solid rgba(198,138,46,.28);border-radius:999px;
   padding:3px 15px;font-size:12.5px;font-weight:700;letter-spacing:.3px;
+  /* the wording is typed, not fixed: a long one wraps inside the board rather
+     than pushing the pill past its edge */
+  max-width:calc(100% - 48px);text-align:center;
 }
 .v-title{
   font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:58px;line-height:1.08;
@@ -293,6 +319,61 @@ body.view .stage{padding-top:6px}
 .v.no-photos .v-title{font-size:66px;margin-top:20px}
 .v.no-photos .v-kicker{margin-top:12px}
 
+/* --- family and friends: a coin carries the amount, not the big title ---
+   The whole point of this variant is the number, so it gets the weight the
+   title holds on the gift voucher, and the title and kicker step aside. */
+.v-amount{display:none}
+.v.ff .v-title,.v.ff .v-kicker{display:none}
+.v.ff .v-amount{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:14px}
+.v.ff .v-chip{background:var(--sage-soft);color:var(--sage-deep);border-color:rgba(95,122,106,.30)}
+/* DOM order decides sides here too: the coin is first, so in RTL it lands right */
+.am-coin{
+  flex:none;width:124px;height:124px;border-radius:50%;
+  background:radial-gradient(circle at 32% 26%, #FFFAEC, var(--sun-soft));
+  border:2px solid rgba(198,138,46,.42);
+  box-shadow:0 10px 22px rgba(198,138,46,.20), inset 0 0 0 6px rgba(255,255,255,.62);
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  font-family:'Frank Ruhl Libre',serif;color:var(--sun-deep);
+}
+.am-coin b{font-weight:900;font-size:52px;line-height:1;letter-spacing:-1.5px}
+.am-coin i{font-style:normal;font-weight:700;font-size:26px;line-height:1}
+/* The two units sit on opposite sides of the number: Hebrew writes the shekel
+   sign after the number in reading order (so, to its left) but keeps the percent
+   sign glued to the digits on the right, exactly as the title above renders it.
+   DOM order gives the first, row-reverse gives the second. */
+.am-coin.pct{flex-direction:row-reverse;gap:1px}
+/* the number in the coin is typed, not fixed, so the type steps down as it
+   grows - "100%" and "1200" have to sit inside the same circle as "50" */
+.am-coin.d3 b{font-size:42px}
+.am-coin.d4 b{font-size:33px;letter-spacing:-1px}
+.am-coin.d4 i{font-size:22px}
+.am-txt{text-align:right;max-width:340px}
+.am-txt b{
+  display:block;font-family:'Frank Ruhl Libre',serif;font-weight:900;
+  font-size:34px;line-height:1.18;letter-spacing:-.5px;
+}
+.am-txt span{display:block;margin-top:6px;font-size:15.5px;color:var(--ink-soft);line-height:1.5}
+.v.ff.no-photos .v-amount{margin-top:22px}
+.v.ff.no-photos .am-coin{width:150px;height:150px}
+.v.ff.no-photos .am-coin b{font-size:64px}
+.v.ff.no-photos .am-coin i{font-size:30px}
+.v.ff.no-photos .am-coin.d3 b{font-size:52px}
+.v.ff.no-photos .am-coin.d4 b{font-size:41px}
+.v.ff.no-photos .am-txt b{font-size:40px}
+
+/* The board is clipped, never reflowed, so content that does not fit would cut
+   the footer off without saying so. Two rungs of squeeze come first, and only
+   then does the photo band go. */
+.v.tight .v-photos{margin-top:12px}
+.v.tight .v-photos .side{width:134px;height:176px}
+.v.tight .v-photos .mid{width:132px;height:132px}
+.v.tight .v-for{margin-top:14px}
+.v.tight .v-card{margin-top:11px;padding:12px 18px}
+.v.tight .v-card li{font-size:15.5px}
+.v.tight .v-note{margin-top:10px}
+.v.tight .v-from{margin-top:11px}
+.v.tighter .v-photos{display:none}
+
 /* --- recipient --- */
 .v-for{text-align:center;margin-top:22px}
 .v-for .lbl{
@@ -304,6 +385,8 @@ body.view .stage{padding-top:6px}
   font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:40px;line-height:1.2;
   white-space:nowrap;display:inline-block;
 }
+/* a coupon handed out unfilled gets a line to write the name on */
+.v-name.blank span{min-width:340px;height:36px;border-bottom:2px dashed rgba(95,122,106,.55)}
 
 /* --- what the voucher buys --- */
 .v-card{
@@ -367,7 +450,15 @@ body.view .stage{padding-top:6px}
     <p class="hint">מלאו את הפרטים - השובר מתעדכן מולכם בזמן אמת.</p>
 
     <div class="field">
-      <label for="fName">שם מקבל השובר</label>
+      <label>סוג השובר</label>
+      <div class="kinds" id="fKind">
+        <button type="button" data-kind="gift" aria-pressed="true">שובר מתנה<small>מפגשים במתנה</small></button>
+        <button type="button" data-kind="ff" aria-pressed="false">משפחה וחברים<small>הנחה בסכום או באחוזים</small></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="fName">שם מקבל השובר <span class="sub" id="lNameHint"></span></label>
       <input type="text" id="fName" autocomplete="off" placeholder="למשל: מתן ניגרקר">
     </div>
 
@@ -376,8 +467,29 @@ body.view .stage{padding-top:6px}
       <input type="text" id="fFrom" autocomplete="off" placeholder="למשל: באהבה, מהאחיות שלך">
     </div>
 
+    <div class="field" id="wAmount" hidden>
+      <label for="fAmount"><span id="lAmount">שווי השובר</span> <span class="sub" id="lAmountHint">- בשקלים</span></label>
+      <div class="amt">
+        <input type="text" id="fAmount" inputmode="numeric" autocomplete="off" placeholder="50">
+        <div class="units" id="fMode">
+          <button type="button" data-mode="ils" aria-pressed="true">סכום ₪</button>
+          <button type="button" data-mode="pct" aria-pressed="false">אחוז %</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" id="wChip" hidden>
+      <label for="fChip">התווית שמעל <span class="sub">- למי השובר מיועד</span></label>
+      <input type="text" id="fChip" autocomplete="off" maxlength="28" placeholder="משפחה וחברים">
+    </div>
+
+    <div class="field" id="wSub" hidden>
+      <label for="fSub">שורת המימוש <span class="sub">- מה מקבלים על השובר</span></label>
+      <input type="text" id="fSub" autocomplete="off">
+    </div>
+
     <div class="field">
-      <label for="fItems">מה השובר כולל <span class="sub">- שורה לכל פריט</span></label>
+      <label for="fItems"><span id="lItems">מה השובר כולל</span> <span class="sub">- שורה לכל פריט</span></label>
       <textarea id="fItems" placeholder="3 מפגשי אימון אישי&#10;כל מפגש כשעה, בקליניקה ברחובות או בזום"></textarea>
     </div>
 
@@ -405,6 +517,7 @@ body.view .stage{padding-top:6px}
         <button type="button" data-preset="clinic">הקליניקה</button>
         <button type="button" data-preset="nature">טבע ורוגע</button>
         <button type="button" data-preset="alon">אלון בעבודה</button>
+        <button type="button" data-preset="seminar">הסמינר</button>
         <button type="button" data-preset="off">בלי תמונות</button>
       </div>
       <div id="picker">
@@ -453,9 +566,15 @@ body.view .stage{padding-top:6px}
     <div class="v-rule"><i>✦</i></div>
 
     <div class="v-body">
-    <span class="v-chip">מתנה עבורך</span>
+    <span class="v-chip" id="oChip">מתנה עבורך</span>
     <h1 class="v-title">שובר מתנה</h1>
     <p class="v-kicker">מסע אישי של שינוי, צמיחה והתפתחות</p>
+
+    <!-- family and friends only: the coin is first, so RTL puts it on the right -->
+    <div class="v-amount">
+      <span class="am-coin" id="oCoin"><b id="oAmount">50</b><i id="oUnit">₪</i></span>
+      <span class="am-txt"><b id="oAmTitle">שובר בשווי 50 ₪</b><span id="oAmSub"></span></span>
+    </div>
 
     <!-- DOM order is right, middle, left: the first child lands on the right of
          an RTL row, and the slot labels in the panel follow that -->
@@ -537,7 +656,8 @@ const SHAPES = ['s', 'p', 's'];
 const PRESETS = {
   clinic: ['room', 'alon', 'yard'],
   nature: ['calm', 'alon', 'leaves'],
-  alon:   ['session', 'alon', 'lecture']
+  alon:   ['session', 'alon', 'lecture'],
+  seminar:['group', 'alon', 'session']
 };
 const libSrc = (slug, i) => 'assets/gift/lib/' + slug + '-' + SHAPES[i] + '.jpg';
 
@@ -558,12 +678,88 @@ const FONTS = [
   {f:'Frank Ruhl Libre', w:'300 900', r:HEB, u:'assets/gift/fonts/frank-ruhl-libre-hebrew.woff2'}
 ];
 
+/* The event the family-and-friends coupon is minted for. One place to change
+   when the next seminar is announced. */
+const SEMINAR = {
+  date:  '2026-09-15',
+  line:  'למימוש בסמינר "7 המפתחות לאהבה ולזוגיות בריאה"',
+  when:  'יום שלישי, 15.09.26 בשעה 18:00, ברחובות',
+  price: '269 ₪ לזוג · 149 ₪ ליחיד'
+};
+
+/* The coupon's value is Alon's to set - a sum off the price, or a percentage of
+   it. Everything the number touches (the coin, the title, the redemption line)
+   reads from here, so a third unit would be one entry rather than a search. */
+const MODES = {
+  ils: {
+    def: '50', unit: '₪',
+    label: 'שווי השובר', hint: '- בשקלים',
+    title: a => 'שובר בשווי ' + a + ' ₪',
+    facts: a => ' - בקיזוז ' + a + ' ₪ בהצגת השובר'
+  },
+  pct: {
+    def: '15', unit: '%',
+    label: 'אחוז ההנחה', hint: '- מהמחיר',
+    title: a => 'שובר הנחה של ' + a + '%',
+    facts: a => ' - בהנחה של ' + a + '% בהצגת השובר'
+  }
+};
+const modeOf = st => MODES[st.mode] || MODES.ils;
+
+/* What the coin actually shows: digits only, never an empty circle, and a
+   percentage that cannot run past the whole price. The field itself is left as
+   typed - rewriting it under the cursor would fight whoever is typing. */
+function amountOf(st){
+  let a = String(st.amount == null ? '' : st.amount).replace(/\D/g, '').replace(/^0+(?=\d)/, '');
+  if (!a) return modeOf(st).def;
+  if (st.mode === 'pct' && +a > 100) a = '100';
+  return a;
+}
+
+const GIFT_ITEMS = '3 מפגשי אימון אישי\nכל מפגש כשעה, בקליניקה ברחובות או בזום';
+
+/* Two vouchers out of one board. Everything downstream - the export, the shared
+   link, the PDF - is blind to which one is on screen; only these defaults and an
+   `ff` class on the board differ. */
+const KINDS = {
+  gift: {
+    chip:   'מתנה עבורך',
+    items:  () => GIFT_ITEMS,
+    pics:   PRESETS.clinic,
+    prefix: 'AS',
+    lItems: 'מה השובר כולל',
+    hint:   '',
+    file:   'שובר-מתנה'
+  },
+  ff: {
+    chip:   'משפחה וחברים',
+    /* the redemption line quotes the coupon's own value, so it is written from
+       the amount rather than stored beside it */
+    items:  st => SEMINAR.when + '\n' + SEMINAR.price + modeOf(st).facts(amountOf(st)),
+    pics:   PRESETS.seminar,
+    prefix: 'FF',
+    lItems: 'פרטי המימוש',
+    hint:   '- אפשר להשאיר ריק ולכתוב ביד',
+    file:   'שובר-משפחה-וחברים'
+  }
+};
+/* the seminar date is a real date that will pass, and a coupon minted after it
+   must not open already expired */
+KINDS.gift.defValid = toISO(plusMonths(new Date(), 12));
+KINDS.ff.defValid   = SEMINAR.date >= toISO(new Date())
+                    ? SEMINAR.date : toISO(plusMonths(new Date(), 3));
+
 const DEFAULTS = {
+  kind:  'gift',
   name:  '',
   from:  '',
-  items: '3 מפגשי אימון אישי\nכל מפגש כשעה, בקליניקה ברחובות או בזום',
+  chip:  '',             // family and friends only: blank falls back to the kind's own
+  mode:  'ils',          // family and friends only: ils (a sum) or pct (a percentage)
+  amount:'50',           // family and friends only
+  sub:   SEMINAR.line,   // family and friends only
+  items: GIFT_ITEMS,
   note:  '',
-  valid: '',            // filled with today+12m on load
+  valid: '',            // filled with the kind's default on load
   code:  '',            // generated on load
   photos: true,
   pics:  PRESETS.clinic.slice()
@@ -589,12 +785,14 @@ function plusMonths(d, n){
   if (c.getDate() !== day) c.setDate(0);   // 31/03 + 12m must not spill into May
   return c;
 }
-function makeCode(){
+function makeCode(prefix){
   const d = new Date(), abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let tail = '';
   for (let i=0;i<3;i++) tail += abc[Math.floor(Math.random()*abc.length)];
-  return 'AS-' + String(d.getFullYear()).slice(2) + pad(d.getMonth()+1) + '-' + tail;
+  return (prefix || 'AS') + '-' + String(d.getFullYear()).slice(2) + pad(d.getMonth()+1) + '-' + tail;
 }
+/* a code this tool minted - safe to re-mint when the kind changes */
+const AUTO_CODE = /^(AS|FF)-\d{4}-[A-Z0-9]{3}$/;
 
 /* The recipient name is the one field that can overflow: shrink it to fit rather
    than wrapping, which would push the footer off the board. It is measured on an
@@ -609,8 +807,31 @@ function fitName(el){
 
 function paint(){
   const v = voucher;
+  const ff = state.kind === 'ff';
+  const K = KINDS[state.kind];
 
-  $('#oName').textContent = state.name.trim() || 'שם מקבל השובר';
+  v.classList.toggle('ff', ff);
+  /* The discount coupon is not only for family any more - Alon writes who it is
+     for ("מבצע לסדנה", "הנחה מיוחדת"). An empty field is not an empty pill: it
+     falls back to the kind's own wording. */
+  $('#oChip').textContent = (ff && state.chip.trim()) || K.chip;
+
+  const amount = amountOf(state), M = modeOf(state);
+  $('#oCoin').className = 'am-coin'
+    + (state.mode === 'pct' ? ' pct' : '')
+    + (amount.length >= 4 ? ' d4' : amount.length === 3 ? ' d3' : '');
+  $('#oAmount').textContent = amount;
+  $('#oUnit').textContent = M.unit;
+  $('#oAmTitle').textContent = M.title(amount);
+  $('#oAmSub').textContent = state.sub.trim();
+
+  /* a coupon printed for a stack of people is handed out unnamed, so an empty
+     name on the family voucher becomes a line to write on rather than a
+     placeholder that would print as if it were the name */
+  const nm = state.name.trim();
+  const blank = ff && !nm;
+  $('#oName').parentElement.classList.toggle('blank', blank);
+  $('#oName').textContent = blank ? '\u00a0' : (nm || 'שם מקבל השובר');
   fitName($('#oName'));
 
   const items = state.items.split('\n').map(s => s.trim()).filter(Boolean);
@@ -640,6 +861,21 @@ function paint(){
       if (el.getAttribute('src') !== src) el.setAttribute('src', src);
     });
   }
+
+  fitBody();
+}
+
+/* The board is a fixed 720x900 that is clipped, never reflowed: a long
+   dedication would push the footer out of the picture with nothing on screen
+   saying so. Squeeze the middle a rung at a time instead, and drop the photos
+   only if that still is not enough. */
+function fitBody(){
+  const b = voucher.querySelector('.v-body');
+  voucher.classList.remove('tight', 'tighter');
+  if (b.scrollHeight <= b.clientHeight) return;
+  voucher.classList.add('tight');
+  if (b.scrollHeight <= b.clientHeight) return;
+  voucher.classList.add('tighter');
 }
 
 /* --- the picker ------------------------------------------------- */
@@ -692,19 +928,53 @@ function tile(slug, src, label){
   return b;
 }
 
+/* The redemption line quotes the coupon's own value, so it follows the number
+   Alon types - but only while it is still the line this tool wrote. The moment
+   he edits it, it is his and the amount stops touching it. `was` is that line as
+   it read *before* the change that is being applied. */
+function syncItems(was){
+  if (state.items.trim() !== was.trim()) return;
+  state.items = KINDS[state.kind].items(state);
+  $('#fItems').value = state.items;
+}
+
 function formToState(){
+  const was = KINDS[state.kind].items(state);
   state.name  = $('#fName').value;
   state.from  = $('#fFrom').value;
+  state.chip  = $('#fChip').value;
+  state.amount= $('#fAmount').value;
+  state.sub   = $('#fSub').value;
   state.items = $('#fItems').value;
   state.note  = $('#fNote').value;
   state.code  = $('#fCode').value;
   state.valid = $('#fNoExpiry').checked ? '' : $('#fValid').value;
+  syncItems(was);
   paint();
 }
 
 function stateToForm(){
+  const K = KINDS[state.kind];
+  document.querySelectorAll('#fKind button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.kind === state.kind)));
+  $('#wAmount').hidden = $('#wSub').hidden = $('#wChip').hidden = state.kind !== 'ff';
+
+  const M = modeOf(state);
+  document.querySelectorAll('#fMode button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode)));
+  $('#fChip').placeholder = K.chip;
+  $('#lAmount').textContent = M.label;
+  $('#lAmountHint').textContent = M.hint;
+  $('#fAmount').placeholder = M.def;
+
+  $('#lItems').textContent = K.lItems;
+  $('#lNameHint').textContent = K.hint;
+
   $('#fName').value  = state.name;
   $('#fFrom').value  = state.from;
+  $('#fChip').value  = state.chip;
+  $('#fAmount').value= state.amount;
+  $('#fSub').value   = state.sub;
   $('#fItems').value = state.items;
   $('#fNote').value  = state.note;
   $('#fCode').value  = state.code;
@@ -713,6 +983,38 @@ function stateToForm(){
   $('#fValid').disabled = !state.valid;
   paint();
   paintPicker();
+}
+
+/* Switching kind swaps the fields the previous kind had filled in for you and
+   leaves anything you typed over alone - the recipient, the dedication and a
+   hand-edited item list all survive the switch. */
+function setKind(k){
+  if (k === state.kind || !KINDS[k]) return;
+  const prev = KINDS[state.kind], next = KINDS[k];
+  const wasAuto = state.items.trim() === prev.items(state).trim();
+  if (state.valid === prev.defValid)            state.valid = next.defValid;
+  if (state.photos && state.pics.join() === prev.pics.join()) state.pics = next.pics.slice();
+  if (AUTO_CODE.test(state.code))               state.code  = makeCode(next.prefix);
+  state.kind = k;
+  if (wasAuto) state.items = next.items(state);
+  stateToForm();
+  resize();
+}
+
+/* Switching the unit keeps the value Alon typed - only a value that cannot mean
+   anything in the new unit is replaced: the one he never touched, and a sum too
+   large to be a percentage. 120 ₪ turning into a silent 100% discount would be a
+   very different coupon from the one he was looking at. */
+function setMode(m){
+  if (m === state.mode || !MODES[m]) return;
+  const was = KINDS[state.kind].items(state);
+  const a = String(state.amount).trim();
+  if (a === modeOf(state).def || (m === 'pct' && +amountOf(state) > 100))
+    state.amount = MODES[m].def;
+  state.mode = m;
+  syncItems(was);
+  stateToForm();
+  resize();
 }
 
 /* =============================================================
@@ -802,8 +1104,8 @@ async function toCanvas(scale){
 }
 
 function fileName(ext){
-  const who = (state.name.trim() || 'שובר').replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '-');
-  return 'שובר-מתנה-' + who + '.' + (ext || 'png');
+  const who = state.name.trim().replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '-');
+  return KINDS[state.kind].file + (who ? '-' + who : '') + '.' + (ext || 'png');
 }
 
 /* PNG at 3x for keeping and printing; JPEG at 2x for WhatsApp, which recompresses
@@ -913,7 +1215,11 @@ $('#bLink').addEventListener('click', async function(){
 });
 
 $('#bReset').addEventListener('click', function(){
-  state = freshState({code: makeCode(), valid: toISO(plusMonths(new Date(), 12))});
+  const K = KINDS[state.kind];
+  state = freshState({kind: state.kind, mode: state.mode, pics: K.pics.slice(),
+                      amount: modeOf(state).def,
+                      code: makeCode(K.prefix), valid: K.defValid});
+  state.items = K.items(state);
   custom[0] = custom[1] = custom[2] = null;
   slot = 0;
   history.replaceState(null, '', location.pathname);
@@ -921,8 +1227,12 @@ $('#bReset').addEventListener('click', function(){
   toast('שובר חדש');
 });
 
-['fName','fFrom','fItems','fNote','fCode'].forEach(id =>
+['fName','fFrom','fChip','fAmount','fSub','fItems','fNote','fCode'].forEach(id =>
   $('#'+id).addEventListener('input', formToState));
+document.querySelectorAll('#fKind button').forEach(b =>
+  b.addEventListener('click', function(){ setKind(this.dataset.kind); }));
+document.querySelectorAll('#fMode button').forEach(b =>
+  b.addEventListener('click', function(){ setMode(this.dataset.mode); }));
 $('#fValid').addEventListener('change', formToState);
 $('#fNoExpiry').addEventListener('change', function(){
   $('#fValid').disabled = this.checked;
@@ -1011,12 +1321,15 @@ window.addEventListener('resize', resize);
     } catch(e){ console.error('bad voucher link', e); }
   }
   delete state.theme;
+  if (!KINDS[state.kind]) state.kind = 'gift';
+  // links minted before the unit toggle carried no mode - they were all shekels
+  if (!MODES[state.mode]) state.mode = 'ils';
   if (!Array.isArray(state.pics) || state.pics.length !== 3) state.pics = DEFAULTS.pics.slice();
 
   // an empty `valid` means "no expiry" - a meaningful choice, so it is only
-  // overwritten with the 12-month default when it did not come from a link
-  if (!fromLink) state.valid = toISO(plusMonths(new Date(), 12));
-  if (!state.code) state.code = makeCode();
+  // overwritten with the kind's default when it did not come from a link
+  if (!fromLink) state.valid = KINDS[state.kind].defValid;
+  if (!state.code) state.code = makeCode(KINDS[state.kind].prefix);
   stateToForm();
   resize();
   // web fonts land after first paint and change the name's width
