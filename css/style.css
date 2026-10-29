@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    אלון שמש - מטפל רגשי ומאמן להתפתחות אישית
    Design system: calm pastel, sage + cream + apricot
    ============================================================ */
@@ -189,12 +189,13 @@ h3{font-size:1.25rem}
 .hdr-nlp{display:flex;align-items:center;flex-shrink:0}
 .hdr-nlp img{display:block;width:auto;height:34px;opacity:.95}
 
-/* narrow laptops: tighten the nav so it stays on one line next to the badge */
-@media(min-width:1281px) and (max-width:1450px){
-  .header-inner{gap:12px}
-  .main-nav ul{gap:2px}
-  .main-nav a{padding:9px 7px;font-size:.91rem}
-  .hdr-nlp img{height:30px}
+/* desktop: tighten the nav so it stays on one line next to the badge
+   (header container is capped at 1360px, so this is needed at every width >1280) */
+@media(min-width:1281px){
+  .header-inner{gap:10px}
+  .main-nav ul{gap:1px}
+  .main-nav a{padding:9px 6px;font-size:.88rem;white-space:nowrap}
+  .hdr-nlp img{height:28px}
 }
 
 /* header quick actions */
@@ -1864,20 +1865,20 @@ body.lbx-open{overflow:hidden}
    attribute height stretches the picture once the container shrinks it */
 .art-cover img,.art-fig img{width:100%;height:auto;display:block}
 /* ---------- article reading experience ----------
-   Long-form Hebrew, read end to end rather than scanned. Three things carry it:
-   ink-strength text instead of the muted --ink-soft the rest of the site uses
-   for supporting copy (5.2:1 -> 9.6:1 on cream), a measure short enough to keep
-   the eye from losing the line, and figures that break out wider than the text
-   so the column stays narrow without the page feeling cramped. */
+   Long-form Hebrew, read end to end rather than scanned. Ink-strength text
+   instead of the muted --ink-soft the rest of the site uses for supporting copy
+   (5.2:1 -> 9.6:1 on cream). The reading column is aligned to the 900px media
+   width (cover and figures) so text and images share one edge (client request,
+   2026-10-15) - no narrow measure breaking out against wide images. */
 .art-body{
-  max-width:860px;
+  max-width:900px;
   font-size:clamp(1.075rem,.4vw + 1.01rem,1.16rem);
   color:var(--ink);
   line-height:1.85;
   text-wrap:pretty;
 }
 .art-body > p,.art-body > ul,.art-body > h2,.art-body > h3,.art-body > .art-rule{
-  max-width:40rem;margin-inline:auto;
+  max-width:none;margin-inline:0;
 }
 .art-body h2{
   font-size:clamp(1.42rem,2.7vw,1.82rem);margin:52px 0 16px;
@@ -1907,7 +1908,7 @@ body.lbx-open{overflow:hidden}
 }
 .art-rule{border:none;height:1px;background:rgba(95,122,106,.18);margin:34px 0 26px}
 .art-fig{
-  margin:30px auto;width:min(980px,100%);border-radius:var(--radius-sm);
+  margin:30px auto;width:min(900px,100%);border-radius:var(--radius-sm);
   overflow:hidden;box-shadow:var(--shadow);
 }
 .art-aside{
@@ -1921,7 +1922,7 @@ body.lbx-open{overflow:hidden}
 /* ---------- FAQ accordion inside an article ----------
    Native <details>, so it opens with no JS and the question stays a real
    control for a keyboard and a screen reader. */
-.art-faq{max-width:44rem;margin:26px auto 0;display:flex;flex-direction:column;gap:12px}
+.art-faq{max-width:none;margin:26px 0 0;display:flex;flex-direction:column;gap:12px}
 .art-faq-i{
   background:var(--white);border:1px solid var(--sage-soft);
   border-radius:var(--radius-sm);overflow:hidden;
@@ -2192,3 +2193,40 @@ html.acc-motion .sem-modal,html.acc-motion .sem-card{transition:none}
   .sem-modal.inline .sem-keys-h{display:block}
   .sem-modal.inline .sem-keys{display:flex}
 }
+
+/* נפשלווה wordmark logo (rebrand 2026-10-19) */
+.logo{flex-direction:column;align-items:flex-start;gap:2px}
+.logo-img{height:38px;width:auto;display:block}
+.site-footer .f-logo-img{height:42px;width:auto;display:block;margin-bottom:4px}
+@media (max-width:860px){.logo-img{height:32px}}
+
+
+/* ============================================================
+   READABILITY PASS (2026-10-21) — טקסט גדול/כהה/חמים יותר, גריד
+   קריאה רחב יותר, כותרות רגועות, ונגיעת אקצנט בעמודי התוכן.
+   חל על כל האתר. אושר ע"י זיו על בסיס תצוגת /personal-empowerment.
+   ============================================================ */
+:root{
+  --ink-soft:#49564F;   /* היה #5C6B64 — אפור מעט כהה וקריא יותר */
+  --read:#2E3A34;       /* צבע גוף הטקסט בעמודי קריאה — כהה וחמים */
+}
+body{font-size:17.5px;line-height:1.75}
+.section-head p{color:var(--read);font-size:1.12rem}
+.page-hero:not(.photo-hero) p{color:var(--read);font-size:1.16rem}
+.card p{color:var(--read)}
+.hero-lead{color:#3c4a43}
+.prose{max-width:820px}
+.prose p{color:var(--read);font-size:1.17rem;line-height:1.85;margin-bottom:20px}
+.prose .lead{font-size:1.35rem;line-height:1.66;color:var(--ink);font-weight:500;margin-bottom:24px}
+.prose h2{font-size:clamp(1.55rem,2.3vw,2rem);line-height:1.3;letter-spacing:-.01em}
+.prose h2::after{content:"";display:block;width:54px;height:4px;margin-top:16px;border-radius:3px;background:linear-gradient(90deg,var(--sage-deep),var(--apricot))}
+.checklist li{color:var(--read);font-size:1.08rem;line-height:1.72}
+.split-text .quote,.prose .quote{font-size:1.26rem;border-right-width:5px}
+.page-hero.hero-media .hero-copy h1{font-size:clamp(1.65rem,2.7vw,2.35rem);line-height:1.22}
+/* קוביות שירות (.svc-tile) — כותרת גדולה יותר, תיאור כהה/גדול יותר (21/10) */
+.svc-tile h2,.svc-tile h3{font-size:1.16rem;margin-bottom:9px}
+.svc-tile p{color:var(--read);font-size:.98rem;line-height:1.7}
+/* svc-grid עם 10 קוביות (toxic: סימנים) — 5+5 בדסקטופ, 2-טורים בטאבלט (21/10) */
+.svc-grid.g10{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1024px){.svc-grid.g10{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.svc-grid.g10{grid-template-columns:1fr}}

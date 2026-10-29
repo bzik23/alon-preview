@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#FAF7F2">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="אלון שמש">
+<meta property="og:site_name" content="נפשלווה">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://www.alonsms.com/before-divorce">
 <meta property="og:title" content="טיפול זוגי לפני גירושין | למצוא שוב דרך משותפת - אלון שמש">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://www.alonsms.com/assets/og/couples-therapy-before-divorce-og.jpg?v=527bd435">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="אלון שמש - מטפל רגשי ומאמן להתפתחות אישית">
+<meta property="og:image:alt" content="נפשלווה - טיפול רגשי למבוגרים ונוער בשיטת NLP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="טיפול זוגי לפני גירושין | למצוא שוב דרך משותפת - אלון שמש">
 <meta name="twitter:description" content="המילה גירושין כבר נאמרה ואתם לא בטוחים? טיפול זוגי לפני גירושין ברחובות או בזום, בלי התחייבות להישאר. תאמו שיחת היכרות.">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=18">
+<link rel="stylesheet" href="css/style.css?v=21">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -125,61 +125,73 @@
   ]
 }
 </script>
+<style>
+/* === hero media layout — scoped to before-divorce page only === */
+.page-hero.hero-media .container{
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  gap:clamp(28px,4.5vw,64px);align-items:center;text-align:right;
+}
+.page-hero.hero-media .hero-copy{min-width:0}
+.page-hero.hero-media .hero-copy h1{margin:0}
+.page-hero.hero-media .hero-sep{
+  width:76px;height:4px;border:0;border-radius:999px;margin:20px 0 22px;
+  background:linear-gradient(90deg,var(--sun),var(--apricot-deep));
+}
+.page-hero.hero-media .hero-copy p{margin:0 0 24px;max-width:560px;margin-inline:0}
+.page-hero.hero-media .anchor-chips{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;margin-top:4px;max-width:560px;
+}
+.page-hero.hero-media .anchor-chips a{text-align:center;justify-content:center}
+.page-hero.hero-media .chip-ornament{
+  display:flex;align-items:center;justify-content:center;padding:4px;
+}
+.page-hero.hero-media .chip-ornament svg{width:34px;height:34px}
+.page-hero.hero-media .hero-figure{margin:0;min-width:0}
+.page-hero.hero-media .hero-figure img{
+  width:100%;height:100%;max-height:440px;object-fit:cover;object-position:center 30%;
+  border-radius:26px;box-shadow:var(--shadow-lg);display:block;
+}
+@media (max-width:860px){
+  .page-hero.hero-media .container{grid-template-columns:minmax(0,1fr);gap:26px;text-align:center}
+  .page-hero.hero-media .hero-figure{order:-1}
+  .page-hero.hero-media .hero-sep{margin-inline:auto}
+  .page-hero.hero-media .hero-copy p{margin-inline:auto}
+  .page-hero.hero-media .anchor-chips{grid-template-columns:repeat(2,minmax(0,1fr));max-width:420px;margin-inline:auto}
+  .page-hero.hero-media .hero-figure img{max-height:260px}
+}
+</style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
     <a href="./" class="logo">
-      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <circle cx="24" cy="19" r="8.5" fill="#E9B384"/>
-        <g stroke="#D89A63" stroke-width="2.4" stroke-linecap="round">
-          <line x1="24" y1="3.5" x2="24" y2="7"/>
-          <line x1="8.5" y1="19" x2="12" y2="19"/>
-          <line x1="36" y1="19" x2="39.5" y2="19"/>
-          <line x1="13" y1="8" x2="15.5" y2="10.5"/>
-          <line x1="35" y1="8" x2="32.5" y2="10.5"/>
-        </g>
-        <path d="M7 38 Q24 27 41 38" stroke="#5F7A6A" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-        <path d="M14 44 Q24 37 34 44" stroke="#A8C3B0" stroke-width="3" fill="none" stroke-linecap="round"/>
-      </svg>
-      <span class="logo-text">
-        <span class="logo-name">אלון שמש</span>
-        <span class="logo-sub">מטפל רגשי ומאמן להתפתחות אישית</span>
-      </span>
+      <img class="logo-img" src="assets/logo-nefeshlava.png?v=d98b37af" alt="נפשלווה - טיפול רגשי למבוגרים ונוער בשיטת NLP" width="720" height="240">
+      <span class="logo-sub">טיפול רגשי למבוגרים ונוער</span>
     </a>
     <button class="menu-toggle" aria-label="תפריט"><span></span><span></span><span></span></button>
     <nav class="main-nav">
       <ul>
-        <li><a href="about">הכירו אותי</a></li>
+        <li><a href="about">אודות</a></li>
         <li class="has-sub active"><a href="couples">טיפול זוגי</a>
           <ul class="sub-menu">
-            <li><a href="couples#bnei-zug"><span class="sm-ico">💞</span><span class="sm-txt"><b>טיפול זוגי לבני זוג</b><small>מחזירים קרבה והבנה</small></span></a></li>
-            <li><a href="couples#pre-marriage"><span class="sm-ico">💍</span><span class="sm-txt"><b>קשיי זוגיות טרום נישואין</b><small>מתחילים נכון את הדרך המשותפת</small></span></a></li>
-            <li><a href="couples#communication"><span class="sm-ico">🗣️</span><span class="sm-txt"><b>זוגיות ותקשורת</b><small>לומדים לדבר בלי להיפצע</small></span></a></li>
-            <li><a href="couples#toxic"><span class="sm-ico">🛡️</span><span class="sm-txt"><b>טיפול בזוגיות רעילה</b><small>גבולות בריאים וקשר בטוח</small></span></a></li>
-            <li><a href="couples#find-love"><span class="sm-ico">💌</span><span class="sm-txt"><b>לא מצליחים למצוא זוגיות</b><small>משחררים את מה שעוצר אתכם</small></span></a></li>
+            <li><a href="bnei-zug"><span class="sm-ico">💞</span><span class="sm-txt"><b>טיפול זוגי לבני זוג</b><small>מחזירים קרבה והבנה</small></span></a></li>
+            <li><a href="pre-marriage"><span class="sm-ico">💍</span><span class="sm-txt"><b>קשיי זוגיות טרום נישואין</b><small>מתחילים נכון את הדרך המשותפת</small></span></a></li>
+            <li><a href="communication"><span class="sm-ico">🗣️</span><span class="sm-txt"><b>זוגיות ותקשורת</b><small>לומדים לדבר בלי להיפצע</small></span></a></li>
+            <li><a href="find-love"><span class="sm-ico">💌</span><span class="sm-txt"><b>לא מצליחים למצוא זוגיות</b><small>משחררים את מה שעוצר אתכם</small></span></a></li>
             <li><a href="before-divorce"><span class="sm-ico">🕊️</span><span class="sm-txt"><b>טיפול זוגי לפני גירושין</b><small>לעצור רגע לפני ההחלטה</small></span></a></li>
             <li class="sm-all"><a href="couples">לעמוד טיפול זוגי המלא ←</a></li>
           </ul>
         </li>
-        <li class="has-sub"><a href="kids-teens">טיפול בילדים</a>
-          <ul class="sub-menu">
-            <li><a href="kids-teens#adhd"><span class="sm-ico">🎯</span><span class="sm-txt"><b>טיפול בקשב וריכוז</b><small>כלים למיקוד ולביטחון</small></span></a></li>
-            <li><a href="kids-teens#regulation"><span class="sm-ico">🌊</span><span class="sm-txt"><b>ויסות רגשי</b><small>רגשות גדולים - בלי התפרצויות</small></span></a></li>
-            <li><a href="kids-teens#emotional"><span class="sm-ico">🧸</span><span class="sm-txt"><b>טיפול רגשי בילדים</b><small>מרחב בטוח לילד שלכם</small></span></a></li>
-            <li><a href="kids-teens#behavior"><span class="sm-ico">🔄</span><span class="sm-txt"><b>שינוי דפוסי התנהגות</b><small>הרגלים חדשים במקום מאבקים</small></span></a></li>
-            <li><a href="kids-teens#social"><span class="sm-ico">🤝</span><span class="sm-txt"><b>בעיות חברתיות</b><small>ביטחון חברתי וחברויות טובות</small></span></a></li>
-            <li class="sm-all"><a href="kids-teens">לעמוד טיפול בילדים המלא ←</a></li>
-          </ul>
-        </li>
+        <li><a href="kids-teens">טיפול רגשי לנוער</a></li>
         <li class="has-sub"><a href="personal-coaching">אימון אישי</a>
           <ul class="sub-menu">
             <li><a href="personal-empowerment"><span class="sm-ico">🌱</span><span class="sm-txt"><b>העצמה והתפתחות אישית</b><small>לחיות מתוך בחירה</small></span></a></li>
-            <li><a href="personal-coaching#decisions"><span class="sm-ico">⚖️</span><span class="sm-txt"><b>קבלת החלטות</b><small>בהירות וביטחון לבחור</small></span></a></li>
-            <li><a href="personal-coaching#anxiety"><span class="sm-ico">🕊️</span><span class="sm-txt"><b>טיפול בחרדות</b><small>מנמיכים את הרעש הפנימי</small></span></a></li>
-            <li><a href="personal-coaching#stuck"><span class="sm-ico">🧭</span><span class="sm-txt"><b>תקיעות בחיים</b><small>יוצרים תנועה קדימה</small></span></a></li>
-            <li><a href="personal-coaching#patterns"><span class="sm-ico">🔓</span><span class="sm-txt"><b>שינוי דפוסים</b><small>שוברים את האוטומט</small></span></a></li>
+            <li><a href="decisions"><span class="sm-ico">⚖️</span><span class="sm-txt"><b>קבלת החלטות</b><small>בהירות וביטחון לבחור</small></span></a></li>
+            <li><a href="anxiety"><span class="sm-ico">🕊️</span><span class="sm-txt"><b>טיפול בחרדות</b><small>מנמיכים את הרעש הפנימי</small></span></a></li>
+            <li><a href="stuck-in-life"><span class="sm-ico">🧭</span><span class="sm-txt"><b>תקיעות בחיים</b><small>יוצרים תנועה קדימה</small></span></a></li>
+            <li><a href="changing-patterns"><span class="sm-ico">🔓</span><span class="sm-txt"><b>שינוי דפוסים</b><small>שוברים את האוטומט</small></span></a></li>
             <li class="sm-all"><a href="personal-coaching">לעמוד אימון אישי המלא ←</a></li>
           </ul>
         </li>
@@ -193,11 +205,17 @@
             <li><a href="treatments#stress"><span class="sm-ico">🧘</span><span class="sm-txt"><b>התמודדות עם לחץ</b><small>איזון ושקט ביומיום</small></span></a></li>
             <li><a href="treatments#women"><span class="sm-ico">🌸</span><span class="sm-txt"><b>העצמה נשית</b><small>מתחברות חזרה לכוח שלכן</small></span></a></li>
             <li><a href="treatments#boundaries"><span class="sm-ico">🚧</span><span class="sm-txt"><b>השמת גבולות</b><small>להגיד לא - בלי אשמה</small></span></a></li>
+            <li><a href="toxic-relationship"><span class="sm-ico">🛡️</span><span class="sm-txt"><b>טיפול בזוגיות רעילה</b><small>גבולות בריאים וקשר בטוח</small></span></a></li>
             <li class="sm-all"><a href="treatments">לעמוד טיפולים נוספים המלא ←</a></li>
           </ul>
         </li>
         <li><a href="workshops">סדנאות והרצאות</a></li>
-        <li><a href="podcast">פודקאסט</a></li>
+        <li class="has-sub"><a href="#" onclick="return false;">מרכז הידע</a>
+          <ul class="sub-menu">
+            <li><a href="podcast"><span class="sm-ico">🎙️</span><span class="sm-txt"><b>פודקאסט</b><small>שיחות והשראה להאזנה</small></span></a></li>
+            <li><a href="knowledge"><span class="sm-ico">📚</span><span class="sm-txt"><b>מידע מקצועי</b><small>מאמרים וכלים מעשיים</small></span></a></li>
+          </ul>
+        </li>
         <li><a href="contact">יצירת קשר</a></li>
       </ul>
     </nav>
@@ -212,17 +230,34 @@
   </div>
 </header>
 
-<section class="page-hero">
+<section class="page-hero hero-media">
   <div class="container">
-    <h1>טיפול זוגי לפני גירושין - לבדוק אם אפשר למצוא שוב דרך משותפת</h1>
-    <p>יש רגע שבו המילה גירושין כבר לא נאמרת רק בשעת כעס. היא נשארת במחשבות גם אחרי שהמריבה נגמרת. טיפול זוגי לפני גירושין נותן מקום לשאלות שעולות ברגע הזה: מה נפגע, מה ממשיך להרחיק ביניכם, והאם יש נכונות משותפת לשינוי.</p>
-    <div class="anchor-chips">
-      <a href="#question">השאלה האמיתית</a>
-      <a href="#goal">מה המטרה</a>
-      <a href="#how">איך עובדים</a>
-      <a href="#nlp">כלים מעולם ה-NLP</a>
-      <a href="#faq">שאלות נפוצות</a>
+    <div class="hero-copy">
+      <h1>טיפול זוגי לפני גירושין - לבדוק אם אפשר למצוא שוב דרך משותפת</h1>
+      <hr class="hero-sep" aria-hidden="true">
+      <p>יש רגע שבו המילה גירושין כבר לא נאמרת רק בשעת כעס. היא נשארת במחשבות גם אחרי שהמריבה נגמרת. טיפול זוגי לפני גירושין נותן מקום לשאלות שעולות ברגע הזה: מה נפגע, מה ממשיך להרחיק ביניכם, והאם יש נכונות משותפת לשינוי.</p>
+      <div class="anchor-chips">
+        <a href="#question">השאלה האמיתית</a>
+        <a href="#goal">מה המטרה</a>
+        <a href="#how">איך עובדים</a>
+        <a href="#nlp">כלים מעולם ה-NLP</a>
+        <span class="chip-ornament" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="8" fill="#E9B384"/>
+            <g stroke="#D89A63" stroke-width="2.6" stroke-linecap="round">
+              <line x1="24" y1="5" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="43"/>
+              <line x1="5" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="43" y2="24"/>
+              <line x1="11" y1="11" x2="14.6" y2="14.6"/><line x1="33.4" y1="33.4" x2="37" y2="37"/>
+              <line x1="37" y1="11" x2="33.4" y2="14.6"/><line x1="14.6" y1="33.4" x2="11" y2="37"/>
+            </g>
+          </svg>
+        </span>
+        <a href="#faq">שאלות נפוצות</a>
+      </div>
     </div>
+    <figure class="hero-figure">
+      <img src="assets/couples-hero.jpg" alt="זוג בשיחה זוגית מלווה בחצר הקליניקה של אלון שמש ברחובות, רגע של הקשבה לפני החלטה" width="1400" height="728" fetchpriority="high">
+    </figure>
   </div>
 </section>
 
@@ -364,7 +399,7 @@
     <span class="eyebrow">וגם זו אפשרות</span>
     <h2 style="margin-top:10px">ואם מחליטים להיפרד?</h2>
     <p>גם החלטה על פרידה ראויה למקום בתהליך. אם זו הבחירה שמתגבשת, אפשר לבחון יחד איך מדברים עליה, איך מציבים גבולות ואיך מתנהלים מול השינוי - בלי מלחמה, ובלי למחוק את מה שהיה.</p>
-    <p>כשיש ילדים, מתייחסים גם לאופן שבו משוחחים ומתנהלים בנושאים שקשורים אליהם, ולצורך לשמור אותם מחוץ למאבק בין ההורים. ואם ילד או נער מתקשה בתקופה הזאת, אפשר לשלב <a href="kids-teens">טיפול רגשי לילדים ונוער</a>.</p>
+    <p>כשיש ילדים, מתייחסים גם לאופן שבו משוחחים ומתנהלים בנושאים שקשורים אליהם, ולצורך לשמור אותם מחוץ למאבק בין ההורים. ואם נער מתקשה בתקופה הזאת, אפשר לשלב <a href="kids-teens">טיפול רגשי לנוער</a>.</p>
     <p>הליווי הרגשי לא מחליף גישור או ייעוץ משפטי. הסכמות שנוגעות לרכוש, להסדרים ולהליכי גירושין דורשות אנשי מקצוע מתאימים.</p>
   </div>
 </section>
@@ -474,11 +509,7 @@
   </div>
 </section>
 
-<section class="disclaimer-sec">
-  <div class="container">
-    <p class="disclaimer reveal"><b>למען הסר ספק:</b> הליווי והטיפול הרגשי אצל אלון שמש אינם מחליפים טיפול פסיכולוגי או פסיכיאטרי. אלון אינו פסיכולוג ואינו פסיכיאטר, ויש מצבים שמצריכים אבחון או טיפול של איש מקצוע מתחום בריאות הנפש - במקרים כאלה תקבלו הפניה לגורם המתאים.</p>
-  </div>
-</section><section class="section" style="padding-top:0">
+<section class="section" style="padding-top:0">
   <div class="container">
     <div class="cta-band reveal">
       <h2>לתיאום שיחת היכרות עם אלון שמש</h2>
@@ -488,6 +519,10 @@
         <a href="tel:0543333265" class="btn btn-outline">📞 054-3333265</a>
       </div>
     </div>
+  </div>
+</section><section class="disclaimer-sec">
+  <div class="container">
+    <p class="disclaimer reveal"><b>למען הסר ספק:</b> הליווי והטיפול הרגשי אצל אלון שמש אינם מחליפים טיפול פסיכולוגי או פסיכיאטרי. אלון אינו פסיכולוג ואינו פסיכיאטר, ויש מצבים שמצריכים אבחון או טיפול של איש מקצוע מתחום בריאות הנפש - במקרים כאלה תקבלו הפניה לגורם המתאים.</p>
   </div>
 </section>
 
@@ -585,9 +620,9 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <div class="f-logo">אלון שמש</div>
-      <div class="f-sub">מטפל רגשי ומאמן להתפתחות אישית</div>
-      <p>מלווה אנשים, זוגות, ילדים ונוער בתהליכי שינוי אמיתיים - שילוב של אימון אישי, NLP וכלים רגשיים מעשיים. באזור השפלה ובזום.</p>
+      <div class="f-logo"><img class="f-logo-img" src="assets/logo-nefeshlava-light.png?v=3585960d" alt="נפשלווה" width="720" height="240"></div>
+      <div class="f-sub">טיפול רגשי למבוגרים ונוער</div>
+      <p>מלווה אנשים, זוגות ובני נוער בתהליכי שינוי אמיתיים - שילוב של אימון אישי, NLP וכלים רגשיים מעשיים. באזור השפלה ובזום.</p>
       <div class="footer-social">
         <a href="https://www.facebook.com/alon.shemesh.121" target="_blank" rel="noopener" aria-label="פייסבוק"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.6V3.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V10H7.6v3h2.7v8h3.2z"/></svg></a>
         <a href="https://www.instagram.com/alon_shemesh_/" target="_blank" rel="noopener" aria-label="אינסטגרם"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 2c-3.1 0-3.5 0-4.8.1-1.1.1-1.4.2-1.7.3-.4.2-.7.3-1 .6-.3.3-.5.6-.6 1-.1.3-.3.6-.3 1.7-.1 1.3-.1 1.7-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.4.3 1.7.2.4.3.7.6 1 .3.3.6.5 1 .6.3.1.6.3 1.7.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.4-.2 1.7-.3.4-.2.7-.3 1-.6.3-.3.5-.6.6-1 .1-.3.3-.6.3-1.7.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.4-.3-1.7-.2-.4-.3-.7-.6-1-.3-.3-.6-.5-1-.6-.3-.1-.6-.3-1.7-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8zm0 7.2a2.9 2.9 0 1 0 0-5.7 2.9 2.9 0 0 0 0 5.7zm5.6-7.4a1 1 0 1 1-2.1 0 1 1 0 0 1 2.1 0z"/></svg></a>
@@ -604,7 +639,7 @@
     <div>
       <h4>ניווט מהיר</h4>
       <ul>
-        <li><a href="about">הכירו אותי</a></li>
+        <li><a href="about">אודות</a></li>
         <li><a href="workshops">סדנאות והרצאות</a></li>
         <li><a href="podcast">פודקאסט</a></li>
         <li><a href="contact">שיחת היכרות</a></li>
@@ -617,7 +652,7 @@
       <ul>
         <li><a href="couples">טיפול זוגי</a></li>
         <li><a href="before-divorce">טיפול זוגי לפני גירושין</a></li>
-        <li><a href="kids-teens">טיפול בילדים</a></li>
+        <li><a href="kids-teens">טיפול רגשי לנוער</a></li>
         <li><a href="personal-coaching">אימון אישי</a></li>
         <li><a href="personal-empowerment">העצמה אישית</a></li>
         <li><a href="treatments">טיפולים נוספים</a></li>
@@ -637,7 +672,7 @@
   </div>
   <div class="footer-bottom">
     <div class="container fb-inner">
-      <div class="fb-copy">© 2026 אלון שמש - מטפל רגשי ומאמן להתפתחות אישית. כל הזכויות שמורות.</div>
+      <div class="fb-copy">© 2026 נפשלווה - טיפול רגשי למבוגרים ונוער בשיטת NLP. כל הזכויות שמורות.</div>
       <div class="fb-links"><a href="privacy">מדיניות פרטיות</a><span>|</span><a href="accessibility">הצהרת נגישות</a></div>
       <div class="fb-credit">האתר נבנה ע"י בזיק שיווק דיגיטלי</div>
     </div>
