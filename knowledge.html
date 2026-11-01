@@ -102,10 +102,17 @@
     <span class="eyebrow">מרכז התוכן</span>
     <h1>מידע מקצועי</h1>
     <p>מה שאני פוגש בחדר, כתוב. על זוגיות, על נוער ועל הרגעים שבהם משהו נתקע. בלי סיסמאות, ובלי הבטחות שאי אפשר לקיים.</p>
-    <div class="anchor-chips">
-      <a href="couples">טיפול זוגי</a>
-      <a href="personal-coaching">אימון אישי</a>
-      <a href="workshops">סדנאות והרצאות</a>
+    <style>
+      .anchor-chips .art-filter{background:var(--white);border:1px solid var(--sage-soft);border-radius:999px;padding:8px 18px;font:inherit;font-size:.9rem;font-weight:600;color:var(--sage-deep);cursor:pointer;transition:.2s;box-shadow:var(--shadow)}
+      .anchor-chips .art-filter:hover,.anchor-chips .art-filter.is-active{background:var(--sage-deep);color:#fff;border-color:var(--sage-deep)}
+    </style>
+    <div class="anchor-chips art-filters" role="group" aria-label="סינון מאמרים לפי נושא">
+      <button type="button" class="art-filter is-active" data-filter="all" aria-pressed="true">הכל</button>
+      <button type="button" class="art-filter" data-filter="טיפול זוגי" aria-pressed="false">טיפול זוגי</button>
+      <button type="button" class="art-filter" data-filter="אימון אישי" aria-pressed="false">אימון אישי</button>
+      <button type="button" class="art-filter" data-filter="טיפול רגשי למבוגרים" aria-pressed="false">טיפול רגשי למבוגרים</button>
+      <button type="button" class="art-filter" data-filter="טיפול רגשי לנוער" aria-pressed="false">טיפול רגשי לנוער</button>
+      <button type="button" class="art-filter" data-filter="סדנאות והרצאות" aria-pressed="false">סדנאות והרצאות</button>
     </div>
   </div>
 </section>
@@ -113,6 +120,15 @@
 <section class="section glow-plum">
   <div class="container">
     <div class="art-grid">
+      <a class="art-card reveal" href="teen-social-rejection">
+        <span class="ac-media"><img src="assets/articles/teen-social-rejection-cover.jpg" alt="נער מתבגר יושב לבד ליד החלון ומביט בטלפון ומחכה להודעה מהחברים - דחייה חברתית בגיל ההתבגרות" loading="lazy" width="1440" height="750" decoding="async"></span>
+        <span class="ac-body">
+          <span class="ac-cat">טיפול רגשי לנוער</span>
+          <span class="ac-title">דחייה חברתית בגיל ההתבגרות: למה הילד שלי תמיד זה שמחפש את החברים?</span>
+          <span class="ac-desc">הילד תמיד זה שמחפש את החברים? בעיות חברתיות אצל בני נוער לא תמיד נראות כחרם. איך מזהים דחייה חברתית ועוזרים. כנסו לקרוא.</span>
+          <span class="ac-more">לקריאה ←</span>
+        </span>
+      </a>
       <a class="art-card reveal" href="creating-change-in-life">
         <span class="ac-media"><img src="assets/articles/creating-change-in-life-cover.jpg" alt="אישה יושבת ליד שולחן מול חלון בזריחה, סביבה פתקים עם תירוצים לדחיית שינוי וערימת ספרים על קריירה, זוגיות וביטחון עצמי - דחיית שינוי בחיים" loading="lazy" width="1440" height="939" decoding="async"></span>
         <span class="ac-body">
@@ -442,6 +458,38 @@
   </div>
 </div>
 
+<!-- סינון המאמרים לפי נושא: המסננת מקדימה את המאמרים הרלוונטיים לפי .ac-cat ומשאירה את כל היתר אחריהם (לא מסתירה) -->
+<script>
+(function(){
+  var bar = document.querySelector('.art-filters');
+  var grid = document.querySelector('.art-grid');
+  if(!bar || !grid) return;
+  var cards = [].slice.call(grid.querySelectorAll('.art-card'));
+  function catOf(card){
+    var c = card.querySelector('.ac-cat');
+    return c ? c.textContent.trim() : '';
+  }
+  function apply(f){
+    var head = [], tail = [];
+    cards.forEach(function(card){
+      var match = (f === 'all') || (catOf(card) === f);
+      (match ? head : tail).push(card);
+    });
+    // קודם הרלוונטיים (בסדר המקורי) ואז כל היתר. 'all' מחזיר את הסדר המקורי.
+    head.concat(tail).forEach(function(card){ grid.appendChild(card); });
+  }
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.art-filter');
+    if(!btn) return;
+    [].forEach.call(bar.querySelectorAll('.art-filter'), function(b){
+      var on = (b === btn);
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    apply(btn.getAttribute('data-filter'));
+  });
+})();
+</script>
 <!-- ?v= is the only cache-buster we have: .htaccess caches js/css for a year -->
 <script src="js/site.js?v=6"></script>
 </body>
