@@ -20,20 +20,17 @@
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://www.alonsms.com/card">
 <meta property="og:title" content="אלון שמש | מאמן להתפתחות אישית">
-<!-- 🔴 תצוגת השיתוף מקדמת את סמינר 15.09 (בקשת זיו 20/08): התמונה היא הבאנר
-     והתיאור הוא נוסח הסמינר. **אחרי 15/09/26 להחזיר** את הנוסח הגנרי:
-     og:description = "כרטיס הביקור הדיגיטלי של אלון שמש. חיוג, וואטסאפ, ניווט
-     לקליניקה ושמירה באנשי הקשר בלחיצה אחת." ו-og:image = assets/og/card.jpg
-     (1200x630, נשאר בשרת). ⚠️ וואטסאפ מטמין תצוגה מקדימה לפי כתובת - אחרי
-     שינוי כאן, קישור שכבר שותף ימשיך להציג את הישנה; לבדוק עם ?s=2. -->
-<meta property="og:description" content="סמינר זוגיות ואהבה - ערב חווייתי בן 3 שעות, בהנחיית אלון שמש ומירי דרורי. כלים מעשיים, תובנות עמוקות והשראה ליצירת קשר קרוב, מדויק ומלא אהבה. מספר המקומות מוגבל.">
-<meta property="og:image" content="https://www.alonsms.com/assets/og/card-seminar.jpg?v=0fb762e2">
+<!-- נוסח שיתוף גנרי (הוחזר 05/11/26 - סמינר 15.09 עבר). ⚠️ וואטסאפ מטמין תצוגה
+     מקדימה לפי כתובת - קישור שכבר שותף עם תמונת הסמינר ימשיך להציגה; לבדוק עם ?s=2.
+     לסמינר הבא: להחליף שוב ל-og/card-seminar.jpg + נוסח האירוע (אז גם 1200x1200). -->
+<meta property="og:description" content="כרטיס הביקור הדיגיטלי של אלון שמש. חיוג, וואטסאפ, ניווט לקליניקה ושמירה באנשי הקשר בלחיצה אחת.">
+<meta property="og:image" content="https://www.alonsms.com/assets/og/card.jpg?v=f1d29e03">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1200">
-<meta property="og:image:alt" content="סמינר זוגיות ואהבה - 7 המפתחות לאהבה ולזוגיות בריאה, 15.09.26 בשעה 18:00 ברחובות">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="כרטיס הביקור הדיגיטלי של אלון שמש, מאמן להתפתחות אישית">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.alonsms.com/assets/og/card-seminar.jpg?v=0fb762e2">
+<meta name="twitter:image" content="https://www.alonsms.com/assets/og/card.jpg?v=f1d29e03">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,6 +116,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-weight:800;font-size:.8rem;letter-spacing:.01em;color:var(--sage-deep);
 }
 .cover .brand svg{width:20px;height:20px;flex:none}
+.cover .brand img{height:16px;width:auto;flex:none}
 
 .avatar-wrap{position:relative;margin-top:-84px;display:flex;justify-content:center;z-index:2}
 .avatar{
@@ -136,6 +134,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ---------------------------------------------------------- identity */
 .ident{text-align:center;padding-top:14px}
 .ident h1{font-family:var(--head);font-weight:900;font-size:clamp(2rem,7.4vw,2.5rem);line-height:1.12}
+/* שם העסק (נפשלווה) מתחת לשם האדם - נקודת שמש במותג + ירוק יער */
+.ident .biz{display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-weight:800;font-size:.96rem;color:#3E5349;letter-spacing:.01em}
+.ident .biz::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sun);flex:none}
 .ident .role{color:var(--ink-soft);font-weight:600;margin-top:6px;font-size:1.02rem}
 .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:14px}
 .tags span{
@@ -350,6 +351,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 .foot .mark{display:flex;justify-content:center;margin-bottom:8px}
 .foot .mark svg{width:38px;height:38px}
+.foot .mark img{width:auto;height:36px}
 .foot .nm{font-family:var(--head);font-weight:700;font-size:1.05rem}
 .foot .lnk{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:12px;font-size:.8rem;font-weight:700}
 .foot .lnk a{color:var(--sage-deep)}
@@ -456,17 +458,17 @@ body.has-sticky{padding-bottom:78px}
   <!-- ---------------------------------------------- כותרת ותמונה -->
   <header class="cover">
     <img src="assets/card-cover.jpg" alt="" loading="eager" fetchpriority="high" width="1200" height="420">
-    <span class="brand"><svg><use href="#i-sun"></use></svg>כרטיס ביקור דיגיטלי</span>
+    <span class="brand"><img src="assets/logo-nefeshlava.png?v=d98b37af" alt="נפשלווה" width="720" height="240">כרטיס ביקור דיגיטלי</span>
   </header>
 
   <div class="avatar-wrap">
     <img class="avatar" src="assets/card-avatar.jpg" alt="אלון שמש, מאמן להתפתחות אישית" width="760" height="760">
-    <span class="avatar-badge" aria-hidden="true"><svg><use href="#i-sun"></use></svg></span>
   </div>
 
   <div class="pad">
     <div class="ident">
       <h1>אלון שמש</h1>
+      <p class="biz">נפשלווה</p>
       <p class="role">מאמן להתפתחות אישית</p>
       <div class="tags">
         <span>מאסטר NLP</span>
@@ -667,7 +669,7 @@ body.has-sticky{padding-bottom:78px}
 
   <!-- ---------------------------------------------- פוטר -->
   <footer class="foot">
-    <span class="mark"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-sun"></use></svg></span>
+    <span class="mark"><img src="assets/logo-nefeshlava.png?v=d98b37af" alt="נפשלווה" width="720" height="240"></span>
     <div class="nm">אלון שמש</div>
     <div class="tagline">אימון וליווי להתפתחות אישית</div>
     <nav class="lnk" aria-label="קישורי תחתית">
