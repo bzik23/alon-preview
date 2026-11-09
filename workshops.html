@@ -107,8 +107,11 @@
       <p>ערב חווייתי אחד, שבעה מפתחות - למי שנמצאים בזוגיות ורוצים להעמיק אותה, ולמי שעדיין מחפשים אותה.</p>
     </div>
 
+    <style>/* פלייר הסמינר מרובע: בדסקטופ מציגים אותו מלא (contain, שוליים לבנים כמו פוסטר ממוסגר) במקום חיתוך cover; במובייל נשאר cover כי שם זה נראה מעולה */
+    @media(min-width:861px){.ws-card .ws-side.has-img.ws-flyer{background:#fff}
+    .ws-card .ws-side.has-img.ws-flyer img{object-fit:contain;object-position:50% 50%}}</style>
     <div class="card ws-card ws-featured reveal">
-      <div class="ws-side has-img"><img src="assets/card-seminar.jpg" alt="פלייר סמינר 7 המפתחות לאהבה ולזוגיות בריאה - 01.12.26 ברחובות, בהנחיית אלון שמש ומירי דרורי" loading="lazy" width="440" height="440"></div>
+      <div class="ws-side has-img ws-flyer"><img src="assets/card-seminar.jpg" alt="פלייר סמינר 7 המפתחות לאהבה ולזוגיות בריאה - 01.12.26 ברחובות, בהנחיית אלון שמש ומירי דרורי" loading="lazy" width="440" height="440"></div>
       <div class="ws-body">
         <span class="ws-badge">חדש - ההרשמה נפתחה</span>
         <h3>7 המפתחות לאהבה ולזוגיות בריאה</h3>
