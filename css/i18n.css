@@ -1,0 +1,98 @@
+/* ==========================================================================
+   i18n.css - the language switch (both languages) + LTR mirror for /en/.
+   style.css is written for RTL; most of it uses logical properties, and the
+   rules below flip the few that are physical (left/right, arrows, borders).
+   Loaded by every page; the LTR part only applies under html[dir=ltr].
+   ========================================================================== */
+
+/* ---------- language switch (header quick actions) ---------- */
+.lang-switch{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-body);font-weight:800;font-size:.86rem;letter-spacing:.03em;line-height:1;
+  color:var(--plum-deep,#7C3AED);background:var(--plum-soft,#EFE8FF);
+  border:1px solid rgba(124,58,237,.18);transition:.2s;text-decoration:none;
+}
+.lang-switch:hover,.lang-switch:focus-visible{background:var(--plum-deep,#7C3AED);color:#fff;transform:translateY(-1px)}
+.lang-switch[lang="he"]{font-size:.95rem;letter-spacing:0}
+
+/* ---------- LTR mirror ---------- */
+html[dir="ltr"] body{direction:ltr;text-align:left}
+
+/* desktop dropdown panels open from the start (left) edge */
+html[dir="ltr"] .sub-menu{right:auto;left:-14px}
+html[dir="ltr"] .sub-menu::after{right:auto;left:38px}
+html[dir="ltr"] .sub-menu.wide{right:auto;left:-180px}
+html[dir="ltr"] .sub-menu.wide::after{right:auto;left:218px}
+
+/* hero floating chips */
+html[dir="ltr"] .hf-1{right:auto;left:-4%}
+html[dir="ltr"] .hf-2{left:auto;right:-5%}
+
+/* card arrows point forward = right */
+html[dir="ltr"] .card .card-link::after{content:"→"}
+html[dir="ltr"] .card:hover .card-link::after{transform:translateX(4px)}
+
+/* category card title badge */
+html[dir="ltr"] .cat-media .cat-title,
+html[dir="ltr"] .cat-title{right:auto;left:22px}
+
+/* process steps: dashed connector + arrowhead on the right side */
+@media(min-width:1025px){
+  html[dir="ltr"] .step:not(:last-child)::after{left:auto;right:-22px;background-image:linear-gradient(to right,var(--sage) 55%,transparent 0)}
+  html[dir="ltr"] .step:not(:last-child)::before{left:auto;right:-25px;border-right:6px solid transparent;border-left:8px solid var(--apricot-deep)}
+  html[dir="ltr"] .step:not(:last-child)::after{animation-direction:reverse}
+}
+
+/* floating badge on the about split image */
+html[dir="ltr"] .split-badge{right:auto;left:-14px}
+
+/* pull quotes: accent rule on the start (left) edge */
+html[dir="ltr"] .split-text .quote,
+html[dir="ltr"] .prose .quote{border-right:0;border-left:4px solid var(--apricot);padding:6px 0 6px 18px}
+
+/* FAQ + accessibility panel text */
+html[dir="ltr"] .faq-q,
+html[dir="ltr"] .faq-item button{text-align:left}
+html[dir="ltr"] .acc-panel button{text-align:left}
+
+/* native select caret sits on the end (right) */
+html[dir="ltr"] .contact-form select,
+html[dir="ltr"] .sem-form select{background-position:right 16px center}
+
+/* exit-popup banner: room for the close button on the right */
+html[dir="ltr"] .sem-modal.exit .sem-hook{padding:13px 58px 13px 24px;background:linear-gradient(270deg,var(--plum) 0%,var(--plum-deep) 100%)}
+
+/* "today -> goal" arrow: the HTML arrow already points right in English */
+@media(max-width:640px){html[dir="ltr"] .gap-arrow{transform:rotate(90deg)}}
+
+@media(max-width:1280px){
+  /* mobile drawer slides in from the left */
+  html[dir="ltr"] .main-nav{transform:translateX(-100%)}
+  html[dir="ltr"] .main-nav.open{transform:none}
+}
+@media(max-width:860px){
+  html[dir="ltr"] .main-nav{right:auto;left:0;border-radius:0 26px 26px 0;box-shadow:18px 0 46px rgba(51,68,62,.24)}
+  html[dir="ltr"] .main-nav > ul > li > a{padding:13px 14px 13px 18px}
+  html[dir="ltr"] .main-nav > ul > li > a::before{border-radius:4px 0 0 4px}
+  html[dir="ltr"] .main-nav.open > ul > li{animation-name:navInLtr}
+  html[dir="ltr"] .hf-1{left:0;right:auto}
+  html[dir="ltr"] .hf-2{right:0;left:auto}
+  .lang-switch{width:40px;height:40px}
+}
+/* very narrow phones (<375px): the extra switch must not push the logo off-screen */
+@media(max-width:374px){
+  .header-actions{gap:5px}
+  .header-actions > .lang-switch,.header-actions > .hdr-mail,
+  .header-actions > .hdr-phone,.header-actions > .hdr-wa{width:35px;height:35px}
+  .lang-switch{font-size:.78rem}
+}
+@keyframes navInLtr{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+
+/* logo tagline: two tidy lines instead of four */
+html[dir="ltr"] .logo .logo-sub{white-space:nowrap;font-size:.72rem;letter-spacing:0}
+
+/* English copy runs longer: keep the desktop nav on one line */
+@media(min-width:1281px){
+  html[dir="ltr"] .main-nav a{font-size:.84rem;padding:9px 5px}
+}
